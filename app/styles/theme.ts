@@ -12,7 +12,7 @@ export const theme = extendTheme({
 		}),
 	},
 	fonts: {
-		heading: `"supercell","Roboto"`,
-		body: `"supercell","Roboto"`,
+		heading: `supercell,sans-serif`,
+		body: `supercell,sans-serif`,
 	},
 });

@@ -1,0 +1,31 @@
+.navItem {
+	text-transform: capitalize;
+
+	width: min-content;
+	padding: 16px;
+	border-radius: 8px;
+	text-align: center;
+}
+.navItem:hover {
+	color: var(--chakra-colors-gray-300);
+}
+
+.open {
+	background-color: var(--chakra-colors-yellow-400);
+	color: var(--chakra-colors-gray-900);
+}
+
+.open:hover {
+	background-color: var(--chakra-colors-yellow-500);
+}
+@media (max-width: 768px) {
+	.navItem {
+		padding: 8px;
+		border-bottom: 1px solid var(--chakra-colors-gray-300);
+		border-radius: 0;
+		width: 100%;
+	}
+	.open {
+		border-radius: 8px;
+	}
+}
