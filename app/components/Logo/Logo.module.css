@@ -1,0 +1,4 @@
+.logo {
+	color: var(--chakra-colors-yellow-300);
+	text-shadow: red 2px 2px 0px;
+}

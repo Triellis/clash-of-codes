@@ -1,0 +1,9 @@
+body {
+	font-family: "supercell";
+}
+@font-face {
+	font-family: "supercell"; /* Choose a name for your font */
+	src: url("./supercell-magic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
