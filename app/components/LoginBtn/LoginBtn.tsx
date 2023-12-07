@@ -6,8 +6,7 @@ export default function LoginBtn() {
 	return (
 		<Button
 			size={"sm"}
-			colorScheme="brand"
-			rightIcon={<Image alt="to" src={GoogleIcon} />}
+			rightIcon={<Image alt="to" src={GoogleIcon} width={16} />}
 		>
 			Login
 		</Button>

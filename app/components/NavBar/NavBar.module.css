@@ -3,6 +3,7 @@
 	flex-direction: row;
 	border-bottom: var(--chakra-colors-gray-500) 1px solid;
 	align-items: center;
+	justify-content: space-between;
 	gap: 16px;
 	padding: 4px;
 }
