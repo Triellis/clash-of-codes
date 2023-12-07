@@ -1,0 +1,18 @@
+.NavBar {
+	display: flex;
+	flex-direction: row;
+	border-bottom: var(--chakra-colors-gray-500) 1px solid;
+	align-items: center;
+	gap: 16px;
+	padding: 4px;
+}
+
+@media (max-width: 768px) {
+	.NavBar {
+		flex-direction: column;
+		border-bottom: none;
+	}
+	.NavBar > * {
+		width: 100%;
+	}
+}
