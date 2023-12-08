@@ -6,12 +6,11 @@ import Link from "next/link";
 
 export default function NavItem({
 	title,
-	linkTo,
 	isOpen,
+	linkTo,
 }: {
-	isOpen: boolean;
-
 	title: string;
+	isOpen: boolean;
 	linkTo: string;
 }) {
 	return (
