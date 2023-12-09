@@ -1,20 +1,54 @@
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import Logo from "../Logo/Logo";
 import NavItem from "../NavItem/NavItem";
 import styles from "./NavBar.module.css";
 import LoginBtn from "../LoginBtn/LoginBtn";
 import { Box } from "@chakra-ui/react";
-export default function NavBar() {
+import Image from "next/image";
+import MenuIcon from "../../styles/Icons/Menu";
+import CloseIcon from "../../styles/Icons/Close";
+import classNames from "classnames";
+export default function NavBar({
+	isOpen = false,
+	setIsOpen,
+}: {
+	isOpen: boolean;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 	return (
 		<nav className={styles.NavBar}>
-			<Flex direction={{ sm: "column", md: "row" }}>
-				<Logo />
-				<Flex direction={{ sm: "column", md: "row" }} gap={4}>
-					<NavItem isOpen={false} title="option1" linkTo="/" />
-					<NavItem isOpen={true} title="option1" linkTo="/" />
-					<NavItem isOpen={false} title="option1" linkTo="/" />
-				</Flex>
-			</Flex>
+			{isOpen ? (
+				<Button
+					variant={"ghost"}
+					className={styles.menuIcon}
+					onClick={() => setIsOpen(!isOpen)}
+					width={"min-content"}
+				>
+					<CloseIcon />
+				</Button>
+			) : (
+				<Button
+					width={"min-content"}
+					variant={"ghost"}
+					className={styles.menuIcon}
+					onClick={() => setIsOpen(!isOpen)}
+				>
+					<MenuIcon />
+				</Button>
+			)}
+
+			<Logo />
+			<div
+				className={classNames(
+					styles.navItemsWrapper,
+					!isOpen && styles.close
+				)}
+			>
+				<NavItem isOpen={true} title="Live" linkTo="/" />
+				<NavItem isOpen={false} title="Past Scores" linkTo="/" />
+				<NavItem isOpen={false} title="option1" linkTo="/" />
+			</div>
+
 			<LoginBtn />
 		</nav>
 	);
