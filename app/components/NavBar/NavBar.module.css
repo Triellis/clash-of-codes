@@ -23,7 +23,7 @@
 		flex-direction: column;
 		border-bottom: none;
 		grid-template-columns: 1fr 3fr 1fr;
-		align-items: flex-start;
+		/* align-items: flex-start; */
 	}
 	.NavBar > * {
 		width: 100%;
