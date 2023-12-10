@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import Logo from "../Logo/Logo";
 import NavItem from "../NavItem/NavItem";
 import styles from "./NavBar.module.css";
@@ -18,15 +18,21 @@ export default function NavBar({
 	return (
 		<nav className={styles.NavBar}>
 			{isOpen ? (
-				<CloseIcon
+				<Button
+					variant={"ghost"}
 					className={styles.menuIcon}
 					onClick={() => setIsOpen(!isOpen)}
-				/>
+				>
+					<CloseIcon />
+				</Button>
 			) : (
-				<MenuIcon
+				<Button
 					className={styles.menuIcon}
+					variant={"ghost"}
 					onClick={() => setIsOpen(!isOpen)}
-				/>
+				>
+					<MenuIcon onClick={() => setIsOpen(!isOpen)} />
+				</Button>
 			)}
 
 			<Logo />

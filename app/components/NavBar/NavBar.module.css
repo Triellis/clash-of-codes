@@ -9,7 +9,7 @@
 	padding-bottom: 16px;
 }
 .menuIcon {
-	display: none;
+	display: none !important;
 }
 
 .navItemsWrapper {
@@ -22,8 +22,9 @@
 	.NavBar {
 		flex-direction: column;
 		border-bottom: none;
-		grid-template-columns: 1fr 3fr 1fr;
-		/* align-items: flex-start; */
+		grid-template-columns: auto 1fr auto;
+		gap: 16px;
+		align-items: flex-start;
 	}
 	.NavBar > * {
 		width: 100%;
@@ -38,7 +39,7 @@
 		height: 100%;
 	}
 	.menuIcon {
-		display: block;
+		display: block !important;
 	}
 	.navItemsWrapper.close {
 		height: 0;

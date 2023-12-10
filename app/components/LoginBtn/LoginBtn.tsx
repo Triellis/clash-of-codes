@@ -9,6 +9,8 @@ export default function LoginBtn() {
 			fontFamily={"arial"}
 			borderRadius={16}
 			margin={"auto"}
+			paddingX={4}
+			paddingY={2}
 			rightIcon={<Image alt="to" src={GoogleIcon} width={16} />}
 		>
 			Login

@@ -4,11 +4,14 @@ export default function Logo() {
 	return (
 		<Heading
 			fontSize={{
-				sm: 18,
+				sm: 16,
 				md: 24,
 			}}
 			textAlign={"center"}
-			height={"min-content"}
+			height="100%"
+			justifyContent={"center"}
+			alignItems={"center"}
+			display={"flex"}
 			className={styles.logo}
 		>
 			Clash OF Codes
