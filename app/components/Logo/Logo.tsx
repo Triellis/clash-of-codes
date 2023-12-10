@@ -5,7 +5,7 @@ export default function Logo() {
 		<Heading
 			fontSize={{
 				sm: 18,
-				md: 32,
+				md: 24,
 			}}
 			textAlign={"center"}
 			height={"min-content"}

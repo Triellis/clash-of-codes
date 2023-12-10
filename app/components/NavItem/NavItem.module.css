@@ -1,15 +1,16 @@
 .navItem {
 	text-transform: capitalize;
 
-	padding: 16px;
+	padding: 10px;
 	border-radius: 8px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-weight: bold;
 	height: min-content;
+	line-height: 100%;
 }
 .navItem:hover {
 	color: var(--chakra-colors-gray-300);

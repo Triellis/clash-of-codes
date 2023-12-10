@@ -5,9 +5,9 @@ import GoogleIcon from "../../styles/Icons/BsGoogle.svg";
 export default function LoginBtn() {
 	return (
 		<Button
-			size={{ md: "sm", sm: "xs" }}
+			size={{ md: "md", sm: "xs" }}
 			fontFamily={"arial"}
-			borderRadius={12}
+			borderRadius={16}
 			margin={"auto"}
 			rightIcon={<Image alt="to" src={GoogleIcon} width={16} />}
 		>
