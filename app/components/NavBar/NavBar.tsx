@@ -36,8 +36,8 @@ export default function NavBar({
 					!isOpen && styles.close
 				)}
 			>
-				<NavItem isOpen={true} title="Live" linkTo="/" />
-				<NavItem isOpen={false} title="Past Scores" linkTo="/" />
+				<NavItem isOpen={false} title="Live" linkTo="/" />
+				<NavItem isOpen={true} title="Past Scores" linkTo="/" />
 				<NavItem isOpen={false} title="option1" linkTo="/" />
 			</div>
 

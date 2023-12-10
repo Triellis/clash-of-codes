@@ -13,6 +13,10 @@ const Button = {
 		solid: {
 			bg: "yellow.400",
 			color: "gray.900",
+			_hover: {
+				bg: "yellow.500",
+				color: "gray.900",
+			},
 		},
 	},
 };

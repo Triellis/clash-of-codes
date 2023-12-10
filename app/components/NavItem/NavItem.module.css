@@ -1,10 +1,10 @@
 .navItem {
 	text-transform: capitalize;
 
-	padding: 8px 12px;
+	padding: 16px;
 	border-radius: 8px;
 	text-align: center;
-	font-size: 20x;
+	font-size: 24px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
