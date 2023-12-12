@@ -17,6 +17,10 @@ const Button = {
 				bg: "yellow.500",
 				color: "gray.900",
 			},
+			_active: {
+				bg: "yellow.600",
+				color: "gray.900",
+			},
 		},
 	},
 };
