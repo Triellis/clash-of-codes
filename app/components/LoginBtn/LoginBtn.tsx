@@ -5,7 +5,8 @@ import { useGoogleLogin } from "@react-oauth/google";
 export default function LoginBtn() {
 	const login = useGoogleLogin({
 		onSuccess: (codeResponse) => console.log(codeResponse),
-		flow: "implicit",
+		onError: (error) => console.log(error),
+		onNonOAuthError: (error) => console.log(error),
 	});
 	return (
 		<Button
