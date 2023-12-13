@@ -42,7 +42,7 @@ function getBtn(login: () => void, logout: () => void) {
 }
 export default function LoginBtn() {
 	const [oneTapDisabled, setOneTapDisabled] = useState(true);
-	console.log(oneTapDisabled);
+
 	const login = () => {
 		setOneTapDisabled(false);
 	};
