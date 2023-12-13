@@ -22,6 +22,16 @@ const Button = {
 				color: "gray.900",
 			},
 		},
+		ghost: {
+			_hover: {
+				bg: "gray.800",
+				color: "gray.100",
+			},
+			_active: {
+				bg: "gray.700",
+				color: "gray.100",
+			},
+		},
 	},
 };
 export const theme = extendTheme({

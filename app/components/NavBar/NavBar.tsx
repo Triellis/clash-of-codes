@@ -2,12 +2,15 @@ import { Button, Flex } from "@chakra-ui/react";
 import Logo from "../Logo/Logo";
 import NavItem from "../NavItem/NavItem";
 import styles from "./NavBar.module.css";
-import LoginBtn from "../LoginBtn/LoginBtn";
+
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
 import MenuIcon from "../../styles/Icons/Menu";
 import CloseIcon from "../../styles/Icons/Close";
 import classNames from "classnames";
+import dynamic from "next/dynamic";
+
+const LoginBtn = dynamic(() => import("../LoginBtn/LoginBtn"), { ssr: false });
 export default function NavBar({
 	isOpen = false,
 	setIsOpen,
