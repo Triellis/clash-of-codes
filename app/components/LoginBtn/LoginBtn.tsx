@@ -3,10 +3,12 @@ import Image from "next/image";
 import GoogleIcon from "../../styles/Icons/BsGoogle.svg";
 import { useGoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
 import { useEffect, useState } from "react";
+import { googleLogout } from "@react-oauth/google";
+import { getServerUrl } from "@/app/util/functions";
 
 function getBtn(login: () => void, logout: () => void) {
 	let btn;
-	if (document && document.cookie.includes("token")) {
+	if (document && document.cookie.includes("server_token")) {
 		btn = (
 			<Button
 				size={{ md: "md", sm: "xs" }}
@@ -43,21 +45,41 @@ function getBtn(login: () => void, logout: () => void) {
 export default function LoginBtn() {
 	const [oneTapDisabled, setOneTapDisabled] = useState(true);
 
-	const login = () => {
+	const login = async () => {
 		setOneTapDisabled(false);
 	};
 
 	const logout = () => {
 		setOneTapDisabled(true);
+
+		googleLogout();
 		document.cookie =
-			"token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			"google_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		setBtn(getBtn(login, logout));
+		document.cookie =
+			"server_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 		setBtn(getBtn(login, logout));
 	};
+
 	let [btn, setBtn] = useState(getBtn(login, logout));
 	useGoogleOneTapLogin({
-		onSuccess: (credentialResponse) => {
-			document.cookie = `token=${credentialResponse.credential}`;
+		onSuccess: async (credentialResponse) => {
+			document.cookie = `google_token=${credentialResponse.credential}`;
 			console.log("Login Success");
+			const res = await fetch(
+				getServerUrl("login"),
+
+				{
+					credentials: "include",
+				}
+			);
+			if (res.status !== 200) {
+				console.log("Login Failed ");
+			} else {
+				console.log("Login Success 2");
+			}
+			const serverToken = await res.text();
+			document.cookie = `server_token=${serverToken}`;
 			setBtn(getBtn(login, logout));
 		},
 		onError: () => {

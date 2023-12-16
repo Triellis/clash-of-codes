@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar/NavBar";
 import NavItem from "../components/NavItem/NavItem";
 import styles from "./page.module.css";
 import { Flex } from "@chakra-ui/react";
-import { getFullUrl } from "../util/functions";
+import { getServerUrl } from "../util/functions";
 
 export default function Test() {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -15,7 +15,7 @@ export default function Test() {
 			<NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
 			<button
 				onClick={async () => {
-					const res = await fetch(getFullUrl(""), {
+					const res = await fetch(getServerUrl(""), {
 						credentials: "include",
 					});
 					console.log(await res.text());

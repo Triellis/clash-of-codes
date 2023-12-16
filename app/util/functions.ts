@@ -1,4 +1,4 @@
-export function getFullUrl(url: string) {
+export function getServerUrl(url: string) {
 	let SERVER_URL;
 	if (process.env.NODE_ENV === "production") {
 		SERVER_URL = "https://supercell.vercel.app";
