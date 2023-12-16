@@ -12,10 +12,13 @@
 	height: min-content;
 	line-height: 100%;
 }
+.navItem:hover.open {
+	color: var(--chakra-colors-gray-900);
+}
+
 .navItem:hover {
 	color: var(--chakra-colors-gray-300);
 }
-
 .open {
 	background-color: var(--chakra-colors-yellow-400);
 	color: var(--chakra-colors-gray-900);

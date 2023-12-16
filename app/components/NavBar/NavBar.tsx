@@ -41,13 +41,14 @@ const navMenus = {
 };
 
 const LoginBtn = dynamic(() => import("../LoginBtn/LoginBtn"), { ssr: false });
-export default function NavBar({
-	isOpen = false,
-	setIsOpen,
-}: {
-	isOpen: boolean;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+export default function NavBar({}: // isOpen = false,
+// setIsOpen,
+{
+	// isOpen: boolean;
+	// setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+	const [isOpen, setIsOpen] = useState(false);
+
 	const [navItems, setNavItems] = useState(navMenus.Default);
 	const [cookieValue, setCookieValue] = useState(Cookies.get("server_token"));
 	const user = useAppSelector((state) => state.user.value);

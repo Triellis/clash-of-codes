@@ -12,7 +12,6 @@ export default function Test() {
 	const [isOpen, setIsOpen] = React.useState(false);
 	return (
 		<main className={styles.main}>
-			<NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
 			<button
 				onClick={async () => {
 					const res = await customFetch("");
