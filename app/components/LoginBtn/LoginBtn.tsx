@@ -77,9 +77,9 @@ export default function LoginBtn() {
 				console.log("Login Failed ");
 			} else {
 				console.log("Login Success 2");
+				const serverToken = await res.text();
+				document.cookie = `server_token=${serverToken}`;
 			}
-			const serverToken = await res.text();
-			document.cookie = `server_token=${serverToken}`;
 			setBtn(getBtn(login, logout));
 		},
 		onError: () => {
