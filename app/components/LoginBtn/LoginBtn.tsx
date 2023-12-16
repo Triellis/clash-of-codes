@@ -2,7 +2,7 @@ import { Button, useEditable } from "@chakra-ui/react";
 import Image from "next/image";
 import GoogleIcon from "../../styles/Icons/BsGoogle.svg";
 import { useGoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { customFetch, getServerUrl } from "@/app/util/functions";
 
@@ -48,11 +48,11 @@ export default function LoginBtn() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [oneTapDisabled, setOneTapDisabled] = useState(true);
 
-	const login = async () => {
+	const login = useCallback(async () => {
 		setOneTapDisabled(false);
-	};
+	}, []);
 
-	const logout = () => {
+	const logout = useCallback(() => {
 		setOneTapDisabled(true);
 
 		googleLogout();
@@ -62,13 +62,15 @@ export default function LoginBtn() {
 		document.cookie =
 			"server_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 		setBtn(getBtn(login, logout, isLoading));
-	};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	let [btn, setBtn] = useState(getBtn(login, logout, isLoading));
 
 	useGoogleOneTapLogin({
 		onSuccess: async (credentialResponse) => {
 			setIsLoading(true);
+
 			document.cookie = `google_token=${credentialResponse.credential}`;
 			// console.log("Login Success");
 			const res = await customFetch("login");
@@ -80,6 +82,7 @@ export default function LoginBtn() {
 				document.cookie = `server_token=${serverToken}`;
 			}
 			setBtn(getBtn(login, logout, isLoading));
+
 			setIsLoading(false);
 		},
 		onError: () => {
@@ -88,9 +91,9 @@ export default function LoginBtn() {
 		disabled: oneTapDisabled,
 	});
 	useEffect(() => {
-		setIsLoading(true);
 		setBtn(getBtn(login, logout, isLoading));
-		setIsLoading(false);
-	}, []);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isLoading]);
 	return <div>{btn}</div>;
 }

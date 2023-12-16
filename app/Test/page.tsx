@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar/NavBar";
 import NavItem from "../components/NavItem/NavItem";
 import styles from "./page.module.css";
 import { Flex } from "@chakra-ui/react";
-import { customFetch, getServerUrl } from "../util/functions";
+import { customFetch, getServerUrl, getUserData } from "../util/functions";
 
 export default function Test() {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -16,6 +16,7 @@ export default function Test() {
 			<button
 				onClick={async () => {
 					const res = await customFetch("");
+
 					// console.log(await res.text());
 				}}
 			>

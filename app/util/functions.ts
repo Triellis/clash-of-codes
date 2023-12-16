@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+import cookie from "cookie";
 export function getServerUrl(url: string) {
 	let SERVER_URL;
 	if (process.env.NODE_ENV === "production") {
@@ -21,5 +23,11 @@ export function customFetch(url: string, options?: any) {
 }
 
 export function getUserData() {
-	const data = document.cookie.split(";");
+	const cookieObj = cookie.parse(document.cookie);
+	const serverToken = cookieObj["server_token"];
+	if (!serverToken) {
+		throw new Error("Can not find the server_token cookie");
+	}
+	const userData = jwt.decode(serverToken);
+	return userData;
 }
