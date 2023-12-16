@@ -9,6 +9,10 @@ const Button = {
 			border: "2px solid",
 			borderColor: "yellow.400",
 			color: "yellow.400",
+			_hover: {
+				bg: "yellow.500",
+				color: "gray.900",
+			},
 		},
 		solid: {
 			bg: "yellow.400",

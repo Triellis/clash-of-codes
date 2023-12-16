@@ -16,7 +16,7 @@ export default function Test() {
 			<button
 				onClick={async () => {
 					const res = await customFetch("");
-					console.log(await res.text());
+					// console.log(await res.text());
 				}}
 			>
 				Click

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { customFetch, getServerUrl } from "@/app/util/functions";
 
-function getBtn(login: () => void, logout: () => void) {
+function getBtn(login: () => void, logout: () => void, isLoading: boolean) {
 	let btn;
 	if (document && document.cookie.includes("server_token")) {
 		btn = (
@@ -17,8 +17,9 @@ function getBtn(login: () => void, logout: () => void) {
 				margin={"auto"}
 				paddingX={4}
 				paddingY={2}
-				rightIcon={<Image alt="to" src={GoogleIcon} width={16} />}
 				onClick={logout}
+				variant={"outline"}
+				isLoading={isLoading}
 			>
 				Logout
 			</Button>
@@ -34,6 +35,7 @@ function getBtn(login: () => void, logout: () => void) {
 				paddingY={2}
 				rightIcon={<Image alt="to" src={GoogleIcon} width={16} />}
 				onClick={login}
+				isLoading={isLoading}
 			>
 				Login
 			</Button>
@@ -43,6 +45,7 @@ function getBtn(login: () => void, logout: () => void) {
 	return btn;
 }
 export default function LoginBtn() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [oneTapDisabled, setOneTapDisabled] = useState(true);
 
 	const login = async () => {
@@ -55,26 +58,29 @@ export default function LoginBtn() {
 		googleLogout();
 		document.cookie =
 			"google_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-		setBtn(getBtn(login, logout));
+		setBtn(getBtn(login, logout, isLoading));
 		document.cookie =
 			"server_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-		setBtn(getBtn(login, logout));
+		setBtn(getBtn(login, logout, isLoading));
 	};
 
-	let [btn, setBtn] = useState(getBtn(login, logout));
+	let [btn, setBtn] = useState(getBtn(login, logout, isLoading));
+
 	useGoogleOneTapLogin({
 		onSuccess: async (credentialResponse) => {
+			setIsLoading(true);
 			document.cookie = `google_token=${credentialResponse.credential}`;
-			console.log("Login Success");
+			// console.log("Login Success");
 			const res = await customFetch("login");
 			if (res.status !== 200) {
-				console.log("Login Failed ");
+				console.error("Login Failed ");
 			} else {
-				console.log("Login Success 2");
+				// console.log("Login Success 2");
 				const serverToken = await res.text();
 				document.cookie = `server_token=${serverToken}`;
 			}
-			setBtn(getBtn(login, logout));
+			setBtn(getBtn(login, logout, isLoading));
+			setIsLoading(false);
 		},
 		onError: () => {
 			console.log("Login Failed");
@@ -82,7 +88,9 @@ export default function LoginBtn() {
 		disabled: oneTapDisabled,
 	});
 	useEffect(() => {
-		setBtn(getBtn(login, logout));
+		setIsLoading(true);
+		setBtn(getBtn(login, logout, isLoading));
+		setIsLoading(false);
 	}, []);
 	return <div>{btn}</div>;
 }
