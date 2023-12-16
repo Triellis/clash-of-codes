@@ -10,9 +10,12 @@ export function getServerUrl(url: string) {
 
 export function customFetch(url: string, options?: any) {
 	options = options || {};
+
 	options.headers = {
 		...options.headers,
-		cookie: document.cookie,
+		auth: document.cookie,
+		"Content-Type": "application/json",
 	};
-	return fetch(getServerUrl(url), ...options);
+
+	return fetch(getServerUrl(url), options);
 }
