@@ -7,3 +7,12 @@ export function getServerUrl(url: string) {
 	}
 	return `${SERVER_URL}/${url}`;
 }
+
+export function customFetch(url: string, options?: any) {
+	options = options || {};
+	options.headers = {
+		...options.headers,
+		cookie: document.cookie,
+	};
+	return fetch(getServerUrl(url), ...options);
+}

@@ -4,7 +4,7 @@ import GoogleIcon from "../../styles/Icons/BsGoogle.svg";
 import { useGoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
 import { useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
-import { getServerUrl } from "@/app/util/functions";
+import { customFetch, getServerUrl } from "@/app/util/functions";
 
 function getBtn(login: () => void, logout: () => void) {
 	let btn;
@@ -66,13 +66,7 @@ export default function LoginBtn() {
 		onSuccess: async (credentialResponse) => {
 			document.cookie = `google_token=${credentialResponse.credential}`;
 			console.log("Login Success");
-			const res = await fetch(
-				getServerUrl("login"),
-
-				{
-					credentials: "include",
-				}
-			);
+			const res = await customFetch("login");
 			if (res.status !== 200) {
 				console.log("Login Failed ");
 			} else {
