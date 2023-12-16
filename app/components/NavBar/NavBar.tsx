@@ -3,8 +3,6 @@ import Logo from "../Logo/Logo";
 import NavItem from "../NavItem/NavItem";
 import styles from "./NavBar.module.css";
 
-import { Box } from "@chakra-ui/react";
-import Image from "next/image";
 import MenuIcon from "../../styles/Icons/Menu";
 import CloseIcon from "../../styles/Icons/Close";
 import classNames from "classnames";
