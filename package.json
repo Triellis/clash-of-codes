@@ -14,17 +14,22 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@react-oauth/google": "^0.12.1",
+    "@reduxjs/toolkit": "^2.0.1",
     "classnames": "^2.3.2",
     "cookie": "^0.6.0",
     "framer-motion": "^10.16.15",
     "gapi-script": "^1.2.0",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "^9.0.4"
   },
   "devDependencies": {
     "@types/cookie": "^0.6.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20",
     "@types/react": "^18",

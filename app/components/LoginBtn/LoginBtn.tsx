@@ -4,8 +4,10 @@ import GoogleIcon from "../../styles/Icons/BsGoogle.svg";
 import { useGoogleLogin, useGoogleOneTapLogin } from "@react-oauth/google";
 import { useCallback, useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
-import { customFetch, getServerUrl } from "@/app/util/functions";
-
+import { customFetch, getServerUrl, getUserData } from "@/app/util/functions";
+import { useAppDispatch } from "@/app/util/hooks";
+import { update as updateUser } from "@/app/util/userSlice";
+import { UserOnClient } from "@/app/util/types";
 function getBtn(login: () => void, logout: () => void, isLoading: boolean) {
 	let btn;
 	if (document && document.cookie.includes("server_token")) {
@@ -47,6 +49,7 @@ function getBtn(login: () => void, logout: () => void, isLoading: boolean) {
 export default function LoginBtn() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [oneTapDisabled, setOneTapDisabled] = useState(true);
+	const userDispatch = useAppDispatch();
 
 	const login = useCallback(async () => {
 		setOneTapDisabled(false);
@@ -54,6 +57,7 @@ export default function LoginBtn() {
 
 	const logout = useCallback(() => {
 		setOneTapDisabled(true);
+		// userDispatch(updateUser(null));
 
 		googleLogout();
 		document.cookie =
@@ -80,6 +84,9 @@ export default function LoginBtn() {
 				// console.log("Login Success 2");
 				const serverToken = await res.text();
 				document.cookie = `server_token=${serverToken}`;
+				const user = getUserData();
+				// console.log(user);
+				userDispatch(updateUser(user as UserOnClient));
 			}
 			setBtn(getBtn(login, logout, isLoading));
 
