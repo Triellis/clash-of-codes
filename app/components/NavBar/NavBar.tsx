@@ -35,7 +35,7 @@ const navMenus = {
 		},
 		{
 			title: "Config",
-			linkTo: "/Config",
+			linkTo: "/Admin/Config",
 		},
 	],
 };
