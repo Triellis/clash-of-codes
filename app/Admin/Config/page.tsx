@@ -19,7 +19,6 @@ export default function Config() {
       ContestCode: 12461,
       DateAdded: "24/4/2023",
       Live: true,
-      Score: 1,
     },
     {
       Team1: "RG",
@@ -27,7 +26,6 @@ export default function Config() {
       ContestCode: 12461,
       DateAdded: "24/4/2023",
       Live: false,
-      Score: 2,
     },
     {
       Team1: "PP",
@@ -35,7 +33,6 @@ export default function Config() {
       ContestCode: 12461,
       DateAdded: "24/4/2023",
       Live: true,
-      Score: 3,
     },
   ];
   return (
