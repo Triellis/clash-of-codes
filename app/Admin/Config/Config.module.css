@@ -1,6 +1,12 @@
 .config {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.configBoard {
+  margin-top: 1emn ;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
