@@ -49,7 +49,7 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 					aria-label="Done"
 					fontSize="20px"
 					color="red.600"
-					icon={<DeleteIcon />}
+					icon={<Trash />}
 				/>
 			</div>
 		</div>
