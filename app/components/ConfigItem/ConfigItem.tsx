@@ -9,6 +9,14 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 	return (
 		<div className={styles.main}>
 			{/* Order:
+  console.log("item data", itemData);
+
+  const Team1 = itemData.Team1;
+  const Team2 = itemData.Team2;
+
+  return (
+    <div className={styles.main}>
+      {/* Order:
 				-Team1
 				-Team2
 				-Contest Code
@@ -26,7 +34,11 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 			<div>{itemData.DateAdded}</div>
 
 			<div>
-				<Switch variant={"default"} size="lg" />
+				<Switch
+					variant={"default"}
+					size="lg"
+					isChecked={itemData.Live}
+				/>
 			</div>
 
 			<div>
@@ -37,7 +49,7 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 					aria-label="Done"
 					fontSize="20px"
 					color="red.600"
-					icon={<Trash />}
+					icon={<DeleteIcon />}
 				/>
 			</div>
 		</div>
