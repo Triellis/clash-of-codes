@@ -54,7 +54,7 @@ export default function LoginBtn() {
 	const login = useCallback(async () => {
 		setOneTapDisabled(false);
 	}, []);
-
+	// console.log(document.cookie);
 	const logout = useCallback(() => {
 		setOneTapDisabled(true);
 		// userDispatch(updateUser(null));
