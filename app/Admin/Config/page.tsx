@@ -26,7 +26,7 @@ export default function Config() {
       Team2: "BW",
       ContestCode: 12461,
       DateAdded: "24/4/2023",
-      Live: true,
+      Live: false,
       Score: 2,
     },
     {

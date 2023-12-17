@@ -5,6 +5,10 @@ import styles from "./ConfigItem.module.css";
 
 export default function ConfigItem({ itemData }: { itemData: Contest }) {
   console.log("item data", itemData);
+
+  const Team1 = itemData.Team1;
+  const Team2 = itemData.Team2;
+
   return (
     <div className={styles.main}>
       {/* Order:
@@ -16,23 +20,23 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 				-Remove Button
 			*/}
 
-      <div>{itemData.Team1}</div>
+      <div>{Team1}</div>
 
-      <div>{itemData.Team2}</div>
+      <div>{Team2}</div>
 
       <div>{itemData.ContestCode}</div>
 
       <div>{itemData.DateAdded}</div>
 
       <div>
-        <Switch variant={"default"} size="lg" />
+        <Switch variant={"default"} size="lg" isChecked={itemData.Live} />
       </div>
 
       <div>
         <IconButton
           isRound={true}
           variant=""
-					size={"lg"}
+          size={"lg"}
           aria-label="Done"
           fontSize="20px"
           color="red.600"
