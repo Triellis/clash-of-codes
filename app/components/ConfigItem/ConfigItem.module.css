@@ -3,4 +3,6 @@
   grid-template-columns: repeat(6, 1fr);
   gap: 4em;
   text-align: center;
+  align-items: center;
+  justify-items: center;
 }
