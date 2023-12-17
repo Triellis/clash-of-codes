@@ -31,7 +31,7 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 
       <div>{itemData.ContestCode}</div>
 
-      <div>{itemData.DateAdded}</div>
+      <div>{itemData.DateAdded.toString()}</div>
 
       <div>
         <Switch variant={"default"} size="lg" defaultChecked={itemData.Live} />
