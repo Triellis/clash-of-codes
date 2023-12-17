@@ -3,52 +3,63 @@ import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import { Contest } from "@/app/util/types";
 import { Flex, Heading } from "@chakra-ui/react";
 import styles from "./Config.module.css";
+function useConfig(page: number) {
+	const { data, error, isLoading } = useSWR(`/api/user/${id}`, fetcher);
 
+	return {
+		user: data,
+		isLoading,
+		isError: error,
+	};
+}
 export default function Config() {
-  const data: Contest[] = [
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "24/4/2023",
-      Live: true,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "24/4/2023",
-      Live: true,
-      Score: 1,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "24/4/2023",
-      Live: false,
-      Score: 2,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "24/4/2023",
-      Live: true,
-      Score: 3,
-    },
-  ];
-  return (
-    <main className={styles.config}>
-      <Heading size={"md"}>Contests Config</Heading>
+	const data: Contest[] = [
+		{
+			Team1: "RG",
+			Team2: "BW",
+			ContestCode: 12461,
+			DateAdded: "24/4/2023",
+			Live: true,
+		},
+		{
+			Team1: "RG",
+			Team2: "BW",
+			ContestCode: 12461,
+			DateAdded: "24/4/2023",
+			Live: true,
+			Score: 1,
+		},
+		{
+			Team1: "RG",
+			Team2: "BW",
+			ContestCode: 12461,
+			DateAdded: "24/4/2023",
+			Live: false,
+			Score: 2,
+		},
+		{
+			Team1: "RG",
+			Team2: "BW",
+			ContestCode: 12461,
+			DateAdded: "24/4/2023",
+			Live: true,
+			Score: 3,
+		},
+	];
+	return (
+		<main className={styles.config}>
+			<Heading size={"md"}>Contests Config</Heading>
 
-      <div className={styles.configBoard}>
-        {data.map((contest) => {
-          return (
-            <ConfigItem key={contest.Score} itemData={contest as Contest} />
-          );
-        })}
-      </div>
-    </main>
-  );
+			<div className={styles.configBoard}>
+				{data.map((contest) => {
+					return (
+						<ConfigItem
+							key={contest.Score}
+							itemData={contest as Contest}
+						/>
+					);
+				})}
+			</div>
+		</main>
+	);
 }

@@ -34,3 +34,13 @@ export function getUserData() {
 	const userData: UserOnClient = jwt.decode(serverToken) as UserOnClient;
 	return userData;
 }
+//@ts-ignore
+const fetcher = (...args) => {
+	args[1].headers = {
+		...args[1].headers,
+		auth: document.cookie,
+		"Content-Type": "application/json",
+	};
+	//@ts-ignore
+	fetch(...args).then((res) => res.json());
+};
