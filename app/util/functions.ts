@@ -35,12 +35,21 @@ export function getUserData() {
 	return userData;
 }
 //@ts-ignore
-const fetcher = (...args) => {
-	args[1].headers = {
-		...args[1].headers,
-		auth: document.cookie,
-		"Content-Type": "application/json",
-	};
+export const fetcher = (...args) => {
+	args.push({
+		headers: {
+			auth: document.cookie,
+			"Content-Type": "application/json",
+		},
+	});
 	//@ts-ignore
-	fetch(...args).then((res) => res.json());
+	return fetch(...args)
+		.then((res) => {
+			console.log(args);
+			console.log(res.status);
+			return res.json();
+		})
+		.catch((e) => {
+			console.log(e);
+		});
 };

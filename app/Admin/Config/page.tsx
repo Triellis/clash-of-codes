@@ -3,58 +3,35 @@ import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import { Contest } from "@/app/util/types";
 import { Flex, Heading } from "@chakra-ui/react";
 import styles from "./Config.module.css";
+import useSWR from "swr";
+import { getServerUrl, fetcher } from "@/app/util/functions";
 function useConfig(page: number) {
-	const { data, error, isLoading } = useSWR(`/api/user/${id}`, fetcher);
+	const { data, error, isLoading, mutate } = useSWR(
+		getServerUrl(`admin/config?page=${page}`),
+		fetcher
+	);
 
 	return {
-		user: data,
+		contests: data as Contest[],
 		isLoading,
 		isError: error,
+		mutate,
 	};
 }
 export default function Config() {
-	const data: Contest[] = [
-		{
-			Team1: "RG",
-			Team2: "BW",
-			ContestCode: 12461,
-			DateAdded: "24/4/2023",
-			Live: true,
-		},
-		{
-			Team1: "RG",
-			Team2: "BW",
-			ContestCode: 12461,
-			DateAdded: "24/4/2023",
-			Live: true,
-			Score: 1,
-		},
-		{
-			Team1: "RG",
-			Team2: "BW",
-			ContestCode: 12461,
-			DateAdded: "24/4/2023",
-			Live: false,
-			Score: 2,
-		},
-		{
-			Team1: "RG",
-			Team2: "BW",
-			ContestCode: 12461,
-			DateAdded: "24/4/2023",
-			Live: true,
-			Score: 3,
-		},
-	];
+	const { contests, isLoading, isError, mutate } = useConfig(1);
+	if (isLoading) return <div>Loading...</div>;
+	if (isError) return <div>Error</div>;
+
 	return (
 		<main className={styles.config}>
 			<Heading size={"md"}>Contests Config</Heading>
 
 			<div className={styles.configBoard}>
-				{data.map((contest) => {
+				{contests.map((contest) => {
 					return (
 						<ConfigItem
-							key={contest.Score}
+							key={contest.Score + 55}
 							itemData={contest as Contest}
 						/>
 					);
