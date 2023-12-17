@@ -7,3 +7,6 @@ body {
 	font-weight: normal;
 	font-style: normal;
 }
+#root {
+	padding: 1em;
+}

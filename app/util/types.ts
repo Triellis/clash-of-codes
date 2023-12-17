@@ -1,11 +1,22 @@
 import { ObjectId } from "mongodb";
 
+type Clan = "BW" | "RG" | "YB" | "PP";
+
+export interface Contest {
+	Score: number;
+	Team1: Clan;
+	Team2: Clan;
+	ContestCode: number;
+	DateAdded: Date;
+	Live: boolean;
+}
+
 export type UserCol = {
 	_id?: ObjectId;
 	name: String;
 	email: String;
 	role: "User" | "Admin" | "Elder" | "Member" | "Leader" | "CoLeader";
-	clan: null | "BW" | "RG" | "YB" | "PP";
+	clan: null | Clan;
 	visits: number;
 	createdAt: Date;
 	lastVisit: Date;
