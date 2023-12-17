@@ -1,4 +1,6 @@
 import { Contest } from "@/app/util/types";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { IconButton, Switch } from "@chakra-ui/react";
 import styles from "./ConfigItem.module.css";
 
 export default function ConfigItem({ itemData }: { itemData: Contest }) {
@@ -14,17 +16,29 @@ export default function ConfigItem({ itemData }: { itemData: Contest }) {
 				-Remove Button
 			*/}
 
-      <div>Team1</div>
+      <div>{itemData.Team1}</div>
 
-      <div>Team2</div>
+      <div>{itemData.Team2}</div>
 
-      <div>Contest Code</div>
+      <div>{itemData.ContestCode}</div>
 
-      <div>Date Added</div>
+      <div>{itemData.DateAdded}</div>
 
-      <div>isLive Toggle</div>
+      <div>
+        <Switch variant={"default"} size="lg" />
+      </div>
 
-      <div>Remove Button</div>
+      <div>
+        <IconButton
+          isRound={true}
+          variant=""
+					size={"lg"}
+          aria-label="Done"
+          fontSize="20px"
+          color="red.600"
+          icon={<DeleteIcon />}
+        />
+      </div>
     </div>
   );
 }
