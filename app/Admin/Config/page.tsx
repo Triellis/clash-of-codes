@@ -75,11 +75,43 @@ function useConfig(page: number) {
   };
 }
 
+async function addContest({
+  team1,
+  team2,
+  contestCode,
+  date,
+  live,
+}: {
+  team1: string;
+  team2: string;
+  contestCode: string;
+  date: string;
+  live: boolean;
+}) {
+  const res = await fetch(getServerUrl("admin/config"), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      team1,
+      team2,
+      contestCode,
+      date,
+      live,
+    }),
+  });
+
+  const data = await res.json();
+  console.log(data);
+}
+
 const Config: React.FC = () => {
   const { contests, isLoading, isError } = useConfig(1);
 
   const [team1, setTeam1] = useState<string>("");
   const [team2, setTeam2] = useState<string>("");
+  const [contestCode, setContestCode] = useState<string>("");
 
   let contestNodes;
 
@@ -97,6 +129,8 @@ const Config: React.FC = () => {
     { value: "RG", label: "Red Giants" },
     { value: "PP", label: "Purple Pekkas" },
   ];
+
+  const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
 
   return (
     <main className={styles.config}>
@@ -141,7 +175,14 @@ const Config: React.FC = () => {
           />
 
           {/* Contest code */}
-          <Input variant="default" placeholder="Contest Code" />
+          <Input
+            variant="default"
+            placeholder="Contest Code"
+            onChange={(e) => {
+              setContestCode(e.target.value);
+              // console.log("Contest code is set to", e.target.value);
+            }}
+          />
 
           {/* Date */}
           <div>Today</div>
@@ -151,11 +192,23 @@ const Config: React.FC = () => {
 
           {/* Add button */}
           <IconButton
+            isLoading={isAddLoading}
             aria-label="Add"
             icon={<AddIcon />}
             width="64px"
             height="48px"
             borderRadius="16px"
+            onClick={() => {
+              setIsAddLoading(true);
+              addContest({
+                team1,
+                team2,
+                contestCode,
+                date: new Date().toISOString().slice(0, 10),
+                live: true,
+              });
+              setIsAddLoading(false);
+            }}
           />
         </div>
         {contestNodes}
