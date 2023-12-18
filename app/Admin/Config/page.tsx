@@ -56,8 +56,21 @@ function useConfig(page: number) {
 }
 export default function Config() {
 	const { contests, isLoading, isError, mutate } = useConfig(1);
-	if (isLoading) return <div>Loading...</div>;
-	if (isError) return <div>Error</div>;
+
+	let contestNodes;
+
+	if (isLoading) contestNodes = <div>Loading...</div>;
+	if (isError) contestNodes = <div>Error...</div>;
+	if (contests) {
+		contestNodes = contests?.map((contest) => {
+			return (
+				<ConfigItem
+					key={String(contest._id!)}
+					itemData={contest as ContestCol}
+				/>
+			);
+		});
+	}
 
 	const selectOptions = [
 		{ value: "BW", label: "Blue Wizards" },
@@ -122,15 +135,7 @@ export default function Config() {
 						borderRadius={"16px"}
 					/>
 				</div>
-
-				{contests?.map((contest) => {
-					return (
-						<ConfigItem
-							key={String(contest._id!)}
-							itemData={contest as ContestCol}
-						/>
-					);
-				})}
+				{contestNodes}
 			</div>
 
 			<Pagination />
