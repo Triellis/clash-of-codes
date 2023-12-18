@@ -62,6 +62,24 @@ const Input = {
       field: {
         bg: "gray.800",
         color: "gray.400",
+        fontFamily: "Sans-serif",
+      },
+    },
+  },
+};
+
+const Select = {
+  variants: {
+    default: {
+      field: {
+        bg: "gray.800",
+        color: "gray.400",
+        borderRadius: "6px",
+        border: "1px solid",
+        borderColor: "gray.700",
+        // veritcally align the content
+        alignItems: "center",
+        fontFamily: "Sans-serif",
       },
     },
   },
@@ -85,5 +103,6 @@ export const theme = extendTheme({
     Button,
     Switch,
     Input,
+    Select,
   },
 });
