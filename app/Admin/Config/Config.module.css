@@ -30,7 +30,7 @@
   grid-template-columns: repeat(6, 1fr);
   flex-direction: row;
   gap: 64px;
-  width: 100%;
+  width: 100%;  
   margin-block: 1em;
   align-items: center;
 }

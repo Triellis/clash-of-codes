@@ -77,8 +77,15 @@ const Select = {
         borderRadius: "6px",
         border: "1px solid",
         borderColor: "gray.700",
-        // veritcally align the content
-        alignItems: "center",
+        fontFamily: "Sans-serif",
+      },
+      icon: {
+        color: "gray.400",
+      },
+      list: {
+        // Change 'List' to 'list'
+        bg: "gray.800",
+        color: "gray.500",
         fontFamily: "Sans-serif",
       },
     },

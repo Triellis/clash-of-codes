@@ -35,6 +35,12 @@ export default function Config() {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
+  const selectOptions = [
+    { value: "Blue Wizards", label: "Blue Wizards" },
+    { value: "Yellow Barbarians", label: "Yellow Barbarians" },
+    { value: "Red Giants", label: "Red Giants" },
+  ];
+
   return (
     <main className={styles.config}>
       <Heading fontSize={"32px"} marginBlock={"64px"}>
@@ -56,11 +62,38 @@ export default function Config() {
         <Divider />
 
         <div className={styles.configForm}>
-          <Select variant={"default"} placeholder="Purple Pekkas" size="sm" />
-          <Select variant={"default"} placeholder="Purple Pekkas" size="sm" />
-          <Input variant="default" placeholder="Contest Code" />
+          {/* team1 */}
+          <Select variant={"default"} placeholder="Purple Pekkas" size="sm">
+            {selectOptions?.map((option) => {
+              return (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              );
+            })}
+          </Select>
+
+          {/* team2 */}
+          <Select variant={"default"} placeholder="Purple Pekkas" size="sm">
+            {selectOptions?.map((option) => {
+              return (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              );
+            })}
+          </Select>
+
+          {/* contest code */}
+          <Input variant="default" placeholder="Contest Code"/>
+
+          {/* date */}
           <div>Today</div>
+
+          {/* isLive */}
           <Switch variant={"default"} size="lg" disabled defaultChecked />
+
+          {/* add button */}
           <IconButton
             aria-label="Add"
             icon={<AddIcon />}
