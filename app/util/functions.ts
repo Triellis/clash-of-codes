@@ -44,12 +44,8 @@ export const fetcher = (...args) => {
 	});
 	//@ts-ignore
 	return fetch(...args)
-		.then((res) => {
-			console.log(args);
-			console.log(res.status);
-			return res.json();
-		})
+		.then((res) => {})
 		.catch((e) => {
-			console.log(e);
+			console.error(e);
 		});
 };
