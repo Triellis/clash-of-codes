@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
 import Searchbar from "@/app/components/Searchbar/Searchbar";
@@ -15,6 +16,7 @@ import {
   Select,
   Switch,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import styles from "./Config.module.css";
 
@@ -26,11 +28,30 @@ type Option = {
 type CustomSelectProps = {
   selectOptions: Option[];
   teamName: string;
+  team: string;
+  setTeam: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function CustomSelect({ selectOptions, teamName }: CustomSelectProps) {
+function CustomSelect({
+  selectOptions,
+  teamName,
+  team,
+  setTeam,
+}: CustomSelectProps) {
+  const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTeam = e.target.value;
+    setTeam(selectedTeam);
+    // console.log(`${teamName} is set to`, selectedTeam);
+  };
+
   return (
-    <Select variant="default" placeholder={`Select ${teamName}`} size="sm">
+    <Select
+      variant="default"
+      placeholder={`Select ${teamName}`}
+      size="sm"
+      value={team}
+      onChange={handleTeamChange}
+    >
       {selectOptions?.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -54,23 +75,20 @@ function useConfig(page: number) {
   };
 }
 
-export default function Config() {
-  const { contests, isLoading, isError, mutate } = useConfig(1);
+const Config: React.FC = () => {
+  const { contests, isLoading, isError } = useConfig(1);
+
+  const [team1, setTeam1] = useState<string>("");
+  const [team2, setTeam2] = useState<string>("");
 
   let contestNodes;
 
   if (isLoading) contestNodes = <Center>Loading...</Center>;
-  if (isError) contestNodes = <Center>Error...</Center>;
-
-  if (contests) {
-    contestNodes = contests?.map((contest) => {
-      return (
-        <ConfigItem
-          key={String(contest._id!)}
-          itemData={contest as ContestCol}
-        />
-      );
-    });
+  else if (isError) contestNodes = <Center>Error...</Center>;
+  else if (contests) {
+    contestNodes = contests.map((contest) => (
+      <ConfigItem key={String(contest._id!)} itemData={contest} />
+    ));
   }
 
   const selectOptions = [
@@ -82,7 +100,7 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading fontSize={"32px"} marginTop={"64px"}>
+      <Heading fontSize="32px" marginTop="64px">
         Active Contests
       </Heading>
 
@@ -91,44 +109,53 @@ export default function Config() {
         <Searchbar />
       </div>
 
-      {/* form for makign the item: */}
-
+      {/* form for making the item */}
       <div className={styles.configBoard}>
         <div className={styles.header}>
           <SpecialTxt>Team1</SpecialTxt>
           <SpecialTxt>Team2</SpecialTxt>
           <SpecialTxt>Contest Code</SpecialTxt>
-          <SpecialTxt>Date </SpecialTxt>
-          <SpecialTxt>Live </SpecialTxt>
+          <SpecialTxt>Date</SpecialTxt>
+          <SpecialTxt>Live</SpecialTxt>
           <SpecialTxt>Remove</SpecialTxt>
         </div>
 
-        {/* thickness of 2px */}
-        <Divider variant={"default  "} />
+        {/* Thickness of 2px */}
+        <Divider variant="default" />
 
         <div className={styles.configForm}>
-          {/* team1 */}
-          <CustomSelect selectOptions={selectOptions} teamName="Team 1" />
+          {/* Team1 */}
+          <CustomSelect
+            selectOptions={selectOptions}
+            teamName="Team 1"
+            team={team1}
+            setTeam={setTeam1}
+          />
 
-          {/* team2 */}
-          <CustomSelect selectOptions={selectOptions} teamName="Team 2" />
+          {/* Team2 */}
+          <CustomSelect
+            selectOptions={selectOptions}
+            teamName="Team 2"
+            team={team2}
+            setTeam={setTeam2}
+          />
 
-          {/* contest code */}
+          {/* Contest code */}
           <Input variant="default" placeholder="Contest Code" />
 
-          {/* date */}
+          {/* Date */}
           <div>Today</div>
 
-          {/* isLive */}
-          <Switch variant={"default"} size="lg" disabled defaultChecked />
+          {/* IsLive */}
+          <Switch variant="default" size="lg" disabled defaultChecked />
 
-          {/* add button */}
+          {/* Add button */}
           <IconButton
             aria-label="Add"
             icon={<AddIcon />}
-            width={"64px"}
-            height={"48px"}
-            borderRadius={"16px"}
+            width="64px"
+            height="48px"
+            borderRadius="16px"
           />
         </div>
         {contestNodes}
@@ -137,4 +164,6 @@ export default function Config() {
       <Pagination />
     </main>
   );
-}
+};
+
+export default Config;
