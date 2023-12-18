@@ -1,0 +1,6 @@
+.shiny {
+  background-image: linear-gradient(to right, #e1c66e, #d09243);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

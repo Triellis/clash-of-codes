@@ -1,6 +1,7 @@
 "use client";
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
+import SpecialTxt from "@/app/components/SpecialTxt";
 import Add from "@/app/styles/Icons/Add";
 import { fetcher, getServerUrl } from "@/app/util/functions";
 import { ContestCol } from "@/app/util/types";
@@ -75,12 +76,12 @@ export default function Config() {
 
       <div className={styles.configBoard}>
         <div className={styles.header}>
-          <div className="shiny">Team1</div>
-          <div className="shiny">Team2</div>
-          <div className="shiny">Contest Code</div>
-          <div className="shiny">Date </div>
-          <div className="shiny">Live </div>
-          <div className="shiny">Remove</div>
+          <SpecialTxt>Team1</SpecialTxt>
+          <SpecialTxt>Team2</SpecialTxt>
+          <SpecialTxt>Contest Code</SpecialTxt>
+          <SpecialTxt>Date </SpecialTxt>
+          <SpecialTxt>Live </SpecialTxt>
+          <SpecialTxt>Remove</SpecialTxt>
         </div>
 
         <Divider />
