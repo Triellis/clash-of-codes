@@ -104,7 +104,7 @@ export default function Config() {
         </div>
 
         {/* thickness of 2px */}
-        <Divider variant={"default"} />
+        <Divider variant={"default  "} />
 
         <div className={styles.configForm}>
           {/* team1 */}
