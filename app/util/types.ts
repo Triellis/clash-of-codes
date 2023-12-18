@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-type Clan = "BW" | "RG" | "YB" | "PP";
+export type Clan = "BW" | "RG" | "YB" | "PP";
 
 export interface ContestCol {
 	_id?: ObjectId;

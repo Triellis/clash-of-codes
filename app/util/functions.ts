@@ -9,7 +9,7 @@ export function getServerUrl(url: string) {
 	} else {
 		SERVER_URL = "http://localhost:3001";
 	}
-	return `${SERVER_URL}/${url}`;
+	return `${SERVER_URL}${url}`;
 }
 
 export function customFetch(url: string, options?: any) {
