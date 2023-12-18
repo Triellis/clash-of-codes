@@ -34,7 +34,7 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading size={"md"}>Contests Config</Heading>
+      <Heading size={"md"} marginBlock={"2em"}>Active Contests</Heading>
 
       {/* form for makign the item: */}
 
