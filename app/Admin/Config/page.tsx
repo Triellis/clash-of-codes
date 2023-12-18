@@ -18,16 +18,19 @@ import {
 import useSWR from "swr";
 import styles from "./Config.module.css";
 
-type CustomSelectProps = {
-  selectOptions?: {
-    value: string;
-    label: string;
-  }[];
+type Option = {
+  value: string;
+  label: string;
 };
 
-function CustomSelect({ selectOptions }: CustomSelectProps) {
+type CustomSelectProps = {
+  selectOptions: Option[];
+  teamName: string;
+};
+
+function CustomSelect({ selectOptions, teamName }: CustomSelectProps) {
   return (
-    <Select variant="default" placeholder="Team 1" size="sm">
+    <Select variant="default" placeholder={`Select ${teamName}`} size="sm">
       {selectOptions?.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -84,10 +87,10 @@ export default function Config() {
 
         <div className={styles.configForm}>
           {/* team1 */}
-          <CustomSelect selectOptions={selectOptions} />
+          <CustomSelect selectOptions={selectOptions} teamName="Team 1" />
 
           {/* team2 */}
-          <CustomSelect selectOptions={selectOptions} />
+          <CustomSelect selectOptions={selectOptions} teamName="Team 2" />
 
           {/* contest code */}
           <Input variant="default" placeholder="Contest Code" />
