@@ -1,20 +1,12 @@
 import * as React from "react";
-
 const SvgComponent = (props: any) => (
-  <svg
-    width="10"
-    height="10"
-    viewBox="0 0 10 10"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M5.5 0V4.5H10V5.5H5.5V10H4.5V5.5H0V4.5H4.5V0H5.5Z"
-      fill="black"
+      fill="#000"
+      fillRule="evenodd"
+      d="M5.5 0v4.5H10v1H5.5V10h-1V5.5H0v-1h4.5V0h1Z"
+      clipRule="evenodd"
     />
   </svg>
 );
-
 export default SvgComponent;
