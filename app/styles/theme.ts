@@ -53,6 +53,17 @@ const Switch = {
   },
 };
 
+const Input = {
+  variants: {
+    default: {
+      field: {
+        bg: "gray.800",
+        color: "gray.400",
+      },
+    },
+  },
+};
+
 export const theme = extendTheme({
   styles: {
     global: () => ({
@@ -70,5 +81,6 @@ export const theme = extendTheme({
   components: {
     Button,
     Switch,
+    Input,
   },
 });

@@ -3,7 +3,15 @@ import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
 import { fetcher, getServerUrl } from "@/app/util/functions";
 import { Contest } from "@/app/util/types";
-import { Divider, Flex, Heading } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import {
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  IconButton,
+  Input,
+} from "@chakra-ui/react";
 import useSWR from "swr";
 import styles from "./Config.module.css";
 function useConfig(page: number) {
@@ -28,7 +36,32 @@ export default function Config() {
     <main className={styles.config}>
       <Heading size={"md"}>Contests Config</Heading>
 
+      {/* form for makign the item: */}
+
+      <div className={styles.configForm}>
+        <Input variant="default" placeholder="Team 1 Name" />
+        <Input variant="default" placeholder="Team 2 Name" />
+        <Input variant="default" placeholder="Contest Code" />
+        <IconButton
+          aria-label="Add Contest"
+          icon={<AddIcon />}
+          width={"25%"}
+          isRound
+        />
+      </div>
+
       <div className={styles.configBoard}>
+        <div className={styles.header}>
+          <div>Team1</div>
+          <div>Team2</div>
+          <div>Contest Code</div>
+          <div>Date </div>
+          <div>Live </div>
+          <div>Remove</div>
+        </div>
+
+        <Divider />
+
         {contests.map((contest) => {
           return (
             <ConfigItem
