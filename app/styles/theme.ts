@@ -15,6 +15,7 @@ const Button = {
       },
     },
     solid: {
+      border: "2px solid",
       bg: "yellow.400",
       color: "gray.900",
       _hover: {
