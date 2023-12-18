@@ -9,12 +9,12 @@
   margin-top: 1emn;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 95%;
   gap: 1em;
 }
 
 .header {
-  font-size: 32px;
+  font-size: 24px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 64px;

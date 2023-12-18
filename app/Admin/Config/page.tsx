@@ -35,23 +35,11 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading size={"md"} marginBlock={"2em"}>
+      <Heading fontSize={"32px"} marginBlock={"64px"}>
         Active Contests
       </Heading>
 
       {/* form for makign the item: */}
-
-      <div className={styles.configForm}>
-        <Input variant="default" placeholder="Team 1 Name" />
-        <Input variant="default" placeholder="Team 2 Name" />
-        <Input variant="default" placeholder="Contest Code" />
-        <IconButton
-          aria-label="Add Contest"
-          icon={<Add />}
-          width={"25%"}
-          isRound
-        />
-      </div>
 
       <div className={styles.configBoard}>
         <div className={styles.header}>
@@ -64,6 +52,18 @@ export default function Config() {
         </div>
 
         <Divider />
+
+        <div className={styles.configForm}>
+          <Input variant="default" placeholder="Team 1 Name" />
+          <Input variant="default" placeholder="Team 2 Name" />
+          <Input variant="default" placeholder="Contest Code" />
+          <IconButton
+            aria-label="Add Contest"
+            icon={<Add />}
+            width={"25%"}
+            isRound
+          />
+        </div>
 
         {contests?.map((contest) => {
           return (
