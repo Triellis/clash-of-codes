@@ -1,5 +1,5 @@
 import Trash from "@/app/styles/Icons/Trash";
-import { Contest } from "@/app/util/types";
+import { ContestCol } from "@/app/util/types";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { IconButton, Switch } from "@chakra-ui/react";
 import styles from "./ConfigItem.module.css";
@@ -19,7 +19,7 @@ function fullForm(short: string) {
 	}
 }
 
-export default function ConfigItem({ itemData }: { itemData: Contest }) {
+export default function ConfigItem({ itemData }: { itemData: ContestCol }) {
 	const team1 = fullForm(itemData.Team1);
 	const team2 = fullForm(itemData.Team2);
 

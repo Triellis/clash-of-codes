@@ -2,11 +2,11 @@ import { ObjectId } from "mongodb";
 
 type Clan = "BW" | "RG" | "YB" | "PP";
 
-export interface Contest {
-	Score: number;
+export interface ContestCol {
+	_id?: ObjectId;
 	Team1: Clan;
 	Team2: Clan;
-	ContestCode: number;
+	ContestCode: string;
 	DateAdded: Date;
 	Live: boolean;
 }
