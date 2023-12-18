@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
@@ -38,7 +38,7 @@ function CustomSelect({
   team,
   setTeam,
 }: CustomSelectProps) {
-  const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTeamChange = (e: any) => {
     const selectedTeam = e.target.value;
     setTeam(selectedTeam);
     // console.log(`${teamName} is set to`, selectedTeam);
