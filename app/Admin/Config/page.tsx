@@ -141,7 +141,7 @@ export default function Config() {
 	const defaultContest: AddContestState = {
 		Team1: "BW",
 		Team2: "PP",
-		ContestCode: "11235",
+		ContestCode: "",
 	};
 	const [newContest, dispatchContest] = useReducer(
 		reduceAddContest,
