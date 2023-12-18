@@ -1,16 +1,14 @@
 "use client";
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
+import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt";
-import Add from "@/app/styles/Icons/Add";
 import { fetcher, getServerUrl } from "@/app/util/functions";
 import { ContestCol } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import {
-  Button,
   Center,
   Divider,
-  Flex,
   Heading,
   IconButton,
   Input,
@@ -63,6 +61,7 @@ export default function Config() {
 
   if (isLoading) contestNodes = <Center>Loading...</Center>;
   if (isError) contestNodes = <Center>Error...</Center>;
+
   if (contests) {
     contestNodes = contests?.map((contest) => {
       return (
@@ -83,9 +82,14 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading fontSize={"32px"} marginBlock={"64px"}>
+      <Heading fontSize={"32px"} marginTop={"64px"}>
         Active Contests
       </Heading>
+
+      {/* Searchbar here */}
+      <div className={styles.search}>
+        <Searchbar />
+      </div>
 
       {/* form for makign the item: */}
 

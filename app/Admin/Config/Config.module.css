@@ -13,6 +13,14 @@
   gap: 1em;
 }
 
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
 .header {
   font-size: 24px;
   display: grid;
@@ -30,7 +38,7 @@
   grid-template-columns: repeat(6, 1fr);
   flex-direction: row;
   gap: 64px;
-  width: 100%;  
+  width: 100%;
   margin-block: 1em;
   align-items: center;
 }
