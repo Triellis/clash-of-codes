@@ -92,6 +92,16 @@ const Select = {
   },
 };
 
+const Divider = {
+  variants: {
+    default: {
+      borderColor: "gray.500",
+      borderWidth: "3px",
+      borderStyle: "solid",
+    },
+  },
+};
+
 export const theme = extendTheme({
   styles: {
     global: () => ({
@@ -111,5 +121,6 @@ export const theme = extendTheme({
     Switch,
     Input,
     Select,
+    Divider,
   },
 });

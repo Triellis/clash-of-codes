@@ -103,7 +103,8 @@ export default function Config() {
           <SpecialTxt>Remove</SpecialTxt>
         </div>
 
-        <Divider />
+        {/* thickness of 2px */}
+        <Divider variant={"default"} />
 
         <div className={styles.configForm}>
           {/* team1 */}
