@@ -62,7 +62,7 @@ export default function Config() {
 
         <Divider />
 
-        {contests.map((contest) => {
+        {contests?.map((contest) => {
           return (
             <ConfigItem
               key={contest.Score + 55}
