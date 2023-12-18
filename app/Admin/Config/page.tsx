@@ -34,7 +34,9 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading size={"md"} marginBlock={"2em"}>Active Contests</Heading>
+      <Heading size={"md"} marginBlock={"2em"}>
+        Active Contests
+      </Heading>
 
       {/* form for makign the item: */}
 
@@ -52,12 +54,12 @@ export default function Config() {
 
       <div className={styles.configBoard}>
         <div className={styles.header}>
-          <div>Team1</div>
-          <div>Team2</div>
-          <div>Contest Code</div>
-          <div>Date </div>
-          <div>Live </div>
-          <div>Remove</div>
+          <div className="shiny">Team1</div>
+          <div className="shiny">Team2</div>
+          <div className="shiny">Contest Code</div>
+          <div className="shiny">Date </div>
+          <div className="shiny">Live </div>
+          <div className="shiny">Remove</div>
         </div>
 
         <Divider />

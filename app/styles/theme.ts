@@ -47,7 +47,10 @@ const Switch = {
         bg: "gray.800",
       },
       track: {
-        bg: "yellow.400",
+        bg: "gray.300",
+        _checked: {
+          bg: "yellow.400",
+        },
       },
     },
   },

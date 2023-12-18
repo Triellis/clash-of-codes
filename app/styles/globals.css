@@ -1,12 +1,19 @@
 body {
-	letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 @font-face {
-	font-family: "supercell"; /* Choose a name for your font */
-	src: url("./supercell-magic.ttf") format("truetype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "supercell"; /* Choose a name for your font */
+  src: url("./supercell-magic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 #root {
-	padding: 1em;
+  padding: 1em;
+}
+
+.shiny {
+  background-image: linear-gradient(to right, #e1c66e, #d09243);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
