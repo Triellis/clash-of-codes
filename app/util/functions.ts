@@ -44,7 +44,7 @@ export const fetcher = (...args) => {
 	});
 	//@ts-ignore
 	return fetch(...args)
-		.then((res) => {})
+		.then((res) => res.json())
 		.catch((e) => {
 			console.error(e);
 		});
