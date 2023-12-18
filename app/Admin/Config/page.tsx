@@ -1,6 +1,7 @@
 "use client";
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import Pagination from "@/app/components/Pagination/Pagination";
+import Add from "@/app/styles/Icons/Add";
 import { fetcher, getServerUrl } from "@/app/util/functions";
 import { Contest } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
@@ -46,7 +47,7 @@ export default function Config() {
         <Input variant="default" placeholder="Contest Code" />
         <IconButton
           aria-label="Add Contest"
-          icon={<AddIcon />}
+          icon={<Add />}
           width={"25%"}
           isRound
         />
