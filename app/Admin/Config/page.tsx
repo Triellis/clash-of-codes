@@ -103,6 +103,7 @@ export default function Config() {
           mutate={mutate}
           setPage={setPage}
         />
+
         {contestNodes}
       </div>
 
