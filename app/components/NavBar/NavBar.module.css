@@ -1,13 +1,12 @@
 .NavBar {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  border-bottom: var(--chakra-colors-gray-700) 1px solid;
+  border-bottom: var(--chakra-colors-gray-700) 3px solid;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  width: 100%;
   padding-block: 16px;
-  padding-inline: 32px;
+  margin-inline: 32px;
   /* margin-block: 1em; */
 }
 .menuIcon {
