@@ -1,5 +1,4 @@
 "use client";
-
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
 import CustomSelect from "@/app/components/CustomSelect/CustomSelect";
 import NotifToast from "@/app/components/NotifToast/NotifToast";
@@ -44,9 +43,8 @@ function useConfig(page: number, searchQuery: string, maxResults: number) {
 	};
 }
 
-type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
-
 // for the button:
+type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 async function addContest(
 	contest: AddContestState,
 	mutate: Function,
@@ -81,11 +79,11 @@ async function addContest(
 	}
 }
 
-interface AddContestAction {
+type AddContestAction = {
 	field: "Team1" | "Team2" | "ContestCode";
 	value: Clan | string;
 	type: "UPDATE" | "RESET";
-}
+};
 function reduceAddContest(
 	state: AddContestState,
 	action: AddContestAction
