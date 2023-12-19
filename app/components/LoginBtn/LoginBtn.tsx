@@ -77,7 +77,7 @@ export default function LoginBtn() {
 
 			document.cookie = `google_token=${credentialResponse.credential}`;
 			// console.log("Login Success");
-			const res = await customFetch("login");
+			const res = await customFetch("/login");
 			if (res.status !== 200) {
 				console.error("Login Failed ");
 			} else {
