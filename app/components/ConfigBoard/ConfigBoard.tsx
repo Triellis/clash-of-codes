@@ -3,7 +3,7 @@ import { AddContestState, Clan } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Input, Switch } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import { mutate } from "swr";
+
 import CustomSelect from "../CustomSelect/CustomSelect";
 import styles from "./ConfigBoard.module.css";
 
@@ -13,6 +13,7 @@ type ConfigureBoardProps = {
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 	newContest: AddContestState;
 	dispatchContest: Function;
+	mutate: Function;
 };
 
 function ConfigBoard({
@@ -21,6 +22,7 @@ function ConfigBoard({
 	setIsLoading,
 	newContest,
 	dispatchContest,
+	mutate,
 }: ConfigureBoardProps) {
 	const selectOptions = useMemo(
 		() => [
