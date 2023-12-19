@@ -38,6 +38,35 @@ async function deleteContest(contestId: string, mutate: Function, toast: any) {
 		});
 	}
 }
+async function updateContest(
+	contest: ContestCol,
+	mutate: Function,
+	toast: any
+) {
+	const res = await customFetch(`/admin/config`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(contest),
+	});
+
+	const status = await res.status;
+	if (status === 200) {
+		mutate();
+		NotifToast({
+			title: "Updated",
+			status: "success",
+			toast: toast,
+		});
+	} else {
+		NotifToast({
+			title: "Error",
+			status: "error",
+			toast: toast,
+		});
+	}
+}
 export default function ConfigItem({
 	itemData,
 	mutate,
@@ -65,6 +94,16 @@ export default function ConfigItem({
 					variant={"default"}
 					size="lg"
 					defaultChecked={itemData.Live}
+					onChange={async () =>
+						await updateContest(
+							{
+								...itemData,
+								Live: !itemData.Live,
+							},
+							mutate,
+							toast
+						)
+					}
 				/>
 			</div>
 
