@@ -13,7 +13,7 @@ type ConfigureBoardProps = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   newContest: AddContestState;
   dispatchContest: Function;
-	mutate: Function;
+  mutate: Function;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -23,7 +23,7 @@ function ConfigBoard({
   setIsLoading,
   newContest,
   dispatchContest,
-	mutate,
+  mutate,
   setPage,
 }: ConfigureBoardProps) {
   const selectOptions = useMemo(
@@ -99,6 +99,7 @@ function ConfigBoard({
             setIsLoading(true);
             setPage(1);
             await addContest(newContest, mutate, toast);
+            mutate();
             dispatchContest({ type: "RESET" });
             setIsLoading(false);
           }}
