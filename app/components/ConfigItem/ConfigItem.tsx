@@ -3,57 +3,84 @@ import { ContestCol } from "@/app/util/types";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { IconButton, Switch } from "@chakra-ui/react";
 import styles from "./ConfigItem.module.css";
+import { customFetch } from "@/app/util/functions";
+import NotifToast from "../NotifToast";
 
 function fullForm(short: string) {
-  switch (short) {
-    case "RG":
-      return "Red Giants";
-    case "BW":
-      return "Blue Wizards";
-    case "PP":
-      return "Purple PEKKAS";
-    case "YB":
-      return "Yellow Barbarians";
-    default:
-      return "Seedhi ritna team aapne";
-  }
+	switch (short) {
+		case "RG":
+			return "Red Giants";
+		case "BW":
+			return "Blue Wizards";
+		case "PP":
+			return "Purple PEKKAS";
+		case "YB":
+			return "Yellow Barbarians";
+		default:
+			return "Seedhi ritna team aapne";
+	}
 }
-
-export default function ConfigItem({
-  itemData,
-  deleteFunction,
+async function deleteContest({
+	contestId,
+	mutate,
+	toast,
 }: {
-  itemData: ContestCol;
-  deleteFunction: Function;
+	contestId: string;
+	mutate: Function;
+	toast: any;
 }) {
-  const team1 = fullForm(itemData.Team1);
-  const team2 = fullForm(itemData.Team2);
-  return (
-    <div className={styles.main}>
-      <div>{team1}</div>
+	const res = await customFetch(`/admin/config?id=${contestId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
 
-      <div>{team2}</div>
+	const status = await res.status;
+	if (status === 200) {
+		mutate();
+		NotifToast({
+			title: "Deleted",
+			status: "success",
+			toast: toast,
+		});
+	}
+}
+export default function ConfigItem({ itemData }: { itemData: ContestCol }) {
+	const team1 = fullForm(itemData.Team1);
+	const team2 = fullForm(itemData.Team2);
+	return (
+		<div className={styles.main}>
+			<div>{team1}</div>
 
-      <div>{itemData.ContestCode}</div>
+			<div>{team2}</div>
 
-      <div>{new Date(itemData.DateAdded.toString()).toLocaleDateString()}</div>
+			<div>{itemData.ContestCode}</div>
 
-      <div>
-        <Switch variant={"default"} size="lg" defaultChecked={itemData.Live} />
-      </div>
+			<div>
+				{new Date(itemData.DateAdded.toString()).toLocaleDateString()}
+			</div>
 
-      <div>
-        <IconButton
-          isRound={true}
-          variant=""
-          size={"lg"}
-          aria-label="Done"
-          fontSize="20px"
-          color="red.600"
-          icon={<Trash />}
-          onClick={async () => await deleteFunction(itemData._id)}
-        />
-      </div>
-    </div>
-  );
+			<div>
+				<Switch
+					variant={"default"}
+					size="lg"
+					defaultChecked={itemData.Live}
+				/>
+			</div>
+
+			<div>
+				<IconButton
+					isRound={true}
+					variant=""
+					size={"lg"}
+					aria-label="Done"
+					fontSize="20px"
+					color="red.600"
+					icon={<Trash />}
+					onClick={async () => await deleteContest(itemData._id)}
+				/>
+			</div>
+		</div>
+	);
 }
