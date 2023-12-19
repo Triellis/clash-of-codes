@@ -28,9 +28,6 @@ export default function ConfigItem({
 }) {
   const team1 = fullForm(itemData.Team1);
   const team2 = fullForm(itemData.Team2);
-
-  console.log("itemData", itemData._id);
-
   return (
     <div className={styles.main}>
       <div>{team1}</div>
