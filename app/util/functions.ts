@@ -1,6 +1,7 @@
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
-import { UserOnClient } from "./types";
+import { ContestCol, UserOnClient } from "./types";
+import useSWR from "swr";
 
 export function getServerUrl(url: string) {
   let SERVER_URL;
@@ -49,3 +50,23 @@ export const fetcher = (...args) => {
       console.error(e);
     });
 };
+
+export function useConfig(
+  page: number,
+  searchQuery: string,
+  maxResults: number
+) {
+  const { data, error, isLoading, mutate } = useSWR(
+    getServerUrl(
+      `/admin/config?page=${page}&maxResults=${maxResults}&searchQuery=${searchQuery}`
+    ),
+    fetcher
+  );
+
+  return {
+    contests: data as ContestCol[],
+    isLoading,
+    isError: error,
+    mutate,
+  };
+}

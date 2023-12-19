@@ -5,7 +5,12 @@ import NotifToast from "@/app/components/NotifToast/NotifToast";
 import Pagination from "@/app/components/Pagination/Pagination";
 import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt";
-import { customFetch, fetcher, getServerUrl } from "@/app/util/functions";
+import {
+  customFetch,
+  fetcher,
+  getServerUrl,
+  useConfig,
+} from "@/app/util/functions";
 import { Clan, ContestCol } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import {
@@ -26,22 +31,6 @@ import { describe } from "node:test";
 import React, { useMemo, useReducer, useState } from "react";
 import useSWR, { mutate } from "swr";
 import styles from "./Config.module.css";
-
-function useConfig(page: number, searchQuery: string, maxResults: number) {
-  const { data, error, isLoading, mutate } = useSWR(
-    getServerUrl(
-      `/admin/config?page=${page}&maxResults=${maxResults}&searchQuery=${searchQuery}`
-    ),
-    fetcher
-  );
-
-  return {
-    contests: data as ContestCol[],
-    isLoading,
-    isError: error,
-    mutate,
-  };
-}
 
 // for the button:
 type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
