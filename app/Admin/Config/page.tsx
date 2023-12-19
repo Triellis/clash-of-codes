@@ -100,6 +100,7 @@ export default function Config() {
           setIsLoading={setIsAddLoading}
           newContest={newContest}
           dispatchContest={dispatchContest}
+          setPage={setPage}
         />
         {contestNodes}
       </div>
