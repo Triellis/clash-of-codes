@@ -1,30 +1,130 @@
-import { Contest } from "@/app/util/types";
+import Trash from "@/app/styles/Icons/Trash";
+import { ContestCol } from "@/app/util/types";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { IconButton, Switch, useToast } from "@chakra-ui/react";
 import styles from "./ConfigItem.module.css";
+import { customFetch } from "@/app/util/functions";
+import NotifToast from "../NotifToast";
 
-export default function ConfigItem({ itemData }: { itemData: Contest }) {
-  console.log("item data", itemData);
-  return (
-    <div className={styles.main}>
-      {/* Order:
-				-Team1
-				-Team2
-				-Contest Code
-				-Date Added
-				-isLive Toggle
-				-Remove Button
-			*/}
+function fullForm(short: string) {
+	switch (short) {
+		case "RG":
+			return "Red Giants";
+		case "BW":
+			return "Blue Wizards";
+		case "PP":
+			return "Purple PEKKAS";
+		case "YB":
+			return "Yellow Barbarians";
+		default:
+			return "Seedhi ritna team aapne";
+	}
+}
+async function deleteContest(contestId: string, mutate: Function, toast: any) {
+	const res = await customFetch(`/admin/config?id=${contestId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
 
-      <div>Team1</div>
+	const status = await res.status;
+	if (status === 200) {
+		mutate();
+		NotifToast({
+			title: "Deleted",
+			status: "success",
+			toast: toast,
+		});
+	}
+}
+async function updateContest(
+	contest: ContestCol,
+	mutate: Function,
+	toast: any
+) {
+	const res = await customFetch(`/admin/config`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(contest),
+	});
 
-      <div>Team2</div>
+	const status = await res.status;
+	if (status === 200) {
+		mutate();
+		NotifToast({
+			title: "Updated",
+			status: "success",
+			toast: toast,
+		});
+	} else {
+		NotifToast({
+			title: "Error",
+			status: "error",
+			toast: toast,
+		});
+	}
+}
+export default function ConfigItem({
+	itemData,
+	mutate,
+}: {
+	itemData: ContestCol;
+	mutate: Function;
+}) {
+	const team1 = fullForm(itemData.Team1);
+	const team2 = fullForm(itemData.Team2);
+	const toast = useToast();
+	return (
+		<div className={styles.main}>
+			<div>{team1}</div>
 
-      <div>Contest Code</div>
+			<div>{team2}</div>
 
-      <div>Date Added</div>
+			<div>{itemData.ContestCode}</div>
 
-      <div>isLive Toggle</div>
+			<div>
+				{new Date(itemData.DateAdded.toString()).toLocaleDateString()}
+			</div>
 
-      <div>Remove Button</div>
-    </div>
-  );
+			<div>
+				<Switch
+					variant={"default"}
+					size="lg"
+					defaultChecked={itemData.Live}
+					onChange={async () =>
+						await updateContest(
+							{
+								...itemData,
+								Live: !itemData.Live,
+							},
+							mutate,
+							toast
+						)
+					}
+				/>
+			</div>
+
+			<div>
+				<IconButton
+					isRound={true}
+					variant=""
+					size={"lg"}
+					aria-label="Done"
+					fontSize="20px"
+					color="red.600"
+					icon={<Trash />}
+					onClick={async () =>
+						await deleteContest(
+							String(itemData._id!),
+							mutate,
+							toast
+						)
+					}
+				/>
+			</div>
+		</div>
+	);
 }

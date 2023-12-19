@@ -1,6 +1,8 @@
-import jwt from "jsonwebtoken";
 import cookie from "cookie";
-import { UserOnClient } from "./types";
+import jwt from "jsonwebtoken";
+import { AddContestState, ContestCol, UserOnClient } from "./types";
+import useSWR from "swr";
+import NotifToast from "../components/NotifToast";
 
 export function getServerUrl(url: string) {
 	let SERVER_URL;
@@ -9,7 +11,7 @@ export function getServerUrl(url: string) {
 	} else {
 		SERVER_URL = "http://localhost:3001";
 	}
-	return `${SERVER_URL}/${url}`;
+	return `${SERVER_URL}${url}`;
 }
 
 export function customFetch(url: string, options?: any) {
@@ -33,4 +35,72 @@ export function getUserData() {
 	}
 	const userData: UserOnClient = jwt.decode(serverToken) as UserOnClient;
 	return userData;
+}
+//@ts-ignore
+export const fetcher = (...args) => {
+	args.push({
+		headers: {
+			auth: document.cookie,
+			"Content-Type": "application/json",
+		},
+	});
+	//@ts-ignore
+	return fetch(...args)
+		.then((res) => res.json())
+		.catch((e) => {
+			console.error(e);
+		});
+};
+
+export function useConfig(
+	page: number,
+	searchQuery: string,
+	maxResults: number
+) {
+	const { data, error, isLoading, mutate } = useSWR(
+		getServerUrl(
+			`/admin/config?page=${page}&maxResults=${maxResults}&searchQuery=${searchQuery}`
+		),
+		fetcher
+	);
+
+	return {
+		contests: data as ContestCol[],
+		isLoading,
+		isError: error,
+		mutate,
+	};
+}
+export async function addContest(
+	contest: AddContestState,
+	mutate: Function,
+	toast: any
+) {
+	// Remove all spaces
+	if (contest?.ContestCode === "") {
+		NotifToast({
+			title: "Enter a valid contest code",
+			status: "error",
+			toast: toast,
+		});
+		return;
+	}
+
+	const res = await customFetch("/admin/config", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(contest),
+	});
+
+	const status = await res.status;
+	if (status === 200) {
+		mutate();
+		NotifToast({
+			title: "Success",
+			status: "success",
+			toast: toast,
+		});
+	}
 }

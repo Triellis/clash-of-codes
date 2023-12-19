@@ -14,9 +14,20 @@ export default function Test() {
 		<main className={styles.main}>
 			<button
 				onClick={async () => {
-					const res = await customFetch("");
+					const dummyContest = {
+						Team1: "BW",
+						Team2: "YB",
+						ContestCode: "12345",
+						Live: true,
+					};
 
-					// console.log(await res.text());
+					const res = await customFetch(`admin/config`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(dummyContest),
+					});
 				}}
 			>
 				Click

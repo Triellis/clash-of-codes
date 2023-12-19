@@ -3,10 +3,42 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 .configBoard {
-  margin-top: 1emn ;
+  margin-top: 1emn;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 95%;
+  gap: 1em;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.header {
+  font-size: 24px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 64px;
+  text-align: left;
+  align-items: center;
+  word-wrap: break-word;
+  margin-top: 1em;
+}
+
+.configForm {
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  flex-direction: row;
+  gap: 64px;
+  width: 100%;
+  margin-block: 1em;
+  align-items: center;
 }

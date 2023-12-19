@@ -1,4 +1,8 @@
 .main {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 64px;
+	text-align: left;
+	align-items: center;
+	word-wrap: break-word;
 }

@@ -1,54 +1,117 @@
 "use client";
+import ConfigBoard from "@/app/components/ConfigBoard/ConfigBoard";
 import ConfigItem from "@/app/components/ConfigItem/ConfigItem";
-import { Contest } from "@/app/util/types";
-import { Flex, Heading } from "@chakra-ui/react";
+import Pagination from "@/app/components/Pagination/Pagination";
+import Searchbar from "@/app/components/Searchbar/Searchbar";
+import SpecialTxt from "@/app/components/SpecialTxt";
+import { useConfig } from "@/app/util/functions";
+import { AddContestAction, AddContestState, Clan } from "@/app/util/types";
+import { Center, Divider, Heading, useToast } from "@chakra-ui/react";
+import React, { useMemo, useReducer, useState } from "react";
 import styles from "./Config.module.css";
 
+// for the button:
+function reduceAddContest(
+  state: AddContestState,
+  action: AddContestAction
+): AddContestState {
+  switch (action.type) {
+    case "UPDATE":
+      return { ...state, [action.field]: action.value };
+    case "RESET":
+      return { Team1: "BW", Team2: "RG", ContestCode: "" };
+    default:
+      return state;
+  }
+}
+
 export default function Config() {
-  const data: Contest[] = [
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "24/4/2023",
-      Live: true,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "2023-12-17T10:38:29.222Z",
-      Live: true,
-      Score: 1,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "2023-12-17T10:41:10.816Z",
-      Live: true,
-      Score: 2,
-    },
-    {
-      Team1: "RG",
-      Team2: "BW",
-      ContestCode: 12461,
-      DateAdded: "2023-12-17T10:41:20.890Z",
-      Live: true,
-      Score: 3,
-    },
-  ];
+  const toast = useToast();
+
+  const tableCols = useMemo(
+    () => ["Team1", "Team2", "ContestCode", "Date", "Live", "Remove"],
+    []
+  );
+
+  const defaultContest: AddContestState = {
+    Team1: "BW",
+    Team2: "PP",
+    ContestCode: "",
+  };
+
+  const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
+
+  const [newContest, dispatchContest] = useReducer(
+    reduceAddContest,
+    defaultContest
+  );
+
+  const maxResults = 5;
+  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { contests, isLoading, isError, mutate } = useConfig(
+    page,
+    searchQuery,
+    maxResults
+  );
+  let contestNodes;
+
+  if (isLoading) contestNodes = <Center>Loading...</Center>;
+  else if (isError) contestNodes = <Center>Error...</Center>;
+  else if (contests) {
+    contestNodes = contests.map((contest) => (
+      <ConfigItem
+        key={String(contest._id!)}
+        mutate={mutate}
+        itemData={contest}
+      />
+    ));
+  }
+
   return (
     <main className={styles.config}>
-      <Heading size={"md"}>Contests Config</Heading>
+      <Heading fontSize="32px" marginTop="64px">
+        Active Contests
+      </Heading>
 
-      <div className={styles.configBoard}>
-        {data.map((contest) => {
-          return (
-            <ConfigItem key={contest.Score} itemData={contest as Contest} />
-          );
-        })}
+      {/* Searchbar here */}
+      <div className={styles.search}>
+        <Searchbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setPage={setPage}
+        />
       </div>
+
+      {/* form for making the item */}
+      <div className={styles.configBoard}>
+        <div className={styles.header}>
+          {tableCols.map((col) => (
+            <SpecialTxt key={col}>{col}</SpecialTxt>
+          ))}
+        </div>
+
+        <Divider variant="default" />
+
+        <ConfigBoard
+          toast={toast}
+          isLoading={isAddLoading}
+          setIsLoading={setIsAddLoading}
+          newContest={newContest}
+          dispatchContest={dispatchContest}
+          mutate={mutate}
+          setPage={setPage}
+        />
+        {contestNodes}
+      </div>
+
+      <Pagination
+        page={page}
+        setPage={setPage}
+        items={contests}
+        maxResults={maxResults}
+      />
     </main>
   );
 }
