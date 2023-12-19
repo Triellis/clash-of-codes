@@ -61,9 +61,9 @@ function CustomSelect({ selectOptions, team, setTeam }: CustomSelectProps) {
   );
 }
 
-function useConfig(page: number) {
+function useConfig(page: number, maxResults: number) {
   const { data, error, isLoading, mutate } = useSWR(
-    getServerUrl(`/admin/config?page=${page}&maxResults=5`),
+    getServerUrl(`/admin/config?page=${page}&maxResults=${maxResults}`),
     fetcher
   );
 
@@ -123,18 +123,7 @@ function reduceAddContest(
 }
 
 export default function Config() {
-  const { contests, isLoading, isError, mutate } = useConfig(1);
   const toast = useToast();
-
-  let contestNodes;
-
-  if (isLoading) contestNodes = <Center>Loading...</Center>;
-  else if (isError) contestNodes = <Center>Error...</Center>;
-  else if (contests) {
-    contestNodes = contests.map((contest) => (
-      <ConfigItem key={String(contest._id!)} itemData={contest} />
-    ));
-  }
 
   const selectOptions = useMemo(
     () => [
@@ -149,16 +138,33 @@ export default function Config() {
     () => ["Team1", "Team2", "ContestCode", "Date", "Live", "Remove"],
     []
   );
+
   const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
   const defaultContest: AddContestState = {
     Team1: "BW",
     Team2: "PP",
     ContestCode: "",
   };
+
   const [newContest, dispatchContest] = useReducer(
     reduceAddContest,
     defaultContest
   );
+
+  const maxResults = 5;
+  const { contests, isLoading, isError, mutate } = useConfig(1, maxResults);
+  let contestNodes;
+
+  if (isLoading) contestNodes = <Center>Loading...</Center>;
+  else if (isError) contestNodes = <Center>Error...</Center>;
+  else if (contests) {
+    contestNodes = contests.map((contest) => (
+      <ConfigItem key={String(contest._id!)} itemData={contest} />
+    ));
+  }
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   return (
     <main className={styles.config}>
@@ -168,7 +174,11 @@ export default function Config() {
 
       {/* Searchbar here */}
       <div className={styles.search}>
-        <Searchbar />
+        <Searchbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setPage={setPage}
+        />
       </div>
 
       {/* form for making the item */}
@@ -249,7 +259,12 @@ export default function Config() {
         {contestNodes}
       </div>
 
-      <Pagination />
+      <Pagination
+        page={page}
+        setPage={setPage}
+        items={contests}
+        maxResults={maxResults}
+      />
     </main>
   );
 }
