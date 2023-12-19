@@ -83,6 +83,16 @@ async function addContest(
   mutate: Function,
   toast: any
 ) {
+  // Remove all spaces
+  if (contest?.ContestCode === "") {
+    NotifToast({
+      title: "Enter a valid contest code",
+      status: "error",
+      toast: toast,
+    });
+    return;
+  }
+
   const res = await customFetch("/admin/config", {
     method: "POST",
     headers: {
