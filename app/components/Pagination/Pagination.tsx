@@ -22,6 +22,7 @@ export default function Pagination({
 			<IconButton
 				aria-label="Go to previous page"
 				icon={<Backward />}
+				variant={"outline"}
 				isDisabled={page == 1}
 				onClick={() => {
 					if (page > 1) setPage(page - 1);
@@ -31,6 +32,7 @@ export default function Pagination({
 			<IconButton
 				aria-label="Go to next page"
 				icon={<Forward />}
+				variant={"outline"}
 				isDisabled={items && items.length < maxResults}
 				className="clicky"
 				onClick={() => {
