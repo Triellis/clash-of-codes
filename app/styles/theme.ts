@@ -56,18 +56,6 @@ const Switch = {
   },
 };
 
-const Input = {
-  variants: {
-    default: {
-      field: {
-        bg: "gray.800",
-        color: "gray.400",
-        fontFamily: "Sans-serif",
-      },
-    },
-  },
-};
-
 const Select = {
   variants: {
     default: {
@@ -102,6 +90,36 @@ const Divider = {
   },
 };
 
+const Input = {
+  variants: {
+    default: {
+      field: {
+        bg: "gray.800",
+        color: "gray.400",
+        fontFamily: "Sans-serif",
+      },
+    },
+  },
+};
+
+const NumberInput = {
+  variants: {
+    default: {
+      field: {
+        bg: "gray.800",
+        color: "gray.400",
+        borderRadius: "6px",
+        border: "1px solid",
+        borderColor: "gray.700",
+        fontFamily: "Sans-serif",
+      },
+      stepper: {
+        color: "gray.400",
+      },
+    },
+  },
+};
+
 export const theme = extendTheme({
   styles: {
     global: () => ({
@@ -120,6 +138,7 @@ export const theme = extendTheme({
     Button,
     Switch,
     Input,
+    NumberInput,
     Select,
     Divider,
   },

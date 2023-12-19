@@ -1,7 +1,12 @@
 import { addContest } from "@/app/util/functions";
 import { AddContestState, Clan } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
-import { IconButton, Input, Switch } from "@chakra-ui/react";
+import {
+  IconButton,
+  NumberInput,
+  NumberInputField,
+  Switch,
+} from "@chakra-ui/react";
 import React, { useMemo } from "react";
 
 import CustomSelect from "../CustomSelect/CustomSelect";
@@ -66,20 +71,21 @@ function ConfigBoard({
         />
 
         {/* Contest code */}
-        <Input
-          variant="default"
-          placeholder="Contest Code"
-          onChange={(e) => {
-            dispatchContest({
-              field: "ContestCode",
-              value: e.target.value,
-              type: "UPDATE",
-            });
+        <NumberInput variant="default">
+          <NumberInputField
+            placeholder="Contest Code"
+            onChange={(e: any) => {
+              dispatchContest({
+                field: "ContestCode",
+                value: e.target.value,
+                type: "UPDATE",
+              });
 
-            // console.log("Contest code is set to", e.target.value);
-          }}
-          value={newContest.ContestCode}
-        />
+              // console.log("Contest code is set to", e.target.value);
+            }}
+            value={newContest.ContestCode}
+          />
+        </NumberInput>
 
         {/* Date */}
         <div>Today</div>
