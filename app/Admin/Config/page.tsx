@@ -61,10 +61,11 @@ function CustomSelect({ selectOptions, team, setTeam }: CustomSelectProps) {
 	);
 }
 
-function useConfig(page: number, maxResults: number) {
-	console.log(page);
+function useConfig(page: number, searchQuery: string, maxResults: number) {
 	const { data, error, isLoading, mutate } = useSWR(
-		getServerUrl(`/admin/config?page=${page}&maxResults=${maxResults}`),
+		getServerUrl(
+			`/admin/config?page=${page}&maxResults=${maxResults}&searchQuery=${searchQuery}`
+		),
 		fetcher
 	);
 
@@ -163,8 +164,11 @@ export default function Config() {
 
 	const maxResults = 5;
 	const [page, setPage] = useState(1);
+	const [searchQuery, setSearchQuery] = useState("");
+
 	const { contests, isLoading, isError, mutate } = useConfig(
 		page,
+		searchQuery,
 		maxResults
 	);
 	let contestNodes;
@@ -180,8 +184,6 @@ export default function Config() {
 			/>
 		));
 	}
-
-	const [searchQuery, setSearchQuery] = useState("");
 
 	return (
 		<main className={styles.config}>
