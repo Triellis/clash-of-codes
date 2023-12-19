@@ -1,7 +1,7 @@
 import Trash from "@/app/styles/Icons/Trash";
 import { ContestCol } from "@/app/util/types";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { IconButton, Switch } from "@chakra-ui/react";
+import { IconButton, Switch, useToast } from "@chakra-ui/react";
 import styles from "./ConfigItem.module.css";
 import { customFetch } from "@/app/util/functions";
 import NotifToast from "../NotifToast";
@@ -20,15 +20,7 @@ function fullForm(short: string) {
 			return "Seedhi ritna team aapne";
 	}
 }
-async function deleteContest({
-	contestId,
-	mutate,
-	toast,
-}: {
-	contestId: string;
-	mutate: Function;
-	toast: any;
-}) {
+async function deleteContest(contestId: string, mutate: Function, toast: any) {
 	const res = await customFetch(`/admin/config?id=${contestId}`, {
 		method: "DELETE",
 		headers: {
@@ -46,9 +38,16 @@ async function deleteContest({
 		});
 	}
 }
-export default function ConfigItem({ itemData }: { itemData: ContestCol }) {
+export default function ConfigItem({
+	itemData,
+	mutate,
+}: {
+	itemData: ContestCol;
+	mutate: Function;
+}) {
 	const team1 = fullForm(itemData.Team1);
 	const team2 = fullForm(itemData.Team2);
+	const toast = useToast();
 	return (
 		<div className={styles.main}>
 			<div>{team1}</div>
@@ -78,7 +77,13 @@ export default function ConfigItem({ itemData }: { itemData: ContestCol }) {
 					fontSize="20px"
 					color="red.600"
 					icon={<Trash />}
-					onClick={async () => await deleteContest(itemData._id)}
+					onClick={async () =>
+						await deleteContest(
+							String(itemData._id!),
+							mutate,
+							toast
+						)
+					}
 				/>
 			</div>
 		</div>
