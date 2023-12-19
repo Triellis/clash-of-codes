@@ -1,18 +1,28 @@
 body {
-	letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 @font-face {
-	font-family: "supercell"; /* Choose a name for your font */
-	src: url("./supercell-magic.ttf") format("truetype");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "supercell"; /* Choose a name for your font */
+  src: url("./supercell-magic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 #root {
-	padding: 1em;
+  padding-bottom: 1em;
+	padding-inline: 1em;
 }
 
 option {
-	background-color: var(--chakra-colors-gray-800) !important;
-	border: none !important;
-	border-radius: none !important;
+  background-color: var(--chakra-colors-gray-800) !important;
+  border: none !important;
+  border-radius: none !important;
+}
+
+/* sticky nav: */
+.nav {
+  position: sticky;
+	width: 100%;
+  top: 0px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }

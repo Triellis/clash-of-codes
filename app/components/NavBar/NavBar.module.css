@@ -6,8 +6,9 @@
   justify-content: space-between;
   gap: 32px;
   width: 100%;
-  padding-bottom: 16px;
-  margin-block: 1em;
+  padding-block: 16px;
+  padding-inline: 32px;
+  /* margin-block: 1em; */
 }
 .menuIcon {
   display: none !important;
