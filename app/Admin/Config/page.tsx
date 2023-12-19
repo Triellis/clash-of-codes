@@ -185,7 +185,13 @@ export default function Config() {
   else if (isError) contestNodes = <Center>Error...</Center>;
   else if (contests) {
     contestNodes = contests.map((contest) => (
-      <ConfigItem key={String(contest._id!)} itemData={contest} />
+      <ConfigItem
+        key={String(contest._id!)}
+        itemData={contest}
+        deleteFunction={(id: string) =>
+          deleteContest({ contestId: id, mutate, toast })
+        }
+      />
     ));
   }
 
