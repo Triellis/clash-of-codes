@@ -100,7 +100,33 @@ async function addContest(
       toast: toast,
     });
   }
-  console.log(status);
+}
+
+async function deleteContest({
+  contestId,
+  mutate,
+  toast,
+}: {
+  contestId: string;
+  mutate: Function;
+  toast: any;
+}) {
+  const res = await customFetch(`/admin/config?id=${contestId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const status = await res.status;
+  if (status === 200) {
+    mutate();
+    NotifToast({
+      title: "Success",
+      status: "success",
+      toast: toast,
+    });
+  }
 }
 
 interface AddContestAction {
