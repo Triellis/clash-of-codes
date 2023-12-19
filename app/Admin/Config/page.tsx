@@ -12,105 +12,106 @@ import styles from "./Config.module.css";
 
 // for the button:
 function reduceAddContest(
-  state: AddContestState,
-  action: AddContestAction
+	state: AddContestState,
+	action: AddContestAction
 ): AddContestState {
-  switch (action.type) {
-    case "UPDATE":
-      return { ...state, [action.field]: action.value };
-    case "RESET":
-      return { Team1: "BW", Team2: "RG", ContestCode: "" };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case "UPDATE":
+			return { ...state, [action.field]: action.value };
+		case "RESET":
+			return { Team1: "BW", Team2: "RG", ContestCode: "" };
+		default:
+			return state;
+	}
 }
 
 export default function Config() {
-  const toast = useToast();
+	const toast = useToast();
 
-  const tableCols = useMemo(
-    () => ["Team1", "Team2", "ContestCode", "Date", "Live", "Remove"],
-    []
-  );
+	const tableCols = useMemo(
+		() => ["Team1", "Team2", "ContestCode", "Date", "Live", "Remove"],
+		[]
+	);
 
-  const defaultContest: AddContestState = {
-    Team1: "BW",
-    Team2: "PP",
-    ContestCode: "",
-  };
+	const defaultContest: AddContestState = {
+		Team1: "BW",
+		Team2: "PP",
+		ContestCode: "",
+	};
 
-  const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
+	const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
 
-  const [newContest, dispatchContest] = useReducer(
-    reduceAddContest,
-    defaultContest
-  );
+	const [newContest, dispatchContest] = useReducer(
+		reduceAddContest,
+		defaultContest
+	);
 
-  const maxResults = 5;
-  const [page, setPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
+	const maxResults = 5;
+	const [page, setPage] = useState(1);
+	const [searchQuery, setSearchQuery] = useState("");
 
-  const { contests, isLoading, isError, mutate } = useConfig(
-    page,
-    searchQuery,
-    maxResults
-  );
-  let contestNodes;
+	const { contests, isLoading, isError, mutate } = useConfig(
+		page,
+		searchQuery,
+		maxResults
+	);
+	let contestNodes;
 
-  if (isLoading) contestNodes = <Center>Loading...</Center>;
-  else if (isError) contestNodes = <Center>Error...</Center>;
-  else if (contests) {
-    contestNodes = contests.map((contest) => (
-      <ConfigItem
-        key={String(contest._id!)}
-        mutate={mutate}
-        itemData={contest}
-      />
-    ));
-  }
+	if (isLoading) contestNodes = <Center>Loading...</Center>;
+	else if (isError) contestNodes = <Center>Error...</Center>;
+	else if (contests) {
+		contestNodes = contests.map((contest) => (
+			<ConfigItem
+				key={String(contest._id!)}
+				mutate={mutate}
+				itemData={contest}
+			/>
+		));
+	}
 
-  return (
-    <main className={styles.config}>
-      <Heading fontSize="32px" marginTop="64px">
-        Active Contests
-      </Heading>
+	return (
+		<main className={styles.config}>
+			<Heading fontSize="32px" marginTop="64px">
+				Active Contests
+			</Heading>
 
-      {/* Searchbar here */}
-      <div className={styles.search}>
-        <Searchbar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+			{/* Searchbar here */}
+			<div className={styles.search}>
+				<Searchbar
+					searchQuery={searchQuery}
+					setSearchQuery={setSearchQuery}
+					setPage={setPage}
+				/>
+			</div>
+
+			{/* form for making the item */}
+			<div className={styles.configBoard}>
+				<div className={styles.header}>
+					{tableCols.map((col) => (
+						<SpecialTxt key={col}>{col}</SpecialTxt>
+					))}
+				</div>
+
+				<Divider variant="default" />
+
+				<ConfigBoard
+					toast={toast}
+					isLoading={isAddLoading}
+					setIsLoading={setIsAddLoading}
+					newContest={newContest}
+					dispatchContest={dispatchContest}
+					mutate={mutate}
           setPage={setPage}
-        />
-      </div>
+				/>
+				{contestNodes}
+			</div>
 
-      {/* form for making the item */}
-      <div className={styles.configBoard}>
-        <div className={styles.header}>
-          {tableCols.map((col) => (
-            <SpecialTxt key={col}>{col}</SpecialTxt>
-          ))}
-        </div>
-
-        <Divider variant="default" />
-
-        <ConfigBoard
-          toast={toast}
-          isLoading={isAddLoading}
-          setIsLoading={setIsAddLoading}
-          newContest={newContest}
-          dispatchContest={dispatchContest}
-          setPage={setPage}
-        />
-        {contestNodes}
-      </div>
-
-      <Pagination
-        page={page}
-        setPage={setPage}
-        items={contests}
-        maxResults={maxResults}
-      />
-    </main>
-  );
+			<Pagination
+				page={page}
+				setPage={setPage}
+				items={contests}
+				maxResults={maxResults}
+			/>
+		</main>
+	);
 }
