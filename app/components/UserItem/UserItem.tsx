@@ -34,6 +34,7 @@ function UserItem({
 
   const selectClan = useMemo(
     () => [
+      { value: "none", label: "None" },
       { value: "BW", label: "Blue Wizards" },
       { value: "YB", label: "Yellow Barbarians" },
       { value: "RG", label: "Red Giants" },
@@ -69,7 +70,7 @@ function UserItem({
         <div>
           <CustomSelect
             selectOptions={selectClan}
-            option={"BW"}
+            option={"none"}
             setOption={() => {}}
           />
         </div>
@@ -94,7 +95,9 @@ function UserItem({
     <div className={styles.main}>
       <div>
         <Text fontSize={"16x"}>{itemData.name}</Text>
-        <Text fontSize={"12px"} color={"gray.500"}>{itemData.email}</Text>
+        <Text fontSize={"12px"} color={"gray.500"}>
+          {itemData.email}
+        </Text>
       </div>
 
       <div>{itemData.cfUsername}</div>
