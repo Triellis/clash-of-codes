@@ -16,5 +16,6 @@
 
 .last {
   display: flex;
+  gap: 64px;
   flex-direction: row;
 }
