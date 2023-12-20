@@ -2,6 +2,7 @@
 import Pagination from "@/app/components/Pagination";
 import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
+import UserItem from "@/app/components/UserItem/UserItem";
 import { Divider, Heading } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import styles from "./Users.module.css";
@@ -15,6 +16,20 @@ export default function Users() {
     () => ["Name", "CF Handle", "Status", "Clan", "Action"],
     []
   );
+
+  let users;
+  // if (isLoading) contestNodes = <Center>Loading...</Center>;
+  // else if (isError) contestNodes = <Center>Error...</Center>;
+  // else if (contests) {
+  //   contestNodes = contests.map((contest) => (
+  //     <ConfigItem
+  //       key={String(contest._id!)}
+  //       mutate={mutate}
+  //       itemData={contest}
+  //     />
+  //   ));
+  // }
+  users = <UserItem />;
 
   return (
     <div className={styles.main}>
@@ -37,6 +52,8 @@ export default function Users() {
         </div>
 
         <Divider variant="default" />
+
+        {users}
       </div>
 
       {/* <Pagination

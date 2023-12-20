@@ -10,17 +10,19 @@
   margin-top: 1emn;
   display: flex;
   flex-direction: column;
-  width: 95%;
+  justify-content: center;
   gap: 1em;
 }
 
 .header {
   font-size: 24px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 64px;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  word-wrap: break-word;
   margin-top: 1em;
+  gap: 64px;
+}
+
+.header > * {
+  width: 168px;
 }
