@@ -67,6 +67,10 @@ export default function Config() {
         itemData={contest}
       />
     ));
+
+    if (contestNodes.length === 0) {
+      contestNodes = <Center>No contests found</Center>;
+    }
   }
 
   return (
