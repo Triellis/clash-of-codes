@@ -2,13 +2,33 @@ import Close from "@/app/styles/Icons/Close";
 import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
-import { fullForm } from "@/app/util/functions";
+import { customFetch, fullForm } from "@/app/util/functions";
 import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
-import { IconButton, Input, Text } from "@chakra-ui/react";
+import { IconButton, Input, Text, useToast } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
+import NotifToast from "../NotifToast/NotifToast";
 import styles from "./UserItem.module.css";
+
+async function handleDeleteUser(id: string, mutate: Function, toast: any) {
+  const res = await customFetch(`/admin/users?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const status = await res.status;
+  if (status === 200) {
+    mutate();
+    NotifToast({
+      title: "User deleted successfully",
+      status: "success",
+      toast: toast,
+    });
+  }
+}
 
 function UserItem({
   itemData,
@@ -18,7 +38,6 @@ function UserItem({
   mutate: Function;
 }) {
   let myClan = fullForm(itemData.clan!);
-
   const [editMode, setEditMode] = useState(false);
   const selectOptions = useMemo(
     () => [
@@ -42,6 +61,8 @@ function UserItem({
     ],
     []
   );
+
+  const toast = useToast();
 
   if (editMode)
     return (
@@ -116,7 +137,14 @@ function UserItem({
           />
         </div>
         <div>
-          <IconButton variant={"ghost"} aria-label="Delete" icon={<Trash />} />
+          <IconButton
+            variant={"ghost"}
+            aria-label="Delete"
+            icon={<Trash />}
+            onClick={async () =>
+              await handleDeleteUser(String(itemData._id!), mutate, toast)
+            }
+          />
         </div>
       </div>
     </div>
