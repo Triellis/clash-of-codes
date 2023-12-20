@@ -2,13 +2,20 @@ import Close from "@/app/styles/Icons/Close";
 import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
+import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
 import { IconButton, Input } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import styles from "./UserItem.module.css";
 
-function UserItem() {
+function UserItem({
+  itemData,
+  mutate,
+}: {
+  itemData: UserOnClient;
+  mutate: Function;
+}) {
   const [editMode, setEditMode] = useState(false);
   const selectOptions = useMemo(
     () => [
@@ -84,15 +91,15 @@ function UserItem() {
   return (
     <div className={styles.main}>
       <div className={styles.first}>
-        <div>Name</div>
-        <div>Email</div>
+        <div>{itemData.name}</div>
+        <div>{itemData.email}</div>
       </div>
 
-      <div>UserName</div>
+      <div>{itemData.cfUsername}</div>
 
-      <div>Status</div>
+      <div>{itemData.role}</div>
 
-      <div>Clan</div>
+      <div>{itemData.clan}</div>
 
       <div className={styles.last}>
         <div>

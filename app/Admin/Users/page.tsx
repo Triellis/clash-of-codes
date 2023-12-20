@@ -1,10 +1,12 @@
 "use client";
+import ConfigItem from "@/app/components/ConfigItem";
 import Pagination from "@/app/components/Pagination";
 import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
 import UserAdd from "@/app/components/UserAdd/UserAdd";
 import UserItem from "@/app/components/UserItem/UserItem";
-import { Divider, Heading } from "@chakra-ui/react";
+import { useUser } from "@/app/util/functions";
+import { Center, Divider, Heading } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import styles from "./Users.module.css";
 
@@ -18,19 +20,22 @@ export default function Users() {
     []
   );
 
-  let users;
-  // if (isLoading) contestNodes = <Center>Loading...</Center>;
-  // else if (isError) contestNodes = <Center>Error...</Center>;
-  // else if (contests) {
-  //   contestNodes = contests.map((contest) => (
-  //     <ConfigItem
-  //       key={String(contest._id!)}
-  //       mutate={mutate}
-  //       itemData={contest}
-  //     />
-  //   ));
-  // }
-  users = <UserItem />;
+  const { users, isLoading, isError, mutate } = useUser(
+    page,
+    searchQuery,
+    maxResults
+  );
+
+  console.log("users", users);
+
+  let userNodes;
+  if (isLoading) userNodes = <Center>Loading...</Center>;
+  else if (isError) userNodes = <Center>Error...</Center>;
+  else if (users) {
+    userNodes = users.map((usr) => (
+      <UserItem key={String(usr._id!)} mutate={mutate} itemData={usr} />
+    ));
+  }
 
   return (
     <div className={styles.main}>
@@ -57,16 +62,16 @@ export default function Users() {
         <div className={styles.list}>
           <UserAdd />
 
-          {users}
+          {userNodes}
         </div>
       </div>
 
-      {/* <Pagination
+      <Pagination
         page={page}
         setPage={setPage}
-        // items={contests}
+        items={users}
         maxResults={maxResults}
-      /> */}
+      />
     </div>
   );
 }
