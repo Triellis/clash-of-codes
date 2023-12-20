@@ -1,8 +1,19 @@
 .main {
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	gap: 64px;
-	text-align: left;
-	align-items: center;
-	word-wrap: break-word;
+  display: flex;
+  gap: 64px;
+  align-items: center;
+	justify-content: center;
+}
+
+/* first 3 children */
+.main > :nth-child(-n + 3) {
+  width: 168px;
+}
+
+.main > :nth-child(4) {
+  width: 128px;
+}
+
+.main > :nth-child(5) {
+	width: 64px;
 }

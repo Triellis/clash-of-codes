@@ -29,7 +29,7 @@ export default function Config() {
   const toast = useToast();
 
   const tableCols = useMemo(
-    () => ["Team1", "Team2", "ContestCode", "Date", "Live", "Remove"],
+    () => ["Team1", "Team2", "Contest Code", "Date Added", "Live", "Remove"],
     []
   );
 
@@ -75,7 +75,7 @@ export default function Config() {
 
   return (
     <main className={styles.config}>
-      <Heading fontSize="32px" marginTop="64px">
+      <Heading fontSize="32px" marginBlock={"32px"}>
         Active Contests
       </Heading>
 
