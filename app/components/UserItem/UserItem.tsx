@@ -2,6 +2,7 @@ import Close from "@/app/styles/Icons/Close";
 import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
+import { fullForm } from "@/app/util/functions";
 import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
 import { IconButton, Input } from "@chakra-ui/react";
@@ -16,6 +17,8 @@ function UserItem({
   itemData: UserOnClient;
   mutate: Function;
 }) {
+  let myClan = fullForm(itemData.clan!);
+
   const [editMode, setEditMode] = useState(false);
   const selectOptions = useMemo(
     () => [
@@ -64,7 +67,6 @@ function UserItem({
         </div>
 
         <div>
-          {" "}
           <CustomSelect
             selectOptions={selectClan}
             option={"BW"}
@@ -99,7 +101,7 @@ function UserItem({
 
       <div>{itemData.role}</div>
 
-      <div>{itemData.clan}</div>
+      <div>{myClan}</div>
 
       <div className={styles.last}>
         <div>

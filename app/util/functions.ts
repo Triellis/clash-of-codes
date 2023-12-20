@@ -52,6 +52,21 @@ export const fetcher = (...args) => {
     });
 };
 
+export function fullForm(short: string) {
+  switch (short) {
+    case "RG":
+      return "Red Giants";
+    case "BW":
+      return "Blue Wizards";
+    case "PP":
+      return "Purple PEKKAS";
+    case "YB":
+      return "Yellow Barbarians";
+    default:
+      return "N/A";
+  }
+}
+
 export function useConfig(
   page: number,
   searchQuery: string,
