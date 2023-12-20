@@ -121,7 +121,7 @@ function UserItem({
         </Text>
       </div>
 
-      <div>{itemData.cfUsername}</div>
+      <div>{itemData.cfUsername ? itemData.cfUsername : "N/A"}</div>
 
       <div>{itemData.role}</div>
 
