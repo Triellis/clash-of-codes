@@ -86,6 +86,7 @@ const Divider = {
       borderColor: "gray.500",
       borderWidth: "3px",
       borderStyle: "solid",
+      marginBlock: "32px",
     },
   },
 };
@@ -96,6 +97,8 @@ const Input = {
       field: {
         bg: "gray.800",
         color: "gray.400",
+        border: "1px solid",
+        borderColor: "gray.700",
         fontFamily: "Sans-serif",
       },
     },

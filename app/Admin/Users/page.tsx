@@ -2,6 +2,7 @@
 import Pagination from "@/app/components/Pagination";
 import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
+import UserAdd from "@/app/components/UserAdd/UserAdd";
 import UserItem from "@/app/components/UserItem/UserItem";
 import { Divider, Heading } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
@@ -53,7 +54,11 @@ export default function Users() {
 
         <Divider variant="default" />
 
-        {users}
+        <div className={styles.list}>
+          <UserAdd />
+
+          {users}
+        </div>
       </div>
 
       {/* <Pagination
