@@ -5,7 +5,7 @@ import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
 import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
-import { IconButton, Input, Text, useToast } from "@chakra-ui/react";
+import { IconButton, Input, Link, Text, useToast } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import NotifToast from "../NotifToast/NotifToast";
@@ -121,11 +121,29 @@ function UserItem({
         </Text>
       </div>
 
-      <div>{itemData.cfUsername ? itemData.cfUsername : "N/A"}</div>
+      {/* <div>{itemData.cfUsername ? itemData.cfUsername : "N/A"}</div> */}
+      {itemData.cfUsername ? (
+        <div>
+          <Link
+            href={`https://codeforces.com/profile/${itemData.cfUsername}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {itemData.cfUsername}
+          </Link>
+        </div>
+      ) : (
+        <Text color={"gray.500"}>N/A</Text>
+      )}
 
       <div>{itemData.role}</div>
 
-      <div>{myClan}</div>
+      {/* <div>{myClan}</div> */}
+      {myClan === "N/A" ? (
+        <Text color={"gray.500"}>N/A</Text>
+      ) : (
+        <div>{myClan}</div>
+      )}
 
       <div className={styles.last}>
         <div>
