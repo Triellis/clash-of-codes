@@ -5,7 +5,7 @@ import Trash from "@/app/styles/Icons/Trash";
 import { fullForm } from "@/app/util/functions";
 import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
-import { IconButton, Input } from "@chakra-ui/react";
+import { IconButton, Input, Text } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import styles from "./UserItem.module.css";
@@ -92,9 +92,9 @@ function UserItem({
 
   return (
     <div className={styles.main}>
-      <div className={styles.first}>
-        <div>{itemData.name}</div>
-        <div>{itemData.email}</div>
+      <div>
+        <Text fontSize={"16x"}>{itemData.name}</Text>
+        <Text fontSize={"12px"} color={"gray.500"}>{itemData.email}</Text>
       </div>
 
       <div>{itemData.cfUsername}</div>
