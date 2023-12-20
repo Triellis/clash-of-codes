@@ -2,7 +2,7 @@
   display: flex;
   gap: 64px;
   align-items: center;
-	justify-content: center;
+  justify-content: center;
 }
 
 /* first 3 children */
@@ -13,7 +13,6 @@
 .main > :nth-child(4) {
   width: 128px;
 }
-
 .main > :nth-child(5) {
-	width: 64px;
+  width: 50px;
 }
