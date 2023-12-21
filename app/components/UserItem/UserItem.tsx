@@ -5,7 +5,22 @@ import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
 import { UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
-import { IconButton, Input, Link, Text, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  IconButton,
+  Input,
+  Link,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import NotifToast from "../NotifToast/NotifToast";
@@ -28,6 +43,55 @@ async function handleDeleteUser(id: string, mutate: Function, toast: any) {
       toast: toast,
     });
   }
+}
+
+function DeleteUserModal({
+  isOpen,
+  onClose,
+  mutate,
+  id,
+  toast,
+}: {
+  isOpen: boolean;
+  onClose: Function;
+  mutate: Function;
+  id: string;
+  toast: any;
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <Modal
+      isCentered
+      variant={"default"}
+      isOpen={isOpen}
+      onClose={() => onClose()}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Delete User</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Text>Are you sure you want to delete this user?</Text>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            isLoading={isLoading}
+            colorScheme="red"
+            onClick={async () => {
+              setIsLoading(true);
+              await handleDeleteUser(String(id), mutate, toast);
+              setIsLoading(false);
+              onClose();
+            }}
+          >
+            Delete
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
 }
 
 function UserItem({
@@ -63,6 +127,12 @@ function UserItem({
   );
 
   const toast = useToast();
+
+  const {
+    isOpen: isOpenDeleteModal,
+    onOpen: onOpenDeleteModal,
+    onClose: onCloseDeleteModal,
+  } = useDisclosure();
 
   if (editMode)
     return (
@@ -114,6 +184,14 @@ function UserItem({
 
   return (
     <div className={styles.main}>
+      <DeleteUserModal
+        isOpen={isOpenDeleteModal}
+        onClose={onCloseDeleteModal}
+        mutate={mutate}
+        id={String(itemData._id!)}
+        toast={toast}
+      />
+
       <div>
         <Text fontSize={"16x"}>{itemData.name}</Text>
         <Text fontSize={"12px"} color={"gray.500"}>
@@ -159,9 +237,7 @@ function UserItem({
             variant={"ghost"}
             aria-label="Delete"
             icon={<Trash />}
-            onClick={async () =>
-              await handleDeleteUser(String(itemData._id!), mutate, toast)
-            }
+            onClick={onOpenDeleteModal}
           />
         </div>
       </div>
