@@ -86,7 +86,7 @@ const Divider = {
       borderColor: "gray.500",
       borderWidth: "3px",
       borderStyle: "solid",
-      marginBlock: "32px",
+      marginBlock: "12px",
     },
   },
 };

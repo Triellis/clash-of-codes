@@ -22,9 +22,8 @@
 
 .header {
   display: flex;
-  flex-direction: row;
   gap: 64px;
-  justify-content: center;
+  align-items: center;
   font-size: 24px;
 }
 
