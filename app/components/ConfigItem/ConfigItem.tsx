@@ -78,6 +78,7 @@ function DeleteModal({
               setIsLoading(true);
               await deleteContest(contestId, mutate, toast);
               setIsLoading(false);
+              onClose();
             }}
           >
             Delete
@@ -141,7 +142,7 @@ export default function ConfigItem({
         isOpen={isDeleteOpen}
         onOpen={onDeleteOpen}
         onClose={onDeleteClose}
-        contestId={String(itemData?.ContestCode)}
+        contestId={String(itemData?._id)}
         toast={toast}
         mutate={mutate}
       />
