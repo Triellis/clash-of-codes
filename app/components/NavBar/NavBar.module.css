@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  padding-block: 16px;
+  padding-block: 24px;
   margin-inline: 32px;
   /* margin-block: 1em; */
 }
