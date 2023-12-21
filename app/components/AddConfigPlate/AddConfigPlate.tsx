@@ -7,138 +7,141 @@ import React, { useMemo, useReducer } from "react";
 import CustomSelect from "../CustomSelect";
 import styles from "./AddConfigPlate.module.css";
 type AddContestAction = {
-	field?: "Team1" | "Team2" | "ContestCode";
-	value?: Clan | string;
-	type: "UPDATE" | "RESET";
+  field?: "Team1" | "Team2" | "ContestCode";
+  value?: Clan | string;
+  type: "UPDATE" | "RESET";
 };
 
 export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 
 type ConfigureBoardProps = {
-	toast: any;
-	isLoading: boolean;
-	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  toast: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 
-	mutate: Function;
-	setPage: React.Dispatch<React.SetStateAction<number>>;
+  mutate: Function;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 function reduceAddContest(
-	state: AddContestState,
-	action: AddContestAction
+  state: AddContestState,
+  action: AddContestAction
 ): AddContestState {
-	switch (action.type) {
-		case "UPDATE":
-			return { ...state, [action.field!]: action.value };
-		case "RESET":
-			return { Team1: "BW", Team2: "RG", ContestCode: "" };
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case "UPDATE":
+      return { ...state, [action.field!]: action.value };
+    case "RESET":
+      return { Team1: "BW", Team2: "RG", ContestCode: "" };
+    default:
+      return state;
+  }
 }
 export default function AddConfigPlate({
-	toast,
-	isLoading,
-	setIsLoading,
+  toast,
+  isLoading,
+  setIsLoading,
 
-	mutate,
-	setPage,
+  mutate,
+  setPage,
 }: ConfigureBoardProps) {
-	const defaultContest: AddContestState = {
-		Team1: "BW",
-		Team2: "PP",
-		ContestCode: "",
-	};
+  const defaultContest: AddContestState = {
+    Team1: "BW",
+    Team2: "PP",
+    ContestCode: "",
+  };
 
-	const [newContest, dispatchContest] = useReducer(
-		reduceAddContest,
-		defaultContest
-	);
+  const [newContest, dispatchContest] = useReducer(
+    reduceAddContest,
+    defaultContest
+  );
 
-	const selectOptions = useMemo(
-		() => [
-			{ value: "BW", label: "Blue Wizards" },
-			{ value: "YB", label: "Yellow Barbarians" },
-			{ value: "RG", label: "Red Giants" },
-			{ value: "PP", label: "Purple Pekkas" },
-		],
-		[]
-	);
+  const selectOptions = useMemo(
+    () => [
+      { value: "BW", label: "Blue Wizards" },
+      { value: "YB", label: "Yellow Barbarians" },
+      { value: "RG", label: "Red Giants" },
+      { value: "PP", label: "Purple Pekkas" },
+    ],
+    []
+  );
 
-	return (
-		<div>
-			<div className={styles.configForm}>
-				{/* Team1 */}
-				<CustomSelect
-					selectOptions={selectOptions}
-					option={newContest.Team1}
-					setOption={(val) =>
-						dispatchContest({
-							type: "UPDATE",
-							field: "Team1",
-							value: val as Clan,
-						})
-					}
-				/>
+  return (
+    <div>
+      <div className={styles.configForm}>
+        {/* Team1 */}
+        <CustomSelect
+          selectOptions={selectOptions}
+          option={newContest.Team1}
+          setOption={(val) =>
+            dispatchContest({
+              type: "UPDATE",
+              field: "Team1",
+              value: val as Clan,
+            })
+          }
+        />
 
-				{/* Team2 */}
-				<CustomSelect
-					selectOptions={selectOptions}
-					option={newContest.Team2}
-					setOption={(val) =>
-						dispatchContest({
-							type: "UPDATE",
-							field: "Team2",
-							value: val as Clan,
-						})
-					}
-				/>
+        {/* Team2 */}
+        <CustomSelect
+          selectOptions={selectOptions}
+          option={newContest.Team2}
+          setOption={(val) =>
+            dispatchContest({
+              type: "UPDATE",
+              field: "Team2",
+              value: val as Clan,
+            })
+          }
+        />
 
-				{/* Contest code */}
+        {/* Contest code */}
 
-				<Input
-					placeholder="Contest Code"
-					onChange={(e: any) => {
-						dispatchContest({
-							field: "ContestCode",
-							value: e.target.value,
-							type: "UPDATE",
-						});
+        <Input
+          placeholder="Contest Code"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const input = e.target.value;
+            const regex = /^[0-9]*$/; // Regular expression to allow only numbers
 
-						// console.log("Contest code is set to", e.target.value);
-					}}
-					variant={"default"}
-					value={newContest.ContestCode}
-				/>
+            if (regex.test(input)) {
+              dispatchContest({
+                field: "ContestCode",
+                value: input,
+                type: "UPDATE",
+              });
+            }
+          }}
+          variant={"default"}
+          value={newContest.ContestCode}
+        />
 
-				{/* Date */}
-				<div>Today</div>
+        {/* Date */}
+        <div>Today</div>
 
-				{/* IsLive */}
-				<Switch variant="default" size="lg" disabled defaultChecked />
+        {/* IsLive */}
+        <Switch variant="default" size="lg" disabled defaultChecked />
 
-				{/* Add button */}
+        {/* Add button */}
 
-				<IconButton
-					isLoading={isLoading}
-					aria-label="Add"
-					icon={<AddIcon />}
-					width="64px"
-					height="48px"
-					borderRadius="16px"
-					onClick={async () => {
-						setIsLoading(true);
-						setPage(1);
-						await addContest(newContest, mutate, toast);
-						dispatchContest({
-							type: "RESET",
-							field: "ContestCode",
-							value: "",
-						});
-						mutate();
-						setIsLoading(false);
-					}}
-				/>
-			</div>
-		</div>
-	);
+        <IconButton
+          isLoading={isLoading}
+          aria-label="Add"
+          icon={<AddIcon />}
+          width="64px"
+          height="48px"
+          borderRadius="16px"
+          onClick={async () => {
+            setIsLoading(true);
+            setPage(1);
+            await addContest(newContest, mutate, toast);
+            dispatchContest({
+              type: "RESET",
+              field: "ContestCode",
+              value: "",
+            });
+            mutate();
+            setIsLoading(false);
+          }}
+        />
+      </div>
+    </div>
+  );
 }
