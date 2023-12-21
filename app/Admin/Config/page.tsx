@@ -6,7 +6,7 @@ import Searchbar from "@/app/components/Searchbar/Searchbar";
 import SpecialTxt from "@/app/components/SpecialTxt";
 import { useConfig } from "@/app/util/functions";
 import { AddContestAction, AddContestState, Clan } from "@/app/util/types";
-import { Center, Divider, Heading, useToast } from "@chakra-ui/react";
+import { Box, Center, Divider, Heading, useToast } from "@chakra-ui/react";
 import React, { useMemo, useReducer, useState } from "react";
 import styles from "./Config.module.css";
 

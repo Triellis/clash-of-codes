@@ -105,8 +105,8 @@ function ConfigBoard({
             setIsLoading(true);
             setPage(1);
             await addContest(newContest, mutate, toast);
-            mutate();
             dispatchContest({ type: "RESET" });
+            mutate();
             setIsLoading(false);
           }}
         />

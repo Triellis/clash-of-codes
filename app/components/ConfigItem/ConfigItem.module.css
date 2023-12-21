@@ -2,7 +2,6 @@
   display: flex;
   gap: 64px;
   align-items: center;
-  justify-content: center;
 }
 
 /* first 3 children */
