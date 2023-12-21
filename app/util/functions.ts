@@ -111,7 +111,7 @@ export async function addContest(
 	// Remove all spaces
 	if (contest?.ContestCode === "") {
 		NotifToast({
-			title: "Enter a valid contest code",
+			title: "Please enter a contest code",
 			status: "error",
 			toast: toast,
 		});
