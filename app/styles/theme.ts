@@ -123,6 +123,46 @@ const NumberInput = {
   },
 };
 
+const Modal = {
+  variants: {
+    default: {
+      header: {
+        bg: "gray.800",
+        fontSize: "24px",
+        border: "3px solid",
+        borderColor: "gray.700",
+        borderBottom: "none",
+        borderRadius: "6px 6px 0 0",
+      },
+      body: {
+        bg: "gray.800",
+        fontSize: "14px",
+        border: "3px solid",
+        borderColor: "gray.700",
+        borderTop: "none",
+        borderBottom: "none",
+      },
+      overlay: {
+        backdropFilter: "blur(10px)",
+      },
+      dialogueContainer: {
+        bg: "transparent",
+      },
+      dialogue: {
+        bg: "transparent",
+      },
+      footer: {
+        bg: "gray.800",
+        fontSize: "14px",
+        border: "3px solid",
+        borderColor: "gray.700",
+        borderTop: "none",
+        borderRadius: "0 0 6px 6px",
+      },
+    },
+  },
+};
+
 export const theme = extendTheme({
   styles: {
     global: () => ({
@@ -144,5 +184,6 @@ export const theme = extendTheme({
     NumberInput,
     Select,
     Divider,
+    Modal,
   },
 });

@@ -2,7 +2,22 @@ import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
 import { ContestCol } from "@/app/util/types";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { IconButton, Switch, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Switch,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import NotifToast from "../NotifToast";
 import styles from "./ConfigItem.module.css";
 
@@ -24,6 +39,49 @@ async function deleteContest(contestId: string, mutate: Function, toast: any) {
     });
   }
 }
+
+function DeleteModal({
+  isOpen,
+  onOpen,
+  onClose,
+  contestId,
+  toast,
+  mutate,
+}: {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  contestId: string;
+  toast: any;
+  mutate: Function;
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  return (
+    <Modal isCentered variant={"default"} isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Delete Contest</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>Are you sure you want to delete this contest?</ModalBody>
+
+        <ModalFooter>
+          <Button
+            isLoading={isLoading}
+            onClick={async () => {
+              setIsLoading(true);
+              await deleteContest(contestId, mutate, toast);
+              setIsLoading(false);
+            }}
+          >
+            Delete
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+}
+
 async function updateContest(
   contest: ContestCol,
   mutate: Function,
@@ -63,8 +121,25 @@ export default function ConfigItem({
   const team1 = fullForm(itemData.Team1);
   const team2 = fullForm(itemData.Team2);
   const toast = useToast();
+
+  // modal states:
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure();
+
   return (
     <div className={styles.main}>
+      <DeleteModal
+        isOpen={isDeleteOpen}
+        onOpen={onDeleteOpen}
+        onClose={onDeleteClose}
+        contestId={String(itemData?.ContestCode)}
+        toast={toast}
+        mutate={mutate}
+      />
+
       <div>{team1}</div>
 
       <div>{team2}</div>
@@ -100,9 +175,7 @@ export default function ConfigItem({
           fontSize="20px"
           color="red.600"
           icon={<Trash />}
-          onClick={async () =>
-            await deleteContest(String(itemData._id!), mutate, toast)
-          }
+          onClick={onDeleteOpen}
         />
       </div>
     </div>
