@@ -39,7 +39,8 @@ async function deleteContest(contestId: string, mutate: Function, toast: any) {
     });
   } else {
     NotifToast({
-      title: "Error Deleting the contest",
+      title: "Failed",
+      description: await res.text(),
       status: "error",
       toast: toast,
     });
