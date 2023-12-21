@@ -35,6 +35,8 @@ export default function Users() {
     userNodes = users.map((usr) => (
       <UserItem key={String(usr._id!)} mutate={mutate} itemData={usr} />
     ));
+
+    if (userNodes.length === 0) userNodes = <Center>No Users Found</Center>;
   }
 
   return (
