@@ -39,7 +39,7 @@ export default function Users() {
 
   return (
     <div className={styles.main}>
-      <Heading fontSize="32px" marginTop="64px">
+      <Heading fontSize="32px" marginBlock={"32px"}>
         Users
       </Heading>
 
