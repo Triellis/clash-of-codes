@@ -12,7 +12,7 @@ type AddContestAction = {
 	type: "UPDATE" | "RESET";
 };
 
-type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
+export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 
 type ConfigureBoardProps = {
 	toast: any;

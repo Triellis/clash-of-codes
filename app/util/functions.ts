@@ -2,7 +2,8 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 import useSWR from "swr";
 import NotifToast from "../components/NotifToast";
-import { AddContestState, ContestCol, UserOnClient } from "./types";
+import { ContestCol, UserOnClient } from "./types";
+import { AddContestState } from "../components/AddConfigPlate/AddConfigPlate";
 
 export function getServerUrl(url: string) {
 	let SERVER_URL;
