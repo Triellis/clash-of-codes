@@ -6,7 +6,7 @@ import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
 import UserAdd from "@/app/components/UserAdd/UserAdd";
 import UserItem from "@/app/components/UserItem/UserItem";
 import { useUser } from "@/app/util/functions";
-import { Center, Divider, Heading } from "@chakra-ui/react";
+import { Center, Divider, Heading, useToast } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import styles from "./Users.module.css";
 
@@ -26,7 +26,8 @@ export default function Users() {
     maxResults
   );
 
-  console.log("users", users);
+  const [isAddLoading, setIsAddLoading] = useState<boolean>(false);
+  const toast = useToast();
 
   let userNodes;
   if (isLoading) userNodes = <Center>Loading...</Center>;
@@ -62,7 +63,13 @@ export default function Users() {
         <Divider variant="default" />
 
         <div className={styles.list}>
-          <UserAdd />
+          <UserAdd
+            toast={toast}
+            isLoading={isAddLoading}
+            setIsLoading={setIsAddLoading}
+            mutate={mutate}
+            setPage={setPage}
+          />
 
           {userNodes}
         </div>

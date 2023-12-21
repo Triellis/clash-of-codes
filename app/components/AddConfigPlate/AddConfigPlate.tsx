@@ -1,27 +1,25 @@
 import { addContest } from "@/app/util/functions";
-import { Clan } from "@/app/util/types";
+import { AddContestState, Clan } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Input, Switch } from "@chakra-ui/react";
 import React, { useMemo, useReducer } from "react";
-
 import CustomSelect from "../CustomSelect";
 import styles from "./AddConfigPlate.module.css";
+
 type AddContestAction = {
   field?: "Team1" | "Team2" | "ContestCode";
   value?: Clan | string;
   type: "UPDATE" | "RESET";
 };
 
-export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
-
 type ConfigureBoardProps = {
   toast: any;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-
   mutate: Function;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
+
 function reduceAddContest(
   state: AddContestState,
   action: AddContestAction
@@ -35,14 +33,15 @@ function reduceAddContest(
       return state;
   }
 }
+
 export default function AddConfigPlate({
   toast,
   isLoading,
   setIsLoading,
-
   mutate,
   setPage,
 }: ConfigureBoardProps) {
+  
   const defaultContest: AddContestState = {
     Team1: "BW",
     Team2: "PP",
