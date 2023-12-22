@@ -16,7 +16,7 @@ type UserAddProps = {
 
 type AddUserAction = {
   field?: "name" | "email" | "cfUsername" | "role" | "clan";
-  value?: string | null;
+  value: string;
   type: "UPDATE" | "RESET";
 };
 
@@ -84,15 +84,50 @@ function UserAdd({
     <div className={styles.main}>
       <div>
         <div>
-          <Input variant={"default"} placeholder="Name" size="sm" />
+          <Input
+            variant={"default"}
+            placeholder="Name"
+            size="sm"
+            onChange={(e) =>
+              dispatchUser({
+                type: "UPDATE",
+                field: "name",
+                value: e.target.value,
+              })
+            }
+          />
         </div>
         <div>
-          <Input variant={"default"} placeholder="Email" size="sm" />
+          <Input
+            variant={"default"}
+            placeholder="Email"
+            size="sm"
+            onChange={(e) =>
+              dispatchUser({
+                type: "UPDATE",
+                field: "email",
+                value: e.target.value,
+              })
+            }
+          />
         </div>
       </div>
 
       <div>
-        <Input variant={"default"} placeholder="Username" size="sm" />
+        <Input
+          variant={"default"}
+          placeholder="Username"
+          size="sm"
+          onChange={(e) => {
+            const input = e.target.value;
+
+            dispatchUser({
+              field: "cfUsername",
+              value: input,
+              type: "UPDATE",
+            });
+          }}
+        />
       </div>
 
       <div>
