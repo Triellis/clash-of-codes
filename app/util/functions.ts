@@ -2,12 +2,7 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 import useSWR from "swr";
 import NotifToast from "../components/NotifToast";
-import {
-  AddContestState,
-  AddUserState,
-  ContestCol,
-  UserOnClient,
-} from "./types";
+import { AddContestState, ContestCol, UserOnClient } from "./types";
 
 export function getServerUrl(url: string) {
   let SERVER_URL;
@@ -161,7 +156,7 @@ export function hasEmptyFields(object: any) {
 }
 
 export async function addUser(
-  user: AddUserState,
+  user: UserOnClient,
   mutate: Function,
   toast: any
 ) {

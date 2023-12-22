@@ -1,5 +1,5 @@
 import { addUser } from "@/app/util/functions";
-import { AddUserAction, AddUserState } from "@/app/util/types";
+import { AddUserAction, UserOnClient } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Input } from "@chakra-ui/react";
 import { useMemo, useReducer } from "react";
@@ -12,8 +12,7 @@ type UserAddProps = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   mutate: Function;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  newUser: AddUserState;
-  dispatchUser: React.Dispatch<AddUserAction>;
+  reduceAddUser: (state: UserOnClient, action: AddUserAction) => UserOnClient;
 };
 
 function UserAdd({
@@ -22,8 +21,7 @@ function UserAdd({
   setIsLoading,
   mutate,
   setPage,
-  newUser,
-  dispatchUser,
+  reduceAddUser,
 }: UserAddProps) {
   const selectOptions = useMemo(
     () => [
@@ -48,6 +46,16 @@ function UserAdd({
     []
   );
 
+  const defaultUser: UserOnClient = {
+    name: "",
+    email: "",
+    cfUsername: "",
+    role: "Member",
+    clan: null,
+  };
+
+  const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
+
   return (
     <div className={styles.main}>
       <div>
@@ -56,7 +64,7 @@ function UserAdd({
             variant={"default"}
             placeholder="Name"
             size="sm"
-            value={newUser.name}
+            value={String(newUser.name)}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
@@ -71,7 +79,7 @@ function UserAdd({
             variant={"default"}
             placeholder="Email"
             size="sm"
-            value={newUser.email}
+            value={String(newUser.email)}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
@@ -118,7 +126,7 @@ function UserAdd({
       <div>
         <CustomSelect
           selectOptions={selectClan}
-          option={newUser.clan}
+          option={newUser.clan!}
           setOption={(val) => {
             dispatchUser({
               type: "UPDATE",

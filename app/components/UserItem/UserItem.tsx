@@ -3,7 +3,7 @@ import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
-import { UserOnClient } from "@/app/util/types";
+import { AddUserAction, Clan, UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -21,7 +21,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { useMemo, useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import NotifToast from "../NotifToast/NotifToast";
 import styles from "./UserItem.module.css";
@@ -128,13 +128,15 @@ function DeleteUserModal({
 function UserItem({
   itemData,
   mutate,
+  reduceAddUser,
 }: {
   itemData: UserOnClient;
   mutate: Function;
+  reduceAddUser: (state: UserOnClient, action: AddUserAction) => UserOnClient;
 }) {
   let myClan = fullForm(itemData.clan!);
   const [editMode, setEditMode] = useState(false);
-  const selectOptions = useMemo(
+  const selectRole = useMemo(
     () => [
       { value: "Admin", label: "Admin" },
       { value: "Leader", label: "Leader" },
@@ -148,7 +150,7 @@ function UserItem({
 
   const selectClan = useMemo(
     () => [
-      { value: "none", label: "none" },
+      { value: null, label: "none" },
       { value: "BW", label: "Blue Wizards" },
       { value: "YB", label: "Yellow Barbarians" },
       { value: "RG", label: "Red Giants" },
@@ -165,41 +167,98 @@ function UserItem({
     onClose: onCloseDeleteModal,
   } = useDisclosure();
 
+  const defaultUser: UserOnClient = itemData;
+
+  const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
+
   if (editMode)
     return (
       <div className={styles.main}>
         <div className={styles.first}>
           <div>
-            <Input variant={"default"} placeholder="Name" size="sm" />
+            <Input
+              variant={"default"}
+              placeholder="Name"
+              size="sm"
+              value={String(newUser.name)}
+              onChange={(e) =>
+                dispatchUser({
+                  type: "UPDATE",
+                  field: "name",
+                  value: e.target.value,
+                })
+              }
+            />
           </div>
           <div>
-            <Input variant={"default"} placeholder="Email" size="sm" />
+            <Input
+              variant={"default"}
+              placeholder="Email"
+              size="sm"
+              value={String(newUser.email)}
+              onChange={(e) =>
+                dispatchUser({
+                  type: "UPDATE",
+                  field: "email",
+                  value: e.target.value,
+                })
+              }
+            />
           </div>
         </div>
 
         <div>
-          <Input variant={"default"} placeholder="Username" size="sm" />
+          <Input
+            variant={"default"}
+            placeholder="Username"
+            size="sm"
+            value={String(newUser.cfUsername)}
+            onChange={(e) =>
+              dispatchUser({
+                type: "UPDATE",
+                field: "cfUsername",
+                value: e.target.value,
+              })
+            }
+          />
         </div>
 
         <div>
           <CustomSelect
-            selectOptions={selectOptions}
-            option={"member"}
-            setOption={() => {}}
+            selectOptions={selectRole}
+            option={newUser.role}
+            setOption={(val) => {
+              dispatchUser({
+                type: "UPDATE",
+                field: "role",
+                value: val as string,
+              });
+            }}
           />
         </div>
 
         <div>
           <CustomSelect
             selectOptions={selectClan}
-            option={"none"}
-            setOption={() => {}}
+            option={newUser.clan}
+            setOption={(val) => {
+              dispatchUser({
+                type: "UPDATE",
+                field: "clan",
+                value: val as Clan,
+              });
+            }}
           />
         </div>
 
         <div className={styles.last}>
           <div>
-            <IconButton variant={"ghost"} aria-label="Save" icon={<Tick />} />
+            <IconButton
+              variant={"ghost"}
+              aria-label="Save"
+              icon={<Tick />}
+              onClick={() => handleUpdateUser(newUser, mutate, toast)}
+            />
           </div>
           <div>
             <IconButton

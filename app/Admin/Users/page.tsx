@@ -6,15 +6,15 @@ import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
 import UserAdd from "@/app/components/UserAdd/UserAdd";
 import UserItem from "@/app/components/UserItem/UserItem";
 import { useUser } from "@/app/util/functions";
-import { AddUserAction, AddUserState } from "@/app/util/types";
+import { AddUserAction, UserOnClient } from "@/app/util/types";
 import { Center, Divider, Heading, useToast } from "@chakra-ui/react";
 import { useMemo, useReducer, useState } from "react";
 import styles from "./Users.module.css";
 
 function reduceAddUser(
-  state: AddUserState,
+  state: UserOnClient,
   action: AddUserAction
-): AddUserState {
+): UserOnClient {
   switch (action.type) {
     case "UPDATE":
       return { ...state, [action.field!]: action.value };
@@ -55,21 +55,16 @@ export default function Users() {
   else if (isError) userNodes = <Center>Error...</Center>;
   else if (users) {
     userNodes = users.map((usr) => (
-      <UserItem key={String(usr._id!)} mutate={mutate} itemData={usr} />
+      <UserItem
+        key={String(usr._id!)}
+        mutate={mutate}
+        itemData={usr}
+        reduceAddUser={reduceAddUser}
+      />
     ));
 
     if (userNodes.length === 0) userNodes = <Center>No Users Found</Center>;
   }
-
-  const defaultUser: AddUserState = {
-    name: "",
-    email: "",
-    cfUsername: "",
-    role: "Member",
-    clan: "none",
-  };
-
-  const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
 
   return (
     <div className={styles.main}>
@@ -100,8 +95,7 @@ export default function Users() {
             setIsLoading={setIsAddLoading}
             mutate={mutate}
             setPage={setPage}
-            newUser={newUser}
-            dispatchUser={dispatchUser}
+            reduceAddUser={reduceAddUser}
           />
 
           {userNodes}
