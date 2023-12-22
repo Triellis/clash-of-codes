@@ -58,6 +58,15 @@ async function handleUpdateUser(
     body: JSON.stringify(user),
   });
 
+  if (user.role !== "User" && user.clan === null) {
+    NotifToast({
+      title: "Please select a clan",
+      status: "error",
+      toast: toast,
+    });
+    return;
+  }
+
   const status = await res.status;
   if (status === 200) {
     mutate();
