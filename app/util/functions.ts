@@ -168,7 +168,11 @@ export async function addUser(
 		});
 		return;
 	}
-	console.log(user.clan);
+	// @ts-ignore
+	if (user.clan === "None") {
+		user.clan = null;
+	}
+
 	if (user.role !== "User" && user.clan === null) {
 		NotifToast({
 			title: "Please select a clan",
