@@ -156,8 +156,6 @@ export function hasEmptyFields(object: any) {
     if (value === undefined || value === null || value === "") {
       return true;
     }
-
-    console.log(key, value);
   }
   return false;
 }
