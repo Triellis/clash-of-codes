@@ -88,6 +88,7 @@ function UserAdd({
             variant={"default"}
             placeholder="Name"
             size="sm"
+            value={newUser.name}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
@@ -102,6 +103,7 @@ function UserAdd({
             variant={"default"}
             placeholder="Email"
             size="sm"
+            value={newUser.email}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
@@ -118,6 +120,7 @@ function UserAdd({
           variant={"default"}
           placeholder="Username"
           size="sm"
+          value={newUser.cfUsername}
           onChange={(e) => {
             const input = e.target.value;
 
@@ -171,8 +174,8 @@ function UserAdd({
               setIsLoading(true);
               setPage(1);
               await addUser(newUser, mutate, toast);
-              mutate();
               dispatchUser({ type: "RESET", value: "" });
+              mutate();
               setIsLoading(false);
             }}
           />
