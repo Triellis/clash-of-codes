@@ -169,6 +169,15 @@ export async function addUser(
     return;
   }
 
+  if (user.role !== "User" && !user.clan) {
+    NotifToast({
+      title: "Please select a clan",
+      status: "error",
+      toast: toast,
+    });
+    return;
+  }
+
   const res = await customFetch("/admin/users", {
     method: "POST",
     headers: {
