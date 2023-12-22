@@ -9,7 +9,7 @@ body {
 }
 #root {
   padding-bottom: 1em;
-	padding-inline: 1em;
+  padding-inline: 1em;
 }
 
 option {
@@ -21,8 +21,21 @@ option {
 /* sticky nav: */
 .nav {
   position: sticky;
-	width: 100%;
+  width: 100%;
   top: 0px;
   z-index: 10;
   backdrop-filter: blur(10px);
+}
+
+/* for the scroll bar */
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 8px; /* Add rounded corners */
+}
+::-webkit-scrollbar-track {
+  background: var(--chakra-colors-gray-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-gray-600);
+  border-radius: 5px; /* Add rounded corners */
 }
