@@ -7,31 +7,38 @@ type Option = {
 
 type CustomSelectProps = {
 	selectOptions: Option[];
-	option: string;
+	option: string | null;
 	setOption: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function CustomSelect({
 	selectOptions,
-	option: team,
-	setOption: setTeam,
+	option,
+	setOption,
 }: CustomSelectProps) {
 	const handleChange = (e: any) => {
 		const selectedOption = e.target.value;
-		setTeam(selectedOption);
-		// console.log(`${teamName} is set to`, selectedTeam);
+		setOption(selectedOption);
+		// console.log(`${optionName} is set to`, selectedoption);
 	};
 
 	return (
 		<Select
 			variant="default"
 			size="sm"
-			value={team}
+			value={option == null ? undefined : option}
 			onChange={handleChange}
 		>
-			{selectOptions?.map((option) => (
-				<option key={option.value} value={option.value}>
-					{option.label}
+			{selectOptions?.map((optionListItem) => (
+				<option
+					key={optionListItem.value}
+					value={
+						optionListItem.value === null
+							? undefined
+							: optionListItem.value
+					}
+				>
+					{optionListItem.label}
 				</option>
 			))}
 		</Select>

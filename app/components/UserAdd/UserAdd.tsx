@@ -23,28 +23,28 @@ function UserAdd({
   setPage,
   reduceAddUser,
 }: UserAddProps) {
-  const selectOptions = useMemo(
-    () => [
-      { value: "Admin", label: "Admin" },
-      { value: "Leader", label: "Leader" },
-      { value: "CoLeader", label: "CoLeader" },
-      { value: "Elder", label: "Elder" },
-      { value: "Member", label: "Member" },
-      { value: "User", label: "User" },
-    ],
-    []
-  );
+	const selectOptions = useMemo(
+		() => [
+			{ value: "Admin", label: "Admin" },
+			{ value: "Leader", label: "Leader" },
+			{ value: "CoLeader", label: "CoLeader" },
+			{ value: "Elder", label: "Elder" },
+			{ value: "Member", label: "Member" },
+			{ value: "User", label: "User" },
+		],
+		[]
+	);
 
-  const selectClan = useMemo(
-    () => [
-      { value: null, label: "None" },
-      { value: "BW", label: "Blue Wizards" },
-      { value: "YB", label: "Yellow Barbarians" },
-      { value: "RG", label: "Red Giants" },
-      { value: "PP", label: "Purple Pekkas" },
-    ],
-    []
-  );
+	const selectClan = useMemo(
+		() => [
+			{ value: null, label: "None" },
+			{ value: "BW", label: "Blue Wizards" },
+			{ value: "YB", label: "Yellow Barbarians" },
+			{ value: "RG", label: "Red Giants" },
+			{ value: "PP", label: "Purple Pekkas" },
+		],
+		[]
+	);
 
   const defaultUser: UserOnClient = {
     name: "",
@@ -91,37 +91,37 @@ function UserAdd({
         </div>
       </div>
 
-      <div>
-        <Input
-          variant={"default"}
-          placeholder="Username"
-          size="sm"
-          value={newUser.cfUsername}
-          onChange={(e) => {
-            const input = e.target.value;
+			<div>
+				<Input
+					variant={"default"}
+					placeholder="Username"
+					size="sm"
+					value={newUser.cfUsername}
+					onChange={(e) => {
+						const input = e.target.value;
 
-            dispatchUser({
-              field: "cfUsername",
-              value: input,
-              type: "UPDATE",
-            });
-          }}
-        />
-      </div>
+						dispatchUser({
+							field: "cfUsername",
+							value: input,
+							type: "UPDATE",
+						});
+					}}
+				/>
+			</div>
 
-      <div>
-        <CustomSelect
-          selectOptions={selectOptions}
-          option={newUser.role}
-          setOption={(val) => {
-            dispatchUser({
-              type: "UPDATE",
-              field: "role",
-              value: val as string,
-            });
-          }}
-        />
-      </div>
+			<div>
+				<CustomSelect
+					selectOptions={selectOptions}
+					option={newUser.role}
+					setOption={(val) => {
+						dispatchUser({
+							type: "UPDATE",
+							field: "role",
+							value: val as string,
+						});
+					}}
+				/>
+			</div>
 
       <div>
         <CustomSelect
@@ -137,28 +137,28 @@ function UserAdd({
         />
       </div>
 
-      <div>
-        <div>
-          <IconButton
-            isLoading={isLoading}
-            aria-label="Add"
-            icon={<AddIcon />}
-            width="64px"
-            height="48px"
-            borderRadius="16px"
-            onClick={async () => {
-              setIsLoading(true);
-              setPage(1);
-              await addUser(newUser, mutate, toast);
-              dispatchUser({ type: "RESET", value: "" });
-              mutate();
-              setIsLoading(false);
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
+			<div>
+				<div>
+					<IconButton
+						isLoading={isLoading}
+						aria-label="Add"
+						icon={<AddIcon />}
+						width="64px"
+						height="48px"
+						borderRadius="16px"
+						onClick={async () => {
+							setIsLoading(true);
+							setPage(1);
+							await addUser(newUser, mutate, toast);
+							dispatchUser({ type: "RESET", value: "" });
+							mutate();
+							setIsLoading(false);
+						}}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default UserAdd;

@@ -148,7 +148,7 @@ export function hasEmptyFields(object: any) {
   for (const key of Object.keys(object)) {
     const value = object[key];
 
-    if (value === undefined || value === null || value === "") {
+    if (value === "") {
       return true;
     }
   }
