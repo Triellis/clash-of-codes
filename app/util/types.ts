@@ -1,6 +1,13 @@
 import { ObjectId } from "mongodb";
 
 export type Clan = "BW" | "RG" | "YB" | "PP";
+export type Role =
+	| "Admin"
+	| "Elder"
+	| "Member"
+	| "Leader"
+	| "CoLeader"
+	| "User";
 
 export interface ContestCol {
 	_id?: ObjectId;
@@ -15,7 +22,7 @@ export type UserCol = {
 	_id?: ObjectId;
 	name: String;
 	email: String;
-	role: "User" | "Admin" | "Elder" | "Member" | "Leader" | "CoLeader";
+	role: Role;
 	clan: null | Clan;
 	visits: number;
 	createdAt: Date;
@@ -30,7 +37,7 @@ export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 export type AddUserState = {
 	name: string;
 	email: string;
-	role: "Admin" | "Elder" | "Member" | "Leader" | "CoLeader" | "User";
-	clan: Clan | null;
+	role: Role;
+	clan: Clan;
 	cfUsername: string;
 };
