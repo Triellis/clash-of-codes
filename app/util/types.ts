@@ -35,9 +35,9 @@ export type UserOnClient = Omit<UserCol, "visits" | "createdAt" | "lastVisit">;
 export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 
 export type AddUserAction = {
-  field?: "name" | "email" | "cfUsername" | "role" | "clan";
-  value: string | Clan | Role;
-  type: "UPDATE" | "RESET";
+	field?: "name" | "email" | "cfUsername" | "role" | "clan";
+	value: string | Clan | Role;
+	type: "UPDATE" | "RESET";
 };
 
 export type CFAPIResponse = {
@@ -47,13 +47,13 @@ export type CFAPIResponse = {
 	username: string;
 };
 
-type modifiedCFResponse = {
+type ModifiedCFResponse = {
 	name: string;
 	cfUsername: string;
 } & Omit<CFAPIResponse, "username">;
 
-type liveBoardTeam = {
-	[key in Clan]: modifiedCFResponse[];
+export type LiveBoardTeam = {
+	[key in Clan]: ModifiedCFResponse[];
 };
 
-export type liveLeaderboard = liveBoardTeam[];
+export type LiveLeaderboard = LiveBoardTeam[];

@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Leaderboard from "../components/Leaderboard/Leaderboard";
 
 const WebSocketComponent = () => {
 	const [message, setMessage] = useState("");
-
+	const [leaderboardArr, setLeaderboardArr] = useState([]);
 	useEffect(() => {
 		// Establish WebSocket connection
 		const ws = new WebSocket("ws://localhost:3001");
@@ -15,8 +16,7 @@ const WebSocketComponent = () => {
 
 		ws.addEventListener("message", (event) => {
 			const receivedMessage = JSON.parse(event.data);
-
-			setMessage(event.data);
+			setLeaderboardArr(receivedMessage);
 		});
 
 		ws.addEventListener("close", () => {
@@ -34,7 +34,7 @@ const WebSocketComponent = () => {
 
 	return (
 		<div>
-			<p>Received message:{message}</p>
+			<Leaderboard fetchedData={leaderboardArr[0]} />
 		</div>
 	);
 };
