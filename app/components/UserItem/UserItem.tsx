@@ -58,30 +58,13 @@ async function handleUpdateUser(
     body: JSON.stringify(user),
   });
 
-  if (user.role !== "User" && user.clan === null) {
+  if (user.role !== "User" && user.role !== "Admin" && user.clan === null) {
     NotifToast({
       title: "Please select a clan",
       status: "error",
       toast: toast,
     });
     return;
-  }
-
-  const status = await res.status;
-  if (status === 200) {
-    mutate();
-    NotifToast({
-      title: "User updated successfully",
-      status: "success",
-      toast: toast,
-    });
-  } else {
-    NotifToast({
-      title: "Failed",
-      description: await res.text(),
-      status: "error",
-      toast: toast,
-    });
   }
 }
 
