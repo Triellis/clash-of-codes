@@ -38,12 +38,12 @@ export type AddUserState = {
 	name: string;
 	email: string;
 	role: Role;
-	clan: Clan;
+	clan: Clan | null;
 	cfUsername: string;
 };
 
 export type AddUserAction = {
-  field?: "name" | "email" | "cfUsername" | "role" | "clan";
-  value: string;
-  type: "UPDATE" | "RESET";
+	field?: "name" | "email" | "cfUsername" | "role" | "clan";
+	value: string;
+	type: "UPDATE" | "RESET";
 };
