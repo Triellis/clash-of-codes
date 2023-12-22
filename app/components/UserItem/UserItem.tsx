@@ -257,7 +257,10 @@ function UserItem({
               variant={"ghost"}
               aria-label="Save"
               icon={<Tick />}
-              onClick={() => handleUpdateUser(newUser, mutate, toast)}
+              onClick={() => {
+                handleUpdateUser(newUser, mutate, toast);
+                setEditMode(false);
+              }}
             />
           </div>
           <div>
