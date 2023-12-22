@@ -47,3 +47,21 @@ export type AddUserAction = {
 	value: string;
 	type: "UPDATE" | "RESET";
 };
+
+export type CFAPIResponse = {
+	rank: number;
+	points: number;
+	penalty: number;
+	username: string;
+};
+
+type modifiedCFResponse = {
+	name: string;
+	cfUsername: string;
+} & Omit<CFAPIResponse, "username">;
+
+type liveBoardTeam = {
+	[key in Clan]: modifiedCFResponse[];
+};
+
+export type liveLeaderboard = liveBoardTeam[];
