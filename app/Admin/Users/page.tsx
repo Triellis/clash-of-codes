@@ -6,9 +6,30 @@ import SpecialTxt from "@/app/components/SpecialTxt/SpecialTxt";
 import UserAdd from "@/app/components/UserAdd/UserAdd";
 import UserItem from "@/app/components/UserItem/UserItem";
 import { useUser } from "@/app/util/functions";
+import { AddUserAction, AddUserState } from "@/app/util/types";
 import { Center, Divider, Heading, useToast } from "@chakra-ui/react";
-import { useMemo, useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 import styles from "./Users.module.css";
+
+function reduceAddUser(
+  state: AddUserState,
+  action: AddUserAction
+): AddUserState {
+  switch (action.type) {
+    case "UPDATE":
+      return { ...state, [action.field!]: action.value };
+    case "RESET":
+      return {
+        name: "",
+        email: "",
+        cfUsername: "",
+        role: "Member",
+        clan: "none",
+      };
+    default:
+      return state;
+  }
+}
 
 export default function Users() {
   const maxResults = 5;
@@ -40,6 +61,16 @@ export default function Users() {
     if (userNodes.length === 0) userNodes = <Center>No Users Found</Center>;
   }
 
+  const defaultUser: AddUserState = {
+    name: "",
+    email: "",
+    cfUsername: "",
+    role: "Member",
+    clan: "none",
+  };
+
+  const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
+
   return (
     <div className={styles.main}>
       <Heading fontSize="32px" marginBlock={"32px"}>
@@ -69,6 +100,8 @@ export default function Users() {
             setIsLoading={setIsAddLoading}
             mutate={mutate}
             setPage={setPage}
+            newUser={newUser}
+            dispatchUser={dispatchUser}
           />
 
           {userNodes}

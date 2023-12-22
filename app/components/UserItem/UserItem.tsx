@@ -45,6 +45,37 @@ async function handleDeleteUser(id: string, mutate: Function, toast: any) {
   }
 }
 
+async function handleUpdateUser(
+  user: UserOnClient,
+  mutate: Function,
+  toast: any
+) {
+  const res = await customFetch(`/admin/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  const status = await res.status;
+  if (status === 200) {
+    mutate();
+    NotifToast({
+      title: "User updated successfully",
+      status: "success",
+      toast: toast,
+    });
+  } else {
+    NotifToast({
+      title: "Failed",
+      description: await res.text(),
+      status: "error",
+      toast: toast,
+    });
+  }
+}
+
 function DeleteUserModal({
   isOpen,
   onClose,

@@ -41,3 +41,9 @@ export type AddUserState = {
   clan: Clan;
   cfUsername: string;
 };
+
+export type AddUserAction = {
+  field?: "name" | "email" | "cfUsername" | "role" | "clan";
+  value: string;
+  type: "UPDATE" | "RESET";
+};
