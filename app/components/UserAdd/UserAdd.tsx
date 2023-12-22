@@ -33,7 +33,7 @@ function reduceAddUser(
 				email: "",
 				cfUsername: "",
 				role: "Member",
-				clan: "none",
+				clan: null,
 			};
 		default:
 			return state;
@@ -75,7 +75,7 @@ function UserAdd({
 		email: "",
 		cfUsername: "",
 		role: "Member",
-		clan: "none",
+		clan: null,
 	};
 
 	const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);

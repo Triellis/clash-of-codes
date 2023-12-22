@@ -31,6 +31,6 @@ export type AddUserState = {
 	name: string;
 	email: string;
 	role: "Admin" | "Elder" | "Member" | "Leader" | "CoLeader" | "User";
-	clan: Clan;
+	clan: Clan | null;
 	cfUsername: string;
 };
