@@ -34,18 +34,10 @@ export type UserOnClient = Omit<UserCol, "visits" | "createdAt" | "lastVisit">;
 
 export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 
-export type AddUserState = {
-	name: string;
-	email: string;
-	role: Role;
-	clan: Clan | null;
-	cfUsername: string;
-};
-
 export type AddUserAction = {
-	field?: "name" | "email" | "cfUsername" | "role" | "clan";
-	value: string;
-	type: "UPDATE" | "RESET";
+  field?: "name" | "email" | "cfUsername" | "role" | "clan";
+  value: string | Clan | Role;
+  type: "UPDATE" | "RESET";
 };
 
 export type CFAPIResponse = {

@@ -1,5 +1,5 @@
 import { addUser } from "@/app/util/functions";
-import { AddUserAction, AddUserState } from "@/app/util/types";
+import { AddUserAction, UserOnClient } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Input } from "@chakra-ui/react";
 import { useMemo, useReducer } from "react";
@@ -7,23 +7,21 @@ import CustomSelect from "../CustomSelect/CustomSelect";
 import styles from "./UserAdd.module.css";
 
 type UserAddProps = {
-	toast: any;
-	isLoading: boolean;
-	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-	mutate: Function;
-	setPage: React.Dispatch<React.SetStateAction<number>>;
-	newUser: AddUserState;
-	dispatchUser: React.Dispatch<AddUserAction>;
+  toast: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  mutate: Function;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  reduceAddUser: (state: UserOnClient, action: AddUserAction) => UserOnClient;
 };
 
 function UserAdd({
-	toast,
-	isLoading,
-	setIsLoading,
-	mutate,
-	setPage,
-	newUser,
-	dispatchUser,
+  toast,
+  isLoading,
+  setIsLoading,
+  mutate,
+  setPage,
+  reduceAddUser,
 }: UserAddProps) {
 	const selectOptions = useMemo(
 		() => [
@@ -48,40 +46,50 @@ function UserAdd({
 		[]
 	);
 
-	return (
-		<div className={styles.main}>
-			<div>
-				<div>
-					<Input
-						variant={"default"}
-						placeholder="Name"
-						size="sm"
-						value={newUser.name}
-						onChange={(e) =>
-							dispatchUser({
-								type: "UPDATE",
-								field: "name",
-								value: e.target.value,
-							})
-						}
-					/>
-				</div>
-				<div>
-					<Input
-						variant={"default"}
-						placeholder="Email"
-						size="sm"
-						value={newUser.email}
-						onChange={(e) =>
-							dispatchUser({
-								type: "UPDATE",
-								field: "email",
-								value: e.target.value,
-							})
-						}
-					/>
-				</div>
-			</div>
+  const defaultUser: UserOnClient = {
+    name: "",
+    email: "",
+    cfUsername: "",
+    role: "Member",
+    clan: null,
+  };
+
+  const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
+
+  return (
+    <div className={styles.main}>
+      <div>
+        <div>
+          <Input
+            variant={"default"}
+            placeholder="Name"
+            size="sm"
+            value={String(newUser.name)}
+            onChange={(e) =>
+              dispatchUser({
+                type: "UPDATE",
+                field: "name",
+                value: e.target.value,
+              })
+            }
+          />
+        </div>
+        <div>
+          <Input
+            variant={"default"}
+            placeholder="Email"
+            size="sm"
+            value={String(newUser.email)}
+            onChange={(e) =>
+              dispatchUser({
+                type: "UPDATE",
+                field: "email",
+                value: e.target.value,
+              })
+            }
+          />
+        </div>
+      </div>
 
 			<div>
 				<Input
@@ -115,19 +123,19 @@ function UserAdd({
 				/>
 			</div>
 
-			<div>
-				<CustomSelect
-					selectOptions={selectClan}
-					option={newUser.clan}
-					setOption={(val) => {
-						dispatchUser({
-							type: "UPDATE",
-							field: "clan",
-							value: val as string,
-						});
-					}}
-				/>
-			</div>
+      <div>
+        <CustomSelect
+          selectOptions={selectClan}
+          option={newUser.clan!}
+          setOption={(val) => {
+            dispatchUser({
+              type: "UPDATE",
+              field: "clan",
+              value: val as string,
+            });
+          }}
+        />
+      </div>
 
 			<div>
 				<div>

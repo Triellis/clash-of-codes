@@ -2,12 +2,7 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 import useSWR from "swr";
 import NotifToast from "../components/NotifToast";
-import {
-	AddContestState,
-	AddUserState,
-	ContestCol,
-	UserOnClient,
-} from "./types";
+import { AddContestState, ContestCol, UserOnClient } from "./types";
 
 export function getServerUrl(url: string) {
 	let SERVER_URL;
@@ -161,13 +156,26 @@ export function hasEmptyFields(object: any) {
 }
 
 export async function addUser(
-	user: AddUserState,
+	user: UserOnClient,
 	mutate: Function,
 	toast: any
 ) {
 	if (hasEmptyFields(user)) {
 		NotifToast({
 			title: "Please fill all fields",
+			status: "error",
+			toast: toast,
+		});
+		return;
+	}
+	// @ts-ignore
+	if (user.clan === "None") {
+		user.clan = null;
+	}
+
+	if (user.role !== "User" && user.clan === null) {
+		NotifToast({
+			title: "Please select a clan",
 			status: "error",
 			toast: toast,
 		});
