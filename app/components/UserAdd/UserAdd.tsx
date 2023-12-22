@@ -1,5 +1,5 @@
 import { addUser } from "@/app/util/functions";
-import { AddUserState } from "@/app/util/types";
+import { AddUserAction, AddUserState } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
 import { IconButton, Input } from "@chakra-ui/react";
 import { useMemo, useReducer } from "react";
@@ -12,33 +12,9 @@ type UserAddProps = {
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 	mutate: Function;
 	setPage: React.Dispatch<React.SetStateAction<number>>;
+	newUser: AddUserState;
+	dispatchUser: React.Dispatch<AddUserAction>;
 };
-
-type AddUserAction = {
-	field?: "name" | "email" | "cfUsername" | "role" | "clan";
-	value: string;
-	type: "UPDATE" | "RESET";
-};
-
-function reduceAddUser(
-	state: AddUserState,
-	action: AddUserAction
-): AddUserState {
-	switch (action.type) {
-		case "UPDATE":
-			return { ...state, [action.field!]: action.value };
-		case "RESET":
-			return {
-				name: "",
-				email: "",
-				cfUsername: "",
-				role: "Member",
-				clan: null,
-			};
-		default:
-			return state;
-	}
-}
 
 function UserAdd({
 	toast,
@@ -46,6 +22,8 @@ function UserAdd({
 	setIsLoading,
 	mutate,
 	setPage,
+	newUser,
+	dispatchUser,
 }: UserAddProps) {
 	const selectOptions = useMemo(
 		() => [
@@ -69,16 +47,6 @@ function UserAdd({
 		],
 		[]
 	);
-
-	const defaultUser: AddUserState = {
-		name: "",
-		email: "",
-		cfUsername: "",
-		role: "Member",
-		clan: null,
-	};
-
-	const [newUser, dispatchUser] = useReducer(reduceAddUser, defaultUser);
 
 	return (
 		<div className={styles.main}>
