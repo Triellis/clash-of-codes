@@ -54,7 +54,7 @@ function UserAdd({
 			{ value: "CoLeader", label: "CoLeader" },
 			{ value: "Elder", label: "Elder" },
 			{ value: "Member", label: "Member" },
-			{ value: "Guest", label: "Guest" },
+			{ value: "User", label: "User" },
 		],
 		[]
 	);
