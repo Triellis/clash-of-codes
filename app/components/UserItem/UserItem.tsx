@@ -257,8 +257,8 @@ function UserItem({
               variant={"ghost"}
               aria-label="Save"
               icon={<Tick />}
-              onClick={() => {
-                handleUpdateUser(newUser, mutate, toast);
+              onClick={async () => {
+                await handleUpdateUser(newUser, mutate, toast);
                 setEditMode(false);
               }}
             />
