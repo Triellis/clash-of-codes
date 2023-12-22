@@ -66,6 +66,23 @@ async function handleUpdateUser(
     });
     return;
   }
+
+  const status = await res.status;
+  if (status === 200) {
+    mutate();
+    NotifToast({
+      title: "User updated successfully",
+      status: "success",
+      toast: toast,
+    });
+  } else {
+    NotifToast({
+      title: "Failed",
+      description: await res.text(),
+      status: "error",
+      toast: toast,
+    });
+  }
 }
 
 function DeleteUserModal({
@@ -202,9 +219,9 @@ function UserItem({
         <div>
           <Input
             variant={"default"}
-            placeholder="Username"
+            placeholder=""
             size="sm"
-            value={String(newUser.cfUsername)}
+            value={newUser.cfUsername}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
