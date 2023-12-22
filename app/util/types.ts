@@ -30,7 +30,7 @@ export type AddContestState = { Team1: Clan; Team2: Clan; ContestCode: string };
 export type AddUserState = {
   name: string;
   email: string;
-  role: "Admin" | "Elder" | "Member" | "Leader" | "CoLeader" | "Guest";
+  role: "Admin" | "Elder" | "Member" | "Leader" | "CoLeader" | "User";
   clan: Clan;
   cfUsername: string;
 };

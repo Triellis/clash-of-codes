@@ -105,19 +105,19 @@ function UserItem({
   const [editMode, setEditMode] = useState(false);
   const selectOptions = useMemo(
     () => [
-      { value: "admin", label: "admin" },
-      { value: "leader", label: "leader" },
-      { value: "co-leader", label: "co-leader" },
-      { value: "elder", label: "elder" },
-      { value: "member", label: "member" },
-      { value: "guest", label: "guest" },
+      { value: "Admin", label: "Admin" },
+      { value: "Leader", label: "Leader" },
+      { value: "CoLeader", label: "CoLeader" },
+      { value: "Elder", label: "Elder" },
+      { value: "Member", label: "Member" },
+      { value: "User", label: "User" },
     ],
     []
   );
 
   const selectClan = useMemo(
     () => [
-      { value: "none", label: "None" },
+      { value: "none", label: "none" },
       { value: "BW", label: "Blue Wizards" },
       { value: "YB", label: "Yellow Barbarians" },
       { value: "RG", label: "Red Giants" },
