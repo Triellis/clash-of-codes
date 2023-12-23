@@ -45,13 +45,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
 .board {
   display: flex;
   flex-direction: row;
-  width: 100%;
   font-size: 14px;
+  position: relative;
+  top: -90px;
+  z-index: -2;
 }
 
 .sb1 {
@@ -63,6 +66,8 @@
   flex: 1 0 0;
   align-self: stretch;
   width: 418px;
+  height: 452px;
+  
 
   border-radius: 16px 0px 0px 16px;
   border: 1px solid #000;
@@ -78,6 +83,8 @@
   flex: 1 0 0;
   align-self: stretch;
   width: 418px;
+  height: 452px;
+  
 
   border-radius: 0px 16px 16px 0px;
   border: 1px solid #000;
