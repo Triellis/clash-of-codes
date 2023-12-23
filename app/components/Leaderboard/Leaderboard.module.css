@@ -16,7 +16,7 @@
 }
 
 .title {
-  font-size: 32px;
+  font-size: 28px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,23 +33,6 @@
 }
 
 /* remaining scoreboard */
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-
-.heading {
-  font-size: 32px;
-  margin-block: 32px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 23px;
-}
 
 .board {
   margin-block: 32px;

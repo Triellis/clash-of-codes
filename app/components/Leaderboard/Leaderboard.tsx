@@ -2,9 +2,9 @@ import Live from "@/app/styles/Icons/Live";
 import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
 import { Center, Heading } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
+import SpecialTxt from "../SpecialTxt";
 import TabsComponent from "../TabsComponent/TabsComponent";
 import styles from "./Leaderboard.module.css";
-import SpecialTxt from "../SpecialTxt";
 
 function Scorecard() {
   const team1 = "Purple Pekkas";
@@ -35,18 +35,6 @@ export default function Leaderboard({
 }: {
   fetchedData: LiveBoardTeam;
 }) {
-  const tabs: TabsType = useMemo(
-    () => [
-      { label: "match1", value: "All" },
-      { label: "match2", value: "Student" },
-      { label: "match3", value: "Faculty" },
-      { label: "match4", value: "Admin" },
-    ],
-    []
-  );
-
-  const [tab, setTab] = useState<string>(tabs[0].value);
-
   if (!fetchedData) return <Center>Loading...</Center>;
   const clans = Object.keys(fetchedData);
 
@@ -58,17 +46,6 @@ export default function Leaderboard({
 
   return (
     <div className={styles.main}>
-      <div className={styles.heading}>
-        <Live />
-        Live Score Board
-      </div>
-
-      <TabsComponent
-        tab={tab} // Pass the 'tab' state variable
-        setTab={setTab}
-        allTabs={tabs}
-      />
-
       <div className={styles.board}>
         <Scorecard />
       </div>
