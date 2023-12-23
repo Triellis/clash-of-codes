@@ -32,7 +32,7 @@ const WebSocketComponent = () => {
 		};
 	}, []); // Empty dependency array means this effect runs once on mount
 
-	return (
+	return ( 	
 		<div>
 			<Leaderboard fetchedData={leaderboardArr[0]} />
 		</div>
