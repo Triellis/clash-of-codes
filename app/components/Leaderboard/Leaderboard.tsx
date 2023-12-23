@@ -1,20 +1,33 @@
 import Live from "@/app/styles/Icons/Live";
-import { Clan, LiveBoardTeam, LiveLeaderboard } from "@/app/util/types";
-import { Heading } from "@chakra-ui/react";
+import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
+import { Center, Heading } from "@chakra-ui/react";
+import { useMemo, useState } from "react";
+import TabsComponent from "../TabsComponent/TabsComponent";
 import styles from "./Leaderboard.module.css";
+
 export default function Leaderboard({
   fetchedData,
 }: {
   fetchedData: LiveBoardTeam;
 }) {
-  if (!fetchedData) return <div>Loading...</div>;
+  const tabs: TabsType = useMemo(
+    () => [
+      { label: "match1", value: "All" },
+      { label: "match2", value: "Student" },
+      { label: "match3", value: "Faculty" },
+      { label: "match4", value: "Admin" },
+    ],
+    []
+  );
+
+  const [tab, setTab] = useState<string>(tabs[0].value);
+
+  if (!fetchedData) return <Center>Loading...</Center>;
   const clans = Object.keys(fetchedData);
 
-  const leftClan = fetchedData[clans[0] as Clan];
-  const rightClan = fetchedData[clans[1] as Clan];
-
-  /* <div>{leftClan.map((a) => JSON.stringify(a))}</div> 
-   <div>{rightClan.map((a) => JSON.stringify(a))}</div> */
+  // Remove unused variables
+  // const leftClan = fetchedData[clans[0] as Clan];
+  // const rightClan = fetchedData[clans[1] as Clan];
 
   return (
     <div className={styles.main}>
@@ -22,6 +35,12 @@ export default function Leaderboard({
         <Live />
         Live Score Board
       </div>
+
+      <TabsComponent
+        tab={tab} // Pass the 'tab' state variable
+        setTab={setTab}
+        allTabs={tabs}
+      />
     </div>
   );
 }

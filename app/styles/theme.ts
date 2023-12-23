@@ -163,6 +163,36 @@ const Modal = {
   },
 };
 
+const Tabs = {
+  variants: {
+    default: {
+      tab: {
+        fontSize: "18px",
+        borderRadius: "10px",
+        paddingBlock: "12px",
+        paddingInline: "16px",
+        _selected: {
+          color: "black",
+        }
+      },
+
+      tabindicator: {
+        borderRadius: "10px",
+        bg: "yellow.400",
+        color: "black",
+      },
+
+      tablist: {
+        border: "1px solid",
+        borderColor: "gray.700",
+        borderRadius: "8px",
+        height: "100%",
+        padding: "16px",
+      },
+    },
+  },
+};
+
 export const theme = extendTheme({
   styles: {
     global: () => ({
@@ -185,5 +215,6 @@ export const theme = extendTheme({
     Select,
     Divider,
     Modal,
+    Tabs,
   },
 });
