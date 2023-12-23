@@ -50,13 +50,10 @@ async function handleUpdateUser(
   mutate: Function,
   toast: any
 ) {
-  const res = await customFetch(`/admin/users`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
+  // @ts-ignore
+  if (user.clan === "none") {
+    user.clan = null;
+  }
 
   if (user.role !== "User" && user.role !== "Admin" && user.clan === null) {
     NotifToast({
@@ -66,6 +63,14 @@ async function handleUpdateUser(
     });
     return;
   }
+
+  const res = await customFetch(`/admin/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
 
   const status = await res.status;
   if (status === 200) {
