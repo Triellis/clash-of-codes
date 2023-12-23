@@ -15,6 +15,10 @@
   width: 482px;
 }
 
+.logo {
+  font-size: 32px;
+}
+
 .title {
   font-size: 28px;
   display: flex;
@@ -24,6 +28,7 @@
   gap: 22px;
   text-align: center;
 }
+
 .score {
   font-size: 36px;
   display: flex;
@@ -34,6 +39,99 @@
 
 /* remaining scoreboard */
 
-.board {
+.main {
   margin-block: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 14px;
+}
+
+.sb1 {
+  display: flex;
+  padding: 128px 26px 80px 26px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+  width: 418px;
+
+  border-radius: 16px 0px 0px 16px;
+  border: 1px solid #000;
+  background: var(--purple-800, #44337a);
+}
+
+.sb2 {
+  display: flex;
+  padding: 128px 37px 80px 37px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+  width: 418px;
+
+  border-radius: 0px 16px 16px 0px;
+  border: 1px solid #000;
+  background: var(--red-900, #63171b);
+}
+
+.death {
+  background: linear-gradient(176deg, #f90000 -61.47%, #6d0000 176.58%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #000;
+}
+
+.header1 {
+  display: flex;
+  padding: 10px 8px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 35px;
+  align-self: stretch;
+
+  border-bottom: 1px solid var(--purple-900, #322659);
+}
+
+.header2 {
+  display: flex;
+  padding: 10px 8px;
+  align-items: center;
+  gap: 35px;
+  align-self: stretch;
+
+  border-bottom: 1px solid var(--red-900, #4c1418);
+}
+
+.entry1 {
+  display: flex;
+  padding: 10px 8px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  text-align: right;
+
+  border-bottom: 1px solid var(--purple-900, #322659);
+}
+
+.entry2 {
+  display: flex;
+  padding: 10px 8px;
+  align-items: center;
+  gap: 64px;
+  align-self: stretch;
+  text-align: left;
+
+  border-bottom: 1px solid var(--red-800, #4c1418);
 }
