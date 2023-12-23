@@ -36,10 +36,7 @@ export default function TabsComponent({
         {allTabs.map((tab, index) => (
           <Tab key={tab.value}>{tab.label}</Tab>
         ))}
-        <TabIndicator
-          className={styles.indicator}
-          
-        />
+        <TabIndicator className={styles.indicator} />
       </TabList>
     </Tabs>
   );

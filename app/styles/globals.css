@@ -9,7 +9,7 @@ body {
 }
 #root {
   padding-bottom: 1em;
-	padding-inline: 1em;
+  padding-inline: 1em;
 }
 
 option {
@@ -21,8 +21,13 @@ option {
 /* sticky nav: */
 .nav {
   position: sticky;
-	width: 100%;
+  width: 100%;
   top: 0px;
   z-index: 10;
   backdrop-filter: blur(10px);
+}
+
+.logo {
+  color: var(--chakra-colors-yellow-300);
+  text-shadow: red 2px 2px 0px;
 }
