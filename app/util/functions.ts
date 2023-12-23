@@ -158,7 +158,8 @@ export function hasEmptyFields(object: any) {
 export async function addUser(
   user: UserOnClient,
   mutate: Function,
-  toast: any
+  toast: any,
+  dispatchUser: Function
 ) {
   if (hasEmptyFields(user)) {
     NotifToast({
@@ -199,6 +200,8 @@ export async function addUser(
       status: "success",
       toast: toast,
     });
+
+    dispatchUser({ type: "RESET", value: "" });
   } else {
     NotifToast({
       title: "failed",

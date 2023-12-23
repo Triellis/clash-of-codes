@@ -3,7 +3,7 @@ import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
-import { AddUserAction, Clan, UserOnClient } from "@/app/util/types";
+import { AddUserAction, Clan, Role, UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -240,7 +240,7 @@ function UserItem({
               dispatchUser({
                 type: "UPDATE",
                 field: "role",
-                value: val as string,
+                value: val as Role,
               });
             }}
           />
@@ -275,7 +275,7 @@ function UserItem({
           <div>
             <IconButton
               variant={"ghost"}
-              aria-label="Save"
+              aria-label="Cancel"
               icon={<Close />}
               onClick={() => setEditMode(false)}
             />
@@ -301,7 +301,6 @@ function UserItem({
         </Text>
       </div>
 
-      {/* <div>{itemData.cfUsername ? itemData.cfUsername : "N/A"}</div> */}
       {itemData.cfUsername ? (
         <div>
           <Link
