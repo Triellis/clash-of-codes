@@ -89,11 +89,11 @@
 }
 
 .death {
-  background: linear-gradient(176deg, #f90000 -61.47%, #6d0000 176.58%);
+  background: linear-gradient(176deg, #fff -61.47%, #000 176.58%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px #000;
+  -webkit-text-stroke: 1px #000 ;
 }
 
 .header1 {
