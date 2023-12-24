@@ -131,7 +131,7 @@
 .entry2 {
   display: flex;
   padding: 10px 8px;
-  align-items: center;
+  align-items: flex-start;
   gap: 64px;
   align-self: stretch;
   text-align: left;
