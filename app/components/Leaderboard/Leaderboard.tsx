@@ -36,7 +36,7 @@ export default function Leaderboard({
 }: {
   fetchedData: LiveBoardTeam;
 }) {
-  if (!fetchedData) return <Center>Loading...</Center>;
+  if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
   const clans = Object.keys(fetchedData);
 
   // console.log(fetchedData);
