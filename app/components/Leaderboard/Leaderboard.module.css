@@ -54,6 +54,8 @@
   position: relative;
   top: -90px;
   z-index: -2;
+
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.43);
 }
 
 .sb1 {
@@ -93,7 +95,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px #000 ;
+  -webkit-text-stroke: 1px #000;
 }
 
 .header1 {
