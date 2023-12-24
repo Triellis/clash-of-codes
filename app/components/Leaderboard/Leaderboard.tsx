@@ -8,102 +8,115 @@ import TabsComponent from "../TabsComponent/TabsComponent";
 import styles from "./Leaderboard.module.css";
 
 function Scorecard() {
-  const team1 = "Purple Pekkas";
-  const team2 = "Red Giants";
+	const team1 = "Purple Pekkas";
+	const team2 = "Red Giants";
 
-  const score1 = 5;
-  const score2 = 3;
+	const score1 = 5;
+	const score2 = 3;
 
-  return (
-    <div className={styles.mainScore}>
-      <div className={styles.title}>
-        <SpecialTxt>{team1} </SpecialTxt>
-        <span className={classNames("logo", styles.logo)}>VS</span>
-        <SpecialTxt> {team2}</SpecialTxt>
-      </div>
+	return (
+		<div className={styles.mainScore}>
+			<div className={styles.title}>
+				<SpecialTxt>{team1} </SpecialTxt>
+				<span className={classNames("logo", styles.logo)}>VS</span>
+				<SpecialTxt> {team2}</SpecialTxt>
+			</div>
 
-      <div className={styles.score}>
-        <SpecialTxt>{score1}</SpecialTxt>
-        <SpecialTxt> - </SpecialTxt>
-        <SpecialTxt>{score2}</SpecialTxt>
-      </div>
-    </div>
-  );
+			<div className={styles.score}>
+				<SpecialTxt>{score1}</SpecialTxt>
+				<SpecialTxt> - </SpecialTxt>
+				<SpecialTxt>{score2}</SpecialTxt>
+			</div>
+		</div>
+	);
 }
 
 export default function Leaderboard({
-  fetchedData,
+	fetchedData,
 }: {
-  fetchedData: LiveBoardTeam;
+	fetchedData: LiveBoardTeam;
 }) {
-  if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
-  const clans = Object.keys(fetchedData);
+	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
+	const clans = Object.keys(fetchedData);
 
-  // console.log(fetchedData);
+	// console.log(fetchedData);
 
-  // Remove unused variables
-  const leftClan = fetchedData[clans[0] as Clan];
-  const rightClan = fetchedData[clans[1] as Clan];
+	// Remove unused variables
+	const leftClan = fetchedData[clans[0] as Clan];
+	const rightClan = fetchedData[clans[1] as Clan];
 
-  console.log("leftClan", leftClan);
-  console.log("rightClan", rightClan);
+	console.log("leftClan", leftClan);
+	console.log("rightClan", rightClan);
 
-  let entries1;
-  let entries2;
+	let entries1;
+	let entries2;
 
-  if (leftClan) {
-    entries1 = leftClan.map((entry, index) => {
-      return (
-        <div className={styles.entry1} key={index}>
-          <div>{entry.name}</div>
-          <SpecialTxt width={"32px"}>{entry.points}</SpecialTxt>
-          <SpecialTxt width={"32px"} className={styles.death}>
-            {entry.penalty}
-          </SpecialTxt>
-        </div>
-      );
-    });
-  }
+	if (leftClan) {
+		entries1 = leftClan.map((entry, index) => {
+			return (
+				<div className={styles.tableEntry} key={index}>
+					<div className={styles.name}>{entry.name}</div>
+					<SpecialTxt>{entry.points}</SpecialTxt>
+					<SpecialTxt className={styles.death}>
+						{entry.penalty}
+					</SpecialTxt>
+				</div>
+			);
+		});
+	}
 
-  if (rightClan) {
-    entries2 = rightClan.map((entry, index) => {
-      return (
-        <div className={styles.entry2} key={index}>
-          <SpecialTxt width={"32px"} className={styles.death}>
-            {entry.penalty}
-          </SpecialTxt>
-          <SpecialTxt width={"32px"}>{entry.points}</SpecialTxt>
-          <div>{entry.name}</div>
-        </div>
-      );
-    });
-  }
+	if (rightClan) {
+		entries2 = rightClan.map((entry, index) => {
+			return (
+				<div
+					className={classNames(
+						styles.tableEntry,
+						styles.tableEntryRight
+					)}
+					key={index}
+				>
+					<div className={styles.name}>{entry.name}</div>
+					<SpecialTxt>{entry.points}</SpecialTxt>
+					<SpecialTxt className={styles.death}>
+						{entry.penalty}
+					</SpecialTxt>
+				</div>
+			);
+		});
+	}
 
-  return (
-    <div className={styles.main}>
-      <Scorecard />
+	return (
+		<div className={styles.main}>
+			<Scorecard />
 
-      <div className={styles.board}>
-        {/* sb1 */}
-        <div className={styles.sb1}>
-          <div className={styles.header1}>
-            <div>#</div>
-            <div className={styles.death}>Penalty</div>
-          </div>
+			<div className={styles.board}>
+				{/* sb1 */}
+				<div className={styles.sb1}>
+					<div className={styles.tableHeader}>
+						<div>name</div>
+						<div>#</div>
+						<div className={styles.death}>Penalty</div>
+					</div>
 
-          {entries1}
-        </div>
+					{entries1}
+				</div>
 
-        {/* sb2 */}
-        <div className={styles.sb2}>
-          <div className={styles.header2}>
-            <div className={styles.death}>Penalty</div>
-            <div>#</div>
-          </div>
+				{/* sb2 */}
+				<div className={styles.sb2}>
+					<div
+						className={classNames(
+							styles.tableHeader,
+							styles.tableHeaderRight
+						)}
+					>
+						<div className={styles.death}>Penalty</div>
+						<div>#</div>
+						<div>name</div>
+					</div>
 
-          {entries2}
-        </div>
-      </div>
-    </div>
-  );
+					{entries2}
+				</div>
+			</div>
+		</div>
+	);
 }
