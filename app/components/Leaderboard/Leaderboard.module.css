@@ -45,7 +45,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .board {
@@ -67,7 +66,6 @@
   align-self: stretch;
   width: 418px;
   height: 452px;
-  
 
   border-radius: 16px 0px 0px 16px;
   border: 1px solid #000;
@@ -84,7 +82,6 @@
   align-self: stretch;
   width: 418px;
   height: 452px;
-  
 
   border-radius: 0px 16px 16px 0px;
   border: 1px solid #000;
@@ -128,7 +125,6 @@
   gap: 64px;
   align-self: stretch;
   text-align: right;
-
   border-bottom: 1px solid var(--purple-900, #322659);
 }
 
@@ -139,6 +135,5 @@
   gap: 64px;
   align-self: stretch;
   text-align: left;
-
   border-bottom: 1px solid var(--red-800, #4c1418);
 }

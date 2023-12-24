@@ -56,8 +56,10 @@ export default function Leaderboard({
       return (
         <div className={styles.entry1} key={index}>
           <div>{entry.name}</div>
-          <SpecialTxt>{entry.points}</SpecialTxt>
-          <div className={styles.death}>{entry.penalty}</div>
+          <SpecialTxt width={"32px"}>{entry.points}</SpecialTxt>
+          <SpecialTxt width={"32px"} className={styles.death}>
+            {entry.penalty}
+          </SpecialTxt>
         </div>
       );
     });
@@ -67,8 +69,10 @@ export default function Leaderboard({
     entries2 = rightClan.map((entry, index) => {
       return (
         <div className={styles.entry2} key={index}>
-          <div className={styles.death}>{entry.penalty}</div>
-          <SpecialTxt>{entry.points}</SpecialTxt>
+          <SpecialTxt width={"32px"} className={styles.death}>
+            {entry.penalty}
+          </SpecialTxt>
+          <SpecialTxt width={"32px"}>{entry.points}</SpecialTxt>
           <div>{entry.name}</div>
         </div>
       );
