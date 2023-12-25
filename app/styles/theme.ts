@@ -178,12 +178,6 @@ const Tabs = {
 				},
 			},
 
-			tabindicator: {
-				borderRadius: "10px",
-				bg: "yellow.400",
-				color: "black",
-			},
-
 			tablist: {
 				border: "1px solid",
 				borderColor: "gray.700",
