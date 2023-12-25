@@ -62,11 +62,12 @@
 	border-radius: 16px;
 }
 
-.sb1 {
+.sb1,
+.sb2 {
 	display: flex;
 	padding: 128px 26px 80px 26px;
 	flex-direction: column;
-	justify-content: space-between;
+
 	align-items: flex-start;
 	flex: 1 0 0;
 	align-self: stretch;
@@ -79,18 +80,9 @@
 }
 
 .sb2 {
-	display: flex;
 	padding: 128px 37px 80px 37px;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-start;
-	flex: 1 0 0;
-	align-self: stretch;
-	width: 418px;
-	height: 452px;
 
 	border-radius: 0px 16px 16px 0px;
-	border: 1px solid #000;
 	background: var(--red-900, #63171b);
 }
 
