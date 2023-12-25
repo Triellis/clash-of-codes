@@ -24,7 +24,7 @@ function Scorecard({
 
 	return (
 		<div className={styles.mainScore}>
-			<div className={styles.title}>
+			<div className={styles.mainScoreTitle}>
 				<div className={styles.teamNameWrapper}>
 					{team1Full.map((word, index) => {
 						return <SpecialTxt key={index}>{word}</SpecialTxt>;
