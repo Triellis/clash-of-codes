@@ -50,9 +50,12 @@ const WebSocketComponent = () => {
 		});
 
 		ws.addEventListener("message", (event) => {
-			const receivedMessage = JSON.parse(event.data);
-
-			setLeaderboardArr(receivedMessage);
+			try {
+				const receivedMessage = JSON.parse(event.data);
+				setLeaderboardArr(receivedMessage);
+			} catch (err) {
+				console.error(err);
+			}
 		});
 
 		ws.addEventListener("close", () => {
