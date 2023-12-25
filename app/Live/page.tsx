@@ -21,7 +21,6 @@ const WebSocketComponent = () => {
 	const [tab, setTab] = useState<string>("");
 
 	useEffect(() => {
-		console.log(tab);
 		tabs.forEach((t) => {
 			if (t.value === tab) {
 				setTabIndex(t.index);
