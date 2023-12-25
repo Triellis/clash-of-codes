@@ -27,7 +27,7 @@ const WebSocketComponent = () => {
 				setTabIndex(t.index);
 			}
 		});
-	}, [tab]);
+	}, [tab, tabs]);
 	useEffect(() => {
 		const newTabs = leaderboardArr.map((item, idx) => {
 			const teams = Object.keys(item);

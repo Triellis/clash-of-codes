@@ -25,6 +25,7 @@ export default function TabsComponent({
 }: TabsComponentProps) {
 	return (
 		<Tabs
+			overflow={"hidden"}
 			className={styles.tabGrp}
 			variant={"default"}
 			defaultIndex={0}
