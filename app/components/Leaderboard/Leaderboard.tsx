@@ -141,13 +141,24 @@ export default function Leaderboard({
 	if (rightClan) {
 		entries2 = rightClan.map((entry, index) => {
 			let animation;
+
 			if (oldData) {
-				const diff = oldData[rightClanName][index].rank - entry.rank;
+				let oldRank;
+				for (let i = 0; i < oldData[rightClanName].length; i++) {
+					if (oldData[rightClanName][i].name === entry.name) {
+						oldRank = oldData[rightClanName][i].rank;
+						break;
+					}
+				}
+				const diff = oldRank - entry.rank;
+
+				console.log(diff);
 				if (diff > 0) {
 					animation = goUpAnimation;
 				} else if (diff < 0) {
 					animation = goDownAnimation;
 				}
+				console.log(animation);
 			}
 			return (
 				<LeaderboardEntry

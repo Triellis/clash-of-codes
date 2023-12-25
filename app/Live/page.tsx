@@ -42,6 +42,7 @@ const WebSocketComponent = () => {
 		});
 		setTabs(newTabs);
 	}, [leaderboardArr]);
+
 	useEffect(() => {
 		// Establish WebSocket connection
 		const ws = new WebSocket("ws://localhost:3001");
@@ -50,10 +51,14 @@ const WebSocketComponent = () => {
 		ws.addEventListener("open", () => {
 			console.log("WebSocket connection opened");
 		});
-
 		ws.addEventListener("message", (event) => {
 			const receivedMessage = JSON.parse(event.data);
-			setLeaderboardArrOld(leaderboardArr);
+
+			setLeaderboardArr((prev) => {
+				setLeaderboardArrOld(prev);
+
+				return prev;
+			});
 			setLeaderboardArr(receivedMessage);
 		});
 
