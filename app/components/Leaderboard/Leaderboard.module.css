@@ -114,10 +114,16 @@
 
 	border-bottom: 1px solid var(--purple-900, #322659);
 }
-.tableEntry > .death {
-	flex: 1;
+.death {
+	width: 96px;
 }
 
+.tableHeaderRight > .death {
+	text-align: left;
+}
+.tableHeader.tableHeaderRight {
+	justify-content: flex-start;
+}
 .tableEntryRight {
 	justify-content: flex-start;
 	text-align: left;
