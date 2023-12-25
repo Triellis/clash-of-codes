@@ -71,7 +71,7 @@
 	flex: 1 0 0;
 	align-self: stretch;
 	width: 418px;
-	height: 452px;
+	height: inherit;
 
 	border-radius: 16px 0px 0px 16px;
 	border: 1px solid #000;
