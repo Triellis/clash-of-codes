@@ -4,6 +4,7 @@ import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
 import { Center, Heading } from "@chakra-ui/react";
 import classNames from "classnames";
 import { useMemo, useState } from "react";
+import MotionDiv from "../MotionDiv/MotionDiv";
 import SpecialTxt from "../SpecialTxt";
 import TabsComponent from "../TabsComponent/TabsComponent";
 import styles from "./Leaderboard.module.css";
@@ -47,6 +48,16 @@ function Scorecard({
 	);
 }
 
+function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
+	return (
+		<MotionDiv {...props}>
+			<div className={styles.name}>{entry.name}</div>
+			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
+			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
+		</MotionDiv>
+	);
+}
+
 export default function Leaderboard({
 	fetchedData,
 }: {
@@ -87,15 +98,11 @@ export default function Leaderboard({
 	if (leftClan) {
 		entries1 = leftClan.map((entry, index) => {
 			return (
-				<div className={styles.tableEntry} key={index}>
-					<div className={styles.name}>{entry.name}</div>
-					<SpecialTxt className={styles.points}>
-						{entry.points}
-					</SpecialTxt>
-					<SpecialTxt className={styles.death}>
-						{entry.penalty}
-					</SpecialTxt>
-				</div>
+				<LeaderboardEntry
+					props={{ className: styles.tableEntry, key: index }}
+					entry={entry}
+					key={index}
+				/>
 			);
 		});
 	}
@@ -103,21 +110,17 @@ export default function Leaderboard({
 	if (rightClan) {
 		entries2 = rightClan.map((entry, index) => {
 			return (
-				<div
-					className={classNames(
-						styles.tableEntry,
-						styles.tableEntryRight
-					)}
+				<LeaderboardEntry
+					props={{
+						className: classNames(
+							styles.tableEntry,
+							styles.tableEntryRight
+						),
+						key: index,
+					}}
+					entry={entry}
 					key={index}
-				>
-					<div className={styles.name}>{entry.name}</div>
-					<SpecialTxt className={styles.points}>
-						{entry.points}
-					</SpecialTxt>
-					<SpecialTxt className={styles.death}>
-						{entry.penalty}
-					</SpecialTxt>
-				</div>
+				/>
 			);
 		});
 	}
