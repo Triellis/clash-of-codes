@@ -48,7 +48,15 @@ function Scorecard({
 	);
 }
 
-function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
+function LeaderboardEntry({
+	props,
+	entry,
+	animation,
+}: {
+	props: any;
+	entry: any;
+	animation?: any;
+}) {
 	// going up transition:
 	const transition = {
 		type: "spring",
@@ -57,7 +65,7 @@ function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
 	};
 
 	return (
-		<MotionDiv {...props} transition={transition}>
+		<MotionDiv {...props} transition={transition} animate={animation}>
 			<div className={styles.name}>{entry.name}</div>
 			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
 			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
@@ -110,6 +118,7 @@ export default function Leaderboard({
 		entries1 = leftClan.map((entry, index) => {
 			return (
 				<LeaderboardEntry
+					animation={goDownAnimation}
 					props={{ className: styles.tableEntry, key: index }}
 					entry={entry}
 					key={index}
