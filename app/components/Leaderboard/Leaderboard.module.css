@@ -95,14 +95,16 @@
 }
 
 .death {
-	background: linear-gradient(176deg, #fff -61.47%, #000 176.58%);
+	background: linear-gradient(176deg, #fff -30.47%, #000 176.58%);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	font-size: 16px;
+	width: 96px;
+	width: 96px;
 
 	/* -webkit-text-stroke: 0.1px #000; */
-	font-weight: 900;
+	font-weight: 500;
 }
 
 .tableHeader,
@@ -116,9 +118,6 @@
 	text-align: right;
 
 	border-bottom: 1px solid var(--purple-900, #322659);
-}
-.death {
-	width: 96px;
 }
 
 .tableHeaderRight > .death {
