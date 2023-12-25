@@ -1,0 +1,16 @@
+.configForm {
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 64px;
+  margin-block: 1em;
+}
+
+.configForm > :nth-child(-n + 3) {
+  width: 168px;
+}
+
+.configForm > :nth-child(4) {
+  width: 128px;
+}

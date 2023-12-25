@@ -5,13 +5,15 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={16}
-    height={16}
+    height={14}
     fill="none"
     {...props}
   >
     <path
-      d="M16 1.86 14.14 0 8 6.14 1.86 0 0 1.86 6.14 8 0 14.14 1.86 16 8 9.86 14.14 16 16 14.14 9.86 8 16 1.86Z"
-      fill="#C53030"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M15.752.635a.727.727 0 0 1 .068 1.026L5.638 13.297a.727.727 0 0 1-1.061.035L.213 8.97A.727.727 0 1 1 1.242 7.94l3.813 3.814L14.725.703a.727.727 0 0 1 1.027-.068Z"
+      fill="#68D391"
     />
   </svg>
 );

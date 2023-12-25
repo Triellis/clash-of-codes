@@ -6,11 +6,9 @@
   width: 100%;
 }
 .configBoard {
-  margin-top: 1emn;
   display: flex;
   flex-direction: column;
-  width: 95%;
-  gap: 1em;
+  gap: 32px;
 }
 
 .search {
@@ -22,14 +20,22 @@
 }
 
 .header {
-  font-size: 24px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
   gap: 64px;
-  text-align: left;
   align-items: center;
-  word-wrap: break-word;
-  margin-top: 1em;
+  font-size: 24px;
+}
+
+.header > :nth-child(-n + 3) {
+  width: 168px;
+}
+
+.header > :nth-child(4) {
+  width: 128px;
+}
+
+.header > :nth-child(5) {
+  width: 64px;
 }
 
 .configForm {

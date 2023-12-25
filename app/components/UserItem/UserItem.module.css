@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.main > * {
+  width: 168px;
+}
+
+.first {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.last {
+  display: flex;
+  gap: 64px;
+  flex-direction: row;
+}

@@ -1,36 +1,58 @@
 import { addContest } from "@/app/util/functions";
 import { AddContestState, Clan } from "@/app/util/types";
 import { AddIcon } from "@chakra-ui/icons";
-import {
-  IconButton,
-  NumberInput,
-  NumberInputField,
-  Switch,
-} from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import { IconButton, Input, Switch } from "@chakra-ui/react";
+import React, { useMemo, useReducer } from "react";
+import CustomSelect from "../CustomSelect";
+import styles from "./AddConfigPlate.module.css";
 
-import CustomSelect from "../CustomSelect/CustomSelect";
-import styles from "./ConfigBoard.module.css";
+type AddContestAction = {
+  field?: "Team1" | "Team2" | "ContestCode";
+  value?: Clan | string;
+  type: "UPDATE" | "RESET";
+};
 
 type ConfigureBoardProps = {
   toast: any;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  newContest: AddContestState;
-  dispatchContest: Function;
   mutate: Function;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function ConfigBoard({
+function reduceAddContest(
+  state: AddContestState,
+  action: AddContestAction
+): AddContestState {
+  switch (action.type) {
+    case "UPDATE":
+      return { ...state, [action.field!]: action.value };
+    case "RESET":
+      return { Team1: "BW", Team2: "RG", ContestCode: "" };
+    default:
+      return state;
+  }
+}
+
+export default function AddConfigPlate({
   toast,
   isLoading,
   setIsLoading,
-  newContest,
-  dispatchContest,
   mutate,
   setPage,
 }: ConfigureBoardProps) {
+  
+  const defaultContest: AddContestState = {
+    Team1: "BW",
+    Team2: "PP",
+    ContestCode: "",
+  };
+
+  const [newContest, dispatchContest] = useReducer(
+    reduceAddContest,
+    defaultContest
+  );
+
   const selectOptions = useMemo(
     () => [
       { value: "BW", label: "Blue Wizards" },
@@ -71,21 +93,24 @@ function ConfigBoard({
         />
 
         {/* Contest code */}
-        <NumberInput variant="default">
-          <NumberInputField
-            placeholder="Contest Code"
-            onChange={(e: any) => {
+
+        <Input
+          placeholder="Contest Code"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const input = e.target.value;
+            const regex = /^[0-9]*$/; // Regular expression to allow only numbers
+
+            if (regex.test(input)) {
               dispatchContest({
                 field: "ContestCode",
-                value: e.target.value,
+                value: input,
                 type: "UPDATE",
               });
-
-              // console.log("Contest code is set to", e.target.value);
-            }}
-            value={newContest.ContestCode}
-          />
-        </NumberInput>
+            }
+          }}
+          variant={"default"}
+          value={newContest.ContestCode}
+        />
 
         {/* Date */}
         <div>Today</div>
@@ -94,6 +119,7 @@ function ConfigBoard({
         <Switch variant="default" size="lg" disabled defaultChecked />
 
         {/* Add button */}
+
         <IconButton
           isLoading={isLoading}
           aria-label="Add"
@@ -105,8 +131,12 @@ function ConfigBoard({
             setIsLoading(true);
             setPage(1);
             await addContest(newContest, mutate, toast);
+            dispatchContest({
+              type: "RESET",
+              field: "ContestCode",
+              value: "",
+            });
             mutate();
-            dispatchContest({ type: "RESET" });
             setIsLoading(false);
           }}
         />
@@ -114,5 +144,3 @@ function ConfigBoard({
     </div>
   );
 }
-
-export default ConfigBoard;

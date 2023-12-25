@@ -1,37 +1,44 @@
 import { Select } from "@chakra-ui/react";
 
 type Option = {
-	value: string;
+	value: string | null;
 	label: string;
 };
 
 type CustomSelectProps = {
 	selectOptions: Option[];
-	option: string;
+	option: string | null;
 	setOption: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function CustomSelect({
 	selectOptions,
-	option: team,
-	setOption: setTeam,
+	option,
+	setOption,
 }: CustomSelectProps) {
-	const handleTeamChange = (e: any) => {
-		const selectedTeam = e.target.value;
-		setTeam(selectedTeam);
-		// console.log(`${teamName} is set to`, selectedTeam);
+	const handleChange = (e: any) => {
+		const selectedOption = e.target.value;
+		setOption(selectedOption);
+		// console.log(`${optionName} is set to`, selectedoption);
 	};
 
 	return (
 		<Select
 			variant="default"
 			size="sm"
-			value={team}
-			onChange={handleTeamChange}
+			value={option == null ? undefined : option}
+			onChange={handleChange}
 		>
-			{selectOptions?.map((option) => (
-				<option key={option.value} value={option.value}>
-					{option.label}
+			{selectOptions?.map((optionListItem) => (
+				<option
+					key={optionListItem.value}
+					value={
+						optionListItem.value === null
+							? undefined
+							: optionListItem.value
+					}
+				>
+					{optionListItem.label}
 				</option>
 			))}
 		</Select>
