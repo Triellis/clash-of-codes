@@ -17,18 +17,14 @@
 	font-size: 32px;
 }
 
-.title {
+.mainScoreTitle {
 	font-size: 28px;
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: 2fr auto 2fr;
 	align-items: center;
 	justify-content: center;
 	gap: 22px;
 	text-align: center;
-}
-
-.title > * {
-	max-width: 200px;
 }
 
 .name {
