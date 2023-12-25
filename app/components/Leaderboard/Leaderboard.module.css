@@ -67,7 +67,7 @@
 .sb1,
 .sb2 {
 	display: flex;
-	padding: 128px 26px 80px 26px;
+	padding: 96px 26px 16px 26px;
 	flex-direction: column;
 
 	align-items: flex-start;
@@ -81,8 +81,6 @@
 }
 
 .sb2 {
-	padding: 128px 26px 80px 26px;
-
 	border-radius: 0px 16px 16px 0px;
 }
 
