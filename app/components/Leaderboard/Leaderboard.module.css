@@ -102,8 +102,7 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	font-size: 16px;
-	width: 96px;
-	width: 96px;
+	width: 7ch;
 
 	/* -webkit-text-stroke: 0.1px #000; */
 	font-weight: 500;
@@ -133,4 +132,12 @@
 	text-align: left;
 	flex-direction: row-reverse;
 	border-bottom: 1px solid var(--red-900, #4c1418);
+}
+
+.points {
+	width: 2ch;
+}
+
+.tableHeaderRight > .points {
+	text-align: left;
 }

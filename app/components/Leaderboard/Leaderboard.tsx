@@ -81,7 +81,9 @@ export default function Leaderboard({
 			return (
 				<div className={styles.tableEntry} key={index}>
 					<div className={styles.name}>{entry.name}</div>
-					<SpecialTxt>{entry.points}</SpecialTxt>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
 					<SpecialTxt className={styles.death}>
 						{entry.penalty}
 					</SpecialTxt>
@@ -101,7 +103,9 @@ export default function Leaderboard({
 					key={index}
 				>
 					<div className={styles.name}>{entry.name}</div>
-					<SpecialTxt>{entry.points}</SpecialTxt>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
 					<SpecialTxt className={styles.death}>
 						{entry.penalty}
 					</SpecialTxt>
@@ -124,7 +128,7 @@ export default function Leaderboard({
 				<div className={classNames(styles.sb1, styles[leftClanName])}>
 					<div className={styles.tableHeader}>
 						<div>name</div>
-						<div>#</div>
+						<div className={styles.points}>#</div>
 						<div className={styles.death}>Penalty</div>
 					</div>
 
@@ -132,7 +136,9 @@ export default function Leaderboard({
 
 					<div className={styles.tableEntry}>
 						<SpecialTxt>Total</SpecialTxt>
-						<SpecialTxt>{score1}</SpecialTxt>
+						<SpecialTxt className={styles.points}>
+							{score1}
+						</SpecialTxt>
 						<SpecialTxt className={styles.death}>
 							{penalty1}
 						</SpecialTxt>
@@ -148,7 +154,7 @@ export default function Leaderboard({
 						)}
 					>
 						<div className={styles.death}>Penalty</div>
-						<div>#</div>
+						<div className={styles.points}>#</div>
 						<div>name</div>
 					</div>
 
@@ -160,8 +166,10 @@ export default function Leaderboard({
 							styles.tableEntryRight
 						)}
 					>
-						<SpecialTxt flex={"2"} >Total</SpecialTxt>
-						<SpecialTxt>{score2}</SpecialTxt>
+						<SpecialTxt flex={"2"}>Total</SpecialTxt>
+						<SpecialTxt className={styles.points}>
+							{score2}
+						</SpecialTxt>
 						<SpecialTxt className={styles.death}>
 							{penalty2}
 						</SpecialTxt>
