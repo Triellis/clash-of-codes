@@ -119,7 +119,7 @@ export default function Leaderboard({
 			return (
 				<LeaderboardEntry
 					animation={goDownAnimation}
-					props={{ className: styles.tableEntry, key: index }}
+					props={{ className: styles.tableEntry }}
 					entry={entry}
 					key={index}
 				/>
@@ -136,7 +136,6 @@ export default function Leaderboard({
 							styles.tableEntry,
 							styles.tableEntryRight
 						),
-						key: index,
 					}}
 					entry={entry}
 					key={index}
