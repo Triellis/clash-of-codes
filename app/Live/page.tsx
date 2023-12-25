@@ -14,8 +14,8 @@ const WebSocketComponent = () => {
 		const teams = Object.keys(item);
 		const team1 = teams[0];
 		const team2 = teams[1];
-		const team1Full = fullForm(team1);
-		const team2Full = fullForm(team2);
+		const team1Full = fullForm(team1).split(" ")[1];
+		const team2Full = fullForm(team2).split(" ")[1];
 		const joint = `${team1Full} vs ${team2Full}`;
 		return { label: joint, value: joint, index: idx };
 	});
