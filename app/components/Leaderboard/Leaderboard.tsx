@@ -65,8 +65,8 @@ export default function Leaderboard({
 		score2 += entry.points;
 	});
 
-	console.log("leftClan", leftClan);
-	console.log("rightClan", rightClan);
+	// console.log("leftClan", leftClan);
+	// console.log("rightClan", rightClan);
 
 	let entries1;
 	let entries2;
