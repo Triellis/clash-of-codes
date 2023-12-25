@@ -1,7 +1,7 @@
 import Live from "@/app/styles/Icons/Live";
 import { fullForm } from "@/app/util/functions";
 import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
-import { Center, Heading } from "@chakra-ui/react";
+import { Center, Heading, transition } from "@chakra-ui/react";
 import classNames from "classnames";
 import { useMemo, useState } from "react";
 import MotionDiv from "../MotionDiv/MotionDiv";
@@ -49,8 +49,15 @@ function Scorecard({
 }
 
 function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
+	// going up transition:
+	const transition = {
+		type: "spring",
+		stiffness: 260,
+		damping: 20,
+	};
+
 	return (
-		<MotionDiv {...props}>
+		<MotionDiv {...props} transition={transition}>
 			<div className={styles.name}>{entry.name}</div>
 			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
 			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
@@ -66,9 +73,6 @@ export default function Leaderboard({
 	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
 	const clans = Object.keys(fetchedData);
 
-	// console.log(fetchedData);
-
-	// Remove unused variables
 	const leftClanName = clans[0] as Clan;
 	const rightClanName = clans[1] as Clan;
 
@@ -89,11 +93,18 @@ export default function Leaderboard({
 		penalty2 += entry.penalty;
 	});
 
-	// console.log("leftClan", leftClan);
-	// console.log("rightClan", rightClan);
-
 	let entries1;
 	let entries2;
+
+	const goUpAnimation = {
+		scale: [1, 1.5, 1],
+		y: [0, -100],
+	};
+
+	const goDownAnimation = {
+		scale: [1, 0.5, 1],
+		y: [0, 100],
+	};
 
 	if (leftClan) {
 		entries1 = leftClan.map((entry, index) => {
