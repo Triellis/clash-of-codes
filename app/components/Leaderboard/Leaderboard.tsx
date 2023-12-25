@@ -6,20 +6,28 @@ import { useMemo, useState } from "react";
 import SpecialTxt from "../SpecialTxt";
 import TabsComponent from "../TabsComponent/TabsComponent";
 import styles from "./Leaderboard.module.css";
+import { fullForm } from "@/app/util/functions";
 
-function Scorecard() {
-	const team1 = "Purple Pekkas";
-	const team2 = "Red Giants";
-
-	const score1 = 5;
-	const score2 = 3;
+function Scorecard({
+	team1,
+	team2,
+	score1,
+	score2,
+}: {
+	team1: Clan;
+	team2: Clan;
+	score1: number;
+	score2: number;
+}) {
+	const team1Full = fullForm(team1);
+	const team2Full = fullForm(team2);
 
 	return (
 		<div className={styles.mainScore}>
 			<div className={styles.title}>
-				<SpecialTxt>{team1} </SpecialTxt>
+				<SpecialTxt>{team1Full} </SpecialTxt>
 				<span className={classNames("logo", styles.logo)}>VS</span>
-				<SpecialTxt> {team2}</SpecialTxt>
+				<SpecialTxt> {team2Full}</SpecialTxt>
 			</div>
 
 			<div className={styles.score}>
@@ -42,8 +50,20 @@ export default function Leaderboard({
 	// console.log(fetchedData);
 
 	// Remove unused variables
-	const leftClan = fetchedData[clans[0] as Clan];
-	const rightClan = fetchedData[clans[1] as Clan];
+	const leftClanName = clans[0] as Clan;
+	const rightClanName = clans[1] as Clan;
+
+	const leftClan = fetchedData[leftClanName];
+	const rightClan = fetchedData[rightClanName];
+
+	let score1 = 0;
+	let score2 = 0;
+	leftClan.forEach((entry) => {
+		score1 += entry.points;
+	});
+	rightClan.forEach((entry) => {
+		score2 += entry.points;
+	});
 
 	console.log("leftClan", leftClan);
 	console.log("rightClan", rightClan);
@@ -87,11 +107,16 @@ export default function Leaderboard({
 
 	return (
 		<div className={styles.main}>
-			<Scorecard />
+			<Scorecard
+				team1={leftClanName}
+				team2={rightClanName}
+				score1={score1}
+				score2={score2}
+			/>
 
 			<div className={styles.board}>
 				{/* sb1 */}
-				<div className={styles.sb1}>
+				<div className={classNames(styles.sb1, styles[leftClanName])}>
 					<div className={styles.tableHeader}>
 						<div>name</div>
 						<div>#</div>
@@ -102,7 +127,7 @@ export default function Leaderboard({
 				</div>
 
 				{/* sb2 */}
-				<div className={styles.sb2}>
+				<div className={classNames(styles.sb2, styles[rightClanName])}>
 					<div
 						className={classNames(
 							styles.tableHeader,

@@ -58,7 +58,6 @@
 	top: -90px;
 	z-index: -2;
 
-	background-color: red;
 	border-radius: 16px;
 }
 
@@ -76,16 +75,27 @@
 
 	border-radius: 16px 0px 0px 16px;
 	border: 1px solid #000;
-	background: var(--purple-800, #44337a);
 }
 
 .sb2 {
 	padding: 128px 37px 80px 37px;
 
 	border-radius: 0px 16px 16px 0px;
-	background: var(--red-900, #63171b);
 }
 
+.RG {
+	background: var(--red-900, #63171b);
+}
+.PP {
+	background: var(--purple-800, #44337a);
+}
+.BW {
+	background: var(--blue-900, #304262);
+}
+
+.YB {
+	background: var(--yellow-900, #6d441c);
+}
 .death {
 	background: linear-gradient(176deg, #fff -30.47%, #000 176.58%);
 	background-clip: text;
