@@ -14,11 +14,11 @@
 }
 
 .logo {
-	font-size: 32px;
+	font-size: 24px;
 }
 
 .mainScoreTitle {
-	font-size: 28px;
+	font-size: 24px;
 	display: grid;
 	grid-template-columns: 2fr auto 2fr;
 	align-items: center;
@@ -47,7 +47,6 @@
 /* remaining scoreboard */
 
 .main {
-	margin-block: 32px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
