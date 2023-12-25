@@ -116,12 +116,14 @@ export default function Leaderboard({
 
 	return (
 		<div className={styles.main}>
-			<Scorecard
-				team1={leftClanName}
-				team2={rightClanName}
-				score1={score1}
-				score2={score2}
-			/>
+			<Center>
+				<Scorecard
+					team1={leftClanName}
+					team2={rightClanName}
+					score1={score1}
+					score2={score2}
+				/>
+			</Center>
 
 			<div className={styles.board}>
 				{/* sb1 */}
