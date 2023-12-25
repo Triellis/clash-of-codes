@@ -19,15 +19,23 @@ function Scorecard({
 	score1: number;
 	score2: number;
 }) {
-	const team1Full = fullForm(team1);
-	const team2Full = fullForm(team2);
+	const team1Full = fullForm(team1).split(" ");
+	const team2Full = fullForm(team2).split(" ");
 
 	return (
 		<div className={styles.mainScore}>
 			<div className={styles.title}>
-				<SpecialTxt>{team1Full} </SpecialTxt>
+				<div className={styles.teamNameWrapper}>
+					{team1Full.map((word, index) => {
+						return <SpecialTxt key={index}>{word}</SpecialTxt>;
+					})}
+				</div>
 				<span className={classNames("logo", styles.logo)}>VS</span>
-				<SpecialTxt> {team2Full}</SpecialTxt>
+				<div className={styles.teamNameWrapper}>
+					{team2Full.map((word, index) => {
+						return <SpecialTxt key={index}>{word}</SpecialTxt>;
+					})}
+				</div>
 			</div>
 
 			<div className={styles.score}>
