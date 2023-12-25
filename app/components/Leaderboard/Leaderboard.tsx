@@ -75,8 +75,10 @@ function LeaderboardEntry({
 
 export default function Leaderboard({
 	fetchedData,
+	oldData,
 }: {
 	fetchedData: LiveBoardTeam;
+	oldData: LiveBoardTeam;
 }) {
 	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
 	const clans = Object.keys(fetchedData);
@@ -116,9 +118,18 @@ export default function Leaderboard({
 
 	if (leftClan) {
 		entries1 = leftClan.map((entry, index) => {
+			let animation;
+			if (oldData) {
+				const diff = oldData[leftClanName][index].rank - entry.rank;
+				if (diff > 0) {
+					animation = goUpAnimation;
+				} else if (diff < 0) {
+					animation = goDownAnimation;
+				}
+			}
 			return (
 				<LeaderboardEntry
-					animation={goDownAnimation}
+					animation={animation}
 					props={{ className: styles.tableEntry }}
 					entry={entry}
 					key={index}
@@ -129,6 +140,15 @@ export default function Leaderboard({
 
 	if (rightClan) {
 		entries2 = rightClan.map((entry, index) => {
+			let animation;
+			if (oldData) {
+				const diff = oldData[rightClanName][index].rank - entry.rank;
+				if (diff > 0) {
+					animation = goUpAnimation;
+				} else if (diff < 0) {
+					animation = goDownAnimation;
+				}
+			}
 			return (
 				<LeaderboardEntry
 					props={{
@@ -137,6 +157,7 @@ export default function Leaderboard({
 							styles.tableEntryRight
 						),
 					}}
+					animation={animation}
 					entry={entry}
 					key={index}
 				/>

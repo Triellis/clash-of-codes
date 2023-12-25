@@ -9,6 +9,9 @@ import { fullForm } from "../util/functions";
 
 const WebSocketComponent = () => {
 	const [leaderboardArr, setLeaderboardArr] = useState<LiveLeaderboard>([]);
+	const [leaderboardArrOld, setLeaderboardArrOld] = useState<LiveLeaderboard>(
+		[]
+	);
 	const [tabIndex, setTabIndex] = useState(0);
 	let [tabs, setTabs] = useState([
 		{
@@ -50,6 +53,7 @@ const WebSocketComponent = () => {
 
 		ws.addEventListener("message", (event) => {
 			const receivedMessage = JSON.parse(event.data);
+			setLeaderboardArrOld(leaderboardArr);
 			setLeaderboardArr(receivedMessage);
 		});
 
@@ -79,7 +83,10 @@ const WebSocketComponent = () => {
 				allTabs={tabs}
 			/>
 
-			<Leaderboard fetchedData={leaderboardArr[tabIndex]} />
+			<Leaderboard
+				fetchedData={leaderboardArr[tabIndex]}
+				oldData={leaderboardArrOld[tabIndex]}
+			/>
 		</div>
 	);
 };
