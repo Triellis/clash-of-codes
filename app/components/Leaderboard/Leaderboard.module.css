@@ -144,7 +144,7 @@
 }
 
 /* for responsive design: */
-@media (max-width: 376px) {
+@media (max-width: 390px) {
 	.mainScore {
 		padding-inline: 10px;
 		padding-block: 30px;
@@ -202,9 +202,75 @@
 		display: none;
 	}
 
+	.tableEntry > * {
+		/* word-break:; */
+	}
+
 	.sb1,
 	.sb2 {
 		width: 160px;
-		padding: 96px 8px 8px 8px;
+		padding: 96px 5px 5px 5px;
 	}
 }
+
+@media (min-width: 390px) and (max-width: 520px) {
+	.mainScore {
+		padding: 20px;
+
+		border-radius: 16px;
+		border: 1px solid #000;
+		background: var(--gray-800, #1a202c);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.logo {
+		font-size: 18px;
+	}
+
+	.mainScoreTitle {
+		font-size: 18px;
+		display: grid;
+		grid-template-columns: 2fr auto 2fr;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.score {
+		font-size: 16px;
+		gap: 5px;
+	}
+
+	.score > * {
+		width: 25px;
+	}
+
+	.board {
+		font-size: 10px;
+	}
+
+	.death {
+		font-size: 10px;
+		width: 40px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 10px;
+	}
+
+	.sb1,
+	.sb2 {
+		width: 190px;
+		padding: 96px 5px 5px 5px;
+	}
+}
+

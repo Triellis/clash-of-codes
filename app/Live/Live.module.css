@@ -17,3 +17,8 @@
 	gap: 16px;
 	margin-top: 16px;
 }
+
+/*! KEPT IT ON NONE FOR TESTING PURPOSES ONLY! */
+.tabs {
+	display: none	;
+}
