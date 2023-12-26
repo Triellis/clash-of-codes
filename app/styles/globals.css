@@ -27,7 +27,15 @@ option {
   backdrop-filter: blur(10px);
 }
 
-.logo {
-  color: var(--chakra-colors-yellow-300);
-  text-shadow: red 2px 2px 0px;
+/* for the scroll bar */
+::-webkit-scrollbar {
+  width: 15px;
+  border-radius: 8px; /* Add rounded corners */
+}
+::-webkit-scrollbar-track {
+  background: var(--chakra-colors-gray-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-gray-600);
+  border-radius: 5px; /* Add rounded corners */
 }

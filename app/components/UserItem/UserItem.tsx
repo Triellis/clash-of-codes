@@ -3,7 +3,7 @@ import Edit from "@/app/styles/Icons/Edit";
 import Tick from "@/app/styles/Icons/Tick";
 import Trash from "@/app/styles/Icons/Trash";
 import { customFetch, fullForm } from "@/app/util/functions";
-import { AddUserAction, Clan, UserOnClient } from "@/app/util/types";
+import { AddUserAction, Clan, Role, UserOnClient } from "@/app/util/types";
 import { CheckIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -50,6 +50,20 @@ async function handleUpdateUser(
   mutate: Function,
   toast: any
 ) {
+  // @ts-ignore
+  if (user.clan === "none") {
+    user.clan = null;
+  }
+
+  if (user.role !== "User" && user.role !== "Admin" && user.clan === null) {
+    NotifToast({
+      title: "Please select a clan",
+      status: "error",
+      toast: toast,
+    });
+    return;
+  }
+
   const res = await customFetch(`/admin/users`, {
     method: "PUT",
     headers: {
@@ -210,9 +224,9 @@ function UserItem({
         <div>
           <Input
             variant={"default"}
-            placeholder="Username"
+            placeholder=""
             size="sm"
-            value={String(newUser.cfUsername)}
+            value={newUser.cfUsername}
             onChange={(e) =>
               dispatchUser({
                 type: "UPDATE",
@@ -231,7 +245,7 @@ function UserItem({
               dispatchUser({
                 type: "UPDATE",
                 field: "role",
-                value: val as string,
+                value: val as Role,
               });
             }}
           />
@@ -266,7 +280,7 @@ function UserItem({
           <div>
             <IconButton
               variant={"ghost"}
-              aria-label="Save"
+              aria-label="Cancel"
               icon={<Close />}
               onClick={() => setEditMode(false)}
             />
@@ -292,7 +306,6 @@ function UserItem({
         </Text>
       </div>
 
-      {/* <div>{itemData.cfUsername ? itemData.cfUsername : "N/A"}</div> */}
       {itemData.cfUsername ? (
         <div>
           <Link
