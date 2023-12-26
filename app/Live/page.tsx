@@ -3,9 +3,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import TabsComponent from "../components/TabsComponent";
 import Live from "../styles/Icons/Live";
+import { fullForm } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
-import { fullForm } from "../util/functions";
 
 const WebSocketComponent = () => {
 	const [leaderboardArr, setLeaderboardArr] = useState<LiveLeaderboard>([]);
@@ -78,11 +78,13 @@ const WebSocketComponent = () => {
 				Live Score Board
 			</div>
 
-			<TabsComponent
-				tab={tab} // Pass the 'tab' state variable
-				setTab={setTab}
-				allTabs={tabs}
-			/>
+			<div className={styles.tabs}>
+				<TabsComponent
+					tab={tab} // Pass the 'tab' state variable
+					setTab={setTab}
+					allTabs={tabs}
+				/>
+			</div>
 
 			<Leaderboard fetchedData={leaderboardArr[tabIndex]} />
 		</div>

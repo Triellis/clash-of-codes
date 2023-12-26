@@ -190,9 +190,9 @@ export default function Leaderboard({
 							styles.tableHeaderRight
 						)}
 					>
-						<div className={styles.death}>Penalty</div>
-						<div className={styles.points}>#</div>
 						<div>name</div>
+						<div className={styles.points}>#</div>
+						<div className={styles.death}>Penalty</div>
 					</div>
 
 					{entries2}

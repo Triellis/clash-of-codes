@@ -1,7 +1,9 @@
 /* top score: */
 .mainScore {
 	border-radius: 16px;
-	padding: 32px;
+	padding-inline: 32px;
+	padding-block: 32px;
+
 	border: 1px solid #000;
 	background: var(--gray-800, #1a202c);
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -122,12 +124,14 @@
 	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
 }
 
+.tableHeaderRight {
+	flex-direction: row-reverse;
+}
+
 .tableHeaderRight > .death {
 	text-align: left;
 }
-.tableHeader.tableHeaderRight {
-	justify-content: flex-start;
-}
+
 .tableEntryRight {
 	justify-content: flex-start;
 	text-align: left;
@@ -135,10 +139,72 @@
 	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
 }
 
-.points {
-	width: 2ch;
-}
-
 .tableHeaderRight > .points {
 	text-align: left;
+}
+
+/* for responsive design: */
+@media (max-width: 376px) {
+	.mainScore {
+		padding-inline: 10px;
+		padding-block: 30px;
+
+		border-radius: 16px;
+		border: 1px solid #000;
+		background: var(--gray-800, #1a202c);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.logo {
+		font-size: 16px;
+	}
+
+	.mainScoreTitle {
+		font-size: 16px;
+		display: grid;
+		grid-template-columns: 2fr auto 2fr;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.score {
+		font-size: 16px;
+		gap: 5px;
+	}
+	.score > * {
+		width: 25px;
+	}
+
+	.board {
+		font-size: 10px;
+	}
+
+	.death {
+		font-size: 10px;
+		width: 30px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 10px;
+	}
+
+	.tableHeader > :nth-child(1) {
+		display: none;
+	}
+
+	.sb1,
+	.sb2 {
+		width: 160px;
+		padding: 96px 8px 8px 8px;
+	}
 }
