@@ -36,12 +36,12 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	gap: 15px;
+	gap: 10px;
 	flex: 1;
 }
 
 .score > * {
-	max-width: 75px;
+	width: 50px;
 }
 
 /* remaining scoreboard */
