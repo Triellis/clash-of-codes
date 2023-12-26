@@ -38,12 +38,24 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	gap: 5px;
+	gap: 15px;
 	flex: 1;
 }
 
 .score > * {
 	width: 75px;
+}
+
+.score > :nth-child(1) {
+	text-align: right;
+}
+
+.score > :nth-child(2) {
+	width: auto;
+}
+
+.score > :nth-child(3) {
+	text-align: left;
 }
 
 /* remaining scoreboard */
@@ -177,10 +189,13 @@
 
 	.score {
 		font-size: 16px;
-		gap: 5px;
 	}
 	.score > * {
-		width: 25px;
+		width: 75px;
+	}
+
+	.score > :nth-child(2) {
+		width: auto;
 	}
 
 	.board {
@@ -200,10 +215,6 @@
 
 	.tableHeader > :nth-child(1) {
 		display: none;
-	}
-
-	.tableEntry > * {
-		/* word-break:; */
 	}
 
 	.sb1,
@@ -245,11 +256,10 @@
 
 	.score {
 		font-size: 16px;
-		gap: 5px;
 	}
 
 	.score > * {
-		width: 25px;
+		width: 75px;
 	}
 
 	.board {
@@ -274,3 +284,112 @@
 	}
 }
 
+@media (min-width: 520px) and (max-width: 768px) {
+	.mainScore {
+		padding: 20px;
+
+		border-radius: 16px;
+		border: 1px solid #000;
+		background: var(--gray-800, #1a202c);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.logo {
+		font-size: 25px;
+	}
+
+	.mainScoreTitle {
+		font-size: 25px;
+		display: grid;
+		grid-template-columns: 2fr auto 2fr;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.score {
+		font-size: 25px;
+	}
+
+	.board {
+		font-size: 10px;
+	}
+
+	.death {
+		font-size: 10px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 10px;
+	}
+
+	.sb1,
+	.sb2 {
+		width: 260px;
+		padding: 96px 5px 5px 5px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 845px) {
+	.mainScore {
+		padding: 20px;
+
+		border-radius: 16px;
+		border: 1px solid #000;
+		background: var(--gray-800, #1a202c);
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.logo {
+		font-size: 25px;
+	}
+
+	.mainScoreTitle {
+		font-size: 25px;
+		display: grid;
+		grid-template-columns: 2fr auto 2fr;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.score {
+		font-size: 25px;
+	}
+
+	.board {
+		font-size: 10px;
+	}
+
+	.death {
+		font-size: 14px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 14px;
+		gap: 20px;
+	}
+
+	.sb1,
+	.sb2 {
+		width: 380px;
+		padding: 96px 8px 8px 8px;
+	}
+}
