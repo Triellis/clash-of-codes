@@ -36,12 +36,12 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	gap: 10px;
+	gap: 5px;
 	flex: 1;
 }
 
 .score > * {
-	width: 50px;
+	width: 75px;
 }
 
 /* remaining scoreboard */
@@ -93,10 +93,10 @@
 .BW {
 	background: var(--blue-900, #304262);
 }
-
 .YB {
 	background: var(--yellow-900, #6d441c);
 }
+
 .death {
 	background: linear-gradient(176deg, #fff -30.47%, #000 176.58%);
 	background-clip: text;
