@@ -188,7 +188,12 @@ const Tabs = {
 		},
 	},
 };
-
+export const breakpoints = {
+	sm: "320px",
+	md: "768px",
+	lg: "960px",
+	xl: "1200px",
+};
 export const theme = extendTheme({
 	styles: {
 		global: () => ({
@@ -213,4 +218,5 @@ export const theme = extendTheme({
 		Modal,
 		Tabs,
 	},
+	breakpoints,
 });
