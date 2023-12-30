@@ -87,7 +87,7 @@
 	align-items: flex-start;
 
 	align-self: stretch;
-	width: 418px;
+
 	height: inherit;
 
 	border-radius: 16px 0px 0px 16px;
@@ -161,24 +161,18 @@
 		width: 90%;
 	}
 
+	.mainScoreTitle {
+		gap: 10px;
+	}
+	.mainScoreTitle,
 	.logo {
 		font-size: 16px;
 	}
-
-	.mainScoreTitle {
-		font-size: 16px;
-		gap: 10px;
-	}
-
 	.score {
-		font-size: 16px;
+		font-size: 20px;
 	}
 
-	.death {
-		font-size: 10px;
-		width: 30px;
-	}
-
+	.death,
 	.tableHeader,
 	.tableEntry {
 		font-size: 10px;
@@ -198,7 +192,6 @@
 @media (min-width: 390px) and (max-width: 520px) {
 	.mainScore {
 		padding: 20px;
-		width: 90%;
 	}
 
 	.logo {
@@ -211,18 +204,18 @@
 	}
 
 	.score {
-		font-size: 16px;
+		font-size: 24px;
 	}
 
 	.death {
 		font-size: 10px;
-		width: 40px;
+		width: 55px;
 	}
 
 	.tableHeader,
 	.tableEntry {
 		font-size: 10px;
-		gap: 10px;
+		gap: 16px;
 	}
 
 	.sb1,
@@ -243,7 +236,7 @@
 	}
 
 	.score {
-		font-size: 20px;
+		font-size: 26px;
 	}
 	.death {
 		font-size: 10px;
