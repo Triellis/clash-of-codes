@@ -154,7 +154,8 @@
 @media (max-width: 390px) {
 	.mainScore {
 		padding-inline: 10px;
-		padding-block: 30px;
+		padding-block: 20px;
+		width: 90%;
 	}
 
 	.logo {
@@ -163,7 +164,7 @@
 
 	.mainScoreTitle {
 		font-size: 16px;
-		gap: 16px;
+		gap: 10px;
 	}
 
 	.score {
@@ -187,7 +188,7 @@
 
 	.sb1,
 	.sb2 {
-		width: 160px;
+		width: 190px;
 		padding: 96px 5px 5px 5px;
 	}
 }
@@ -195,6 +196,7 @@
 @media (min-width: 390px) and (max-width: 520px) {
 	.mainScore {
 		padding: 20px;
+		width: 90%;
 	}
 
 	.logo {
