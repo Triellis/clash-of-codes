@@ -1,3 +1,11 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
 /* top score: */
 .mainScore {
 	border-radius: 16px;
@@ -57,13 +65,6 @@
 
 /* remaining scoreboard */
 
-.main {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
 .board {
 	display: flex;
 	flex-direction: row;
@@ -71,6 +72,8 @@
 	position: relative;
 	top: -90px;
 	z-index: -2;
+	width: 100%;
+	justify-content: center;
 
 	border-radius: 16px;
 }
@@ -155,7 +158,6 @@
 	.mainScore {
 		padding-inline: 10px;
 		padding-block: 20px;
-		width: 90%;
 	}
 
 	.logo {
@@ -186,9 +188,10 @@
 		display: none;
 	}
 
+	/* !NEED TO FIX THIS PART: */
 	.sb1,
 	.sb2 {
-		width: 190px;
+		/* width: 190px; */
 		padding: 96px 5px 5px 5px;
 	}
 }
@@ -225,7 +228,6 @@
 
 	.sb1,
 	.sb2 {
-		width: 190px;
 		padding: 96px 5px 5px 5px;
 	}
 }
@@ -254,12 +256,6 @@
 		font-size: 10px;
 		gap: 10px;
 	}
-
-	.sb1,
-	.sb2 {
-		width: 260px;
-		padding: 96px 5px 5px 5px;
-	}
 }
 
 @media (min-width: 768px) and (max-width: 845px) {
@@ -285,11 +281,5 @@
 	.tableEntry {
 		font-size: 14px;
 		gap: 20px;
-	}
-
-	.sb1,
-	.sb2 {
-		width: 380px;
-		padding: 96px 8px 8px 8px;
 	}
 }
