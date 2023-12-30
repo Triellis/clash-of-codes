@@ -65,11 +65,13 @@ function LeaderboardEntry({
 	};
 
 	return (
-		<MotionDiv {...props} transition={transition} animate={animation}>
+		// <MotionDiv {...props} transition={transition} animate={animation}>
+		<div {...props}>
 			<div className={styles.name}>{entry.name}</div>
 			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
 			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
-		</MotionDiv>
+		</div>
+		// </MotionDiv>
 	);
 }
 
