@@ -158,6 +158,7 @@
 	.mainScore {
 		padding-inline: 10px;
 		padding-block: 20px;
+		width: 90%;
 	}
 
 	.logo {
@@ -188,10 +189,8 @@
 		display: none;
 	}
 
-	/* !NEED TO FIX THIS PART: */
 	.sb1,
 	.sb2 {
-		/* width: 190px; */
 		padding: 96px 5px 5px 5px;
 	}
 }
@@ -237,15 +236,14 @@
 		padding: 20px;
 	}
 	.logo {
-		font-size: 25px;
+		font-size: 20px;
 	}
 	.mainScoreTitle {
-		font-size: 25px;
 		gap: 16px;
 	}
 
 	.score {
-		font-size: 25px;
+		font-size: 20px;
 	}
 	.death {
 		font-size: 10px;
