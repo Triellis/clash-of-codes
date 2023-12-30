@@ -36,6 +36,9 @@ function useWindowSizeMobile() {
 }
 const WebSocketComponent = () => {
 	const [leaderboardArr, setLeaderboardArr] = useState<LiveLeaderboard>([]);
+	const [leaderboardArrOld, setLeaderboardArrOld] = useState<LiveLeaderboard>(
+		[]
+	);
 
 	const [tabIndex, setTabIndex] = useState(0);
 	let [tabs, setTabs] = useState([
@@ -78,6 +81,7 @@ const WebSocketComponent = () => {
 		});
 		setTabs(newTabs);
 	}, [leaderboardArr]);
+
 	useEffect(() => {
 		// Establish WebSocket connection
 		const ws = new WebSocket("ws://localhost:3001");
@@ -86,10 +90,15 @@ const WebSocketComponent = () => {
 		ws.addEventListener("open", () => {
 			console.log("WebSocket connection opened");
 		});
-
 		ws.addEventListener("message", (event) => {
 			try {
 				const receivedMessage = JSON.parse(event.data);
+
+				setLeaderboardArr((prev) => {
+					setLeaderboardArrOld(prev);
+
+					return prev;
+				});
 				setLeaderboardArr(receivedMessage);
 			} catch (err) {
 				console.error(err);
@@ -124,10 +133,13 @@ const WebSocketComponent = () => {
 			)}
 			{isSmall ? (
 				leaderboardArr.map((item, idx) => (
-					<Leaderboard fetchedData={item} key={idx} />
+					<Leaderboard fetchedData={item} key={idx} oldData={item} />
 				))
 			) : (
-				<Leaderboard fetchedData={leaderboardArr[tabIndex]} />
+				<Leaderboard
+					fetchedData={leaderboardArr[tabIndex]}
+					oldData={leaderboardArrOld[tabIndex]}
+				/>
 			)}
 		</div>
 	);
