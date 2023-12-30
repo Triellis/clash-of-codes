@@ -35,7 +35,9 @@ export default function TabsComponent({
 		>
 			<TabList className={styles.tabList}>
 				{allTabs.map((tab, index) => (
-					<Tab key={tab.value}>{tab.label}</Tab>
+					<Tab key={tab.value} fontSize={{ base: "xs", md: "md" }}>
+						{tab.label}
+					</Tab>
 				))}
 				<TabIndicator className={styles.indicator} />
 			</TabList>
