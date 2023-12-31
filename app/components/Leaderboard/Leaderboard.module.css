@@ -36,7 +36,9 @@
 	gap: 22px;
 	text-align: center;
 }
-
+.highlighted {
+	background-color: red !important;
+}
 .name {
 	flex: 2;
 }

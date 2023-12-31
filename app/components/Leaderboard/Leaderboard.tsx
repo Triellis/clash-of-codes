@@ -3,7 +3,7 @@ import { fullForm } from "@/app/util/functions";
 import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
 import { Center, Heading, transition } from "@chakra-ui/react";
 import classNames from "classnames";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MotionDiv from "../MotionDiv/MotionDiv";
 import SpecialTxt from "../SpecialTxt";
 import TabsComponent from "../TabsComponent/TabsComponent";
@@ -51,18 +51,20 @@ function Scorecard({
 function LeaderboardEntry({
 	props,
 	entry,
-	animation,
-}: {
+	rankDiff,
+}: // animation,
+{
 	props: any;
 	entry: any;
-	animation?: any;
+	rankDiff?: number;
+	// animation?: any;
 }) {
 	// going up transition:
-	const transition = {
-		type: "spring",
-		stiffness: 260,
-		damping: 20,
-	};
+	// const transition = {
+	// 	type: "spring",
+	// 	stiffness: 260,
+	// 	damping: 20,
+	// };
 
 	return (
 		// <MotionDiv {...props} transition={transition} animate={animation}>
@@ -108,24 +110,39 @@ export default function Leaderboard({
 	let entries1;
 	let entries2;
 
-	const goUpAnimation = {
-		scale: [1, 1.5, 1],
-		y: [0, -100],
-	};
+	// const goUpAnimation = {
+	// 	scale: [1, 1.5, 1],
+	// 	y: [0, -100],
+	// };
 
-	const goDownAnimation = {
-		scale: [1, 0.5, 1],
-		y: [0, 100],
-	};
+	// const goDownAnimation = {
+	// 	scale: [1, 0.5, 1],
+	// 	y: [0, 100],
+	// };
 
 	if (leftClan) {
 		entries1 = leftClan.map((entry, index) => {
-			let animation;
+			let diff = 0;
+			if (oldData) {
+				let oldRank = entry.rank;
+				for (let i = 0; i < oldData[leftClanName].length; i++) {
+					if (oldData[leftClanName][i].name === entry.name) {
+						oldRank = oldData[leftClanName][i].rank;
+						break;
+					}
+				}
+				diff = oldRank - entry.rank;
+			}
 
 			return (
 				<LeaderboardEntry
-					animation={animation}
-					props={{ className: styles.tableEntry }}
+					rankDiff={diff}
+					props={{
+						className: classNames(
+							styles.tableEntry,
+							styles.highlighted ? diff != 0 : ""
+						),
+					}}
 					entry={entry}
 					key={index}
 				/>
@@ -135,8 +152,7 @@ export default function Leaderboard({
 
 	if (rightClan) {
 		entries2 = rightClan.map((entry, index) => {
-			let animation;
-
+			let diff = 0;
 			if (oldData) {
 				let oldRank = entry.rank;
 				for (let i = 0; i < oldData[rightClanName].length; i++) {
@@ -145,25 +161,22 @@ export default function Leaderboard({
 						break;
 					}
 				}
-				const diff = oldRank - entry.rank;
-
+				diff = oldRank - entry.rank;
+			}
+			if (index == 2) {
 				console.log(diff);
-				if (diff > 0) {
-					animation = goUpAnimation;
-				} else if (diff < 0) {
-					animation = goDownAnimation;
-				}
-				console.log(animation);
+				console.log(entry, oldData![rightClanName][2]);
 			}
 			return (
 				<LeaderboardEntry
 					props={{
 						className: classNames(
 							styles.tableEntry,
-							styles.tableEntryRight
+							styles.tableEntryRight,
+							styles.highlighted ? diff != 0 : ""
 						),
 					}}
-					animation={animation}
+					rankDiff={diff}
 					entry={entry}
 					key={index}
 				/>
