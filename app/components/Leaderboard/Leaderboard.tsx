@@ -163,10 +163,7 @@ export default function Leaderboard({
 				}
 				diff = oldRank - entry.rank;
 			}
-			if (index == 2) {
-				console.log(diff);
-				console.log(entry, oldData![rightClanName][2]);
-			}
+
 			return (
 				<LeaderboardEntry
 					props={{
