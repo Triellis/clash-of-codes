@@ -1,0 +1,14 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.main > :nth-child(1) {
+	color: red;
+}
+
+.flipCard {
+	display: flex;
+	flex-direction: row;
+}

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import styles from "./Counter.module.css";
 
 Counter.propTypes = {
 	startNumber: PropTypes.number.isRequired,
@@ -73,17 +74,18 @@ function Counter({
 	};
 
 	return (
-		<>
-			<div className="flip-card" ref={flipCardRef2}>
+		<div className={styles.main}>
+			<div className={styles.flipCard} ref={flipCardRef2}>
 				<div className="top"></div>
 				<div className="bottom"></div>
 			</div>
-			<div className="flip-card" ref={flipCardRef1}>
+
+			<div className={styles.flipCard} ref={flipCardRef1}>
 				<div className="top"></div>
 				<div className="bottom"></div>
 			</div>
 			<button onClick={handleClick}>increase</button>
-		</>
+		</div>
 	);
 }
 
