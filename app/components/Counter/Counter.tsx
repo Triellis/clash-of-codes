@@ -16,36 +16,43 @@ function Counter({
 }) {
 	const flipCardRef1 = useRef<HTMLDivElement>(null);
 	const flipCardRef2 = useRef<HTMLDivElement>(null);
+	const topRef = useRef<HTMLDivElement>(null);
+	const bottomRef = useRef<HTMLDivElement>(null);
 
 	const updateFlipCard = useCallback(
 		(flipCardRef: any, currentValue: number, nextValue: number) => {
 			const flipCard = flipCardRef.current;
-			const topHalf = flipCard.querySelector(".top");
-			const bottomHalf = flipCard.querySelector(".bottom");
+			const topHalf = topRef.current;
+			const bottomHalf = bottomRef.current;
 			const topFlip = document.createElement("div");
 			const bottomFlip = document.createElement("div");
+			console.log(topHalf, bottomHalf, styles.top, styles.bottom);
 
-			topFlip.classList.add("top-flip");
-			bottomFlip.classList.add("bottom-flip");
+			if (topHalf && bottomHalf && topFlip && bottomFlip) {
+				topFlip.classList.add(styles.topFlip);
+				bottomFlip.classList.add(styles.bottomFlip);
+				// print top and bottom halves
+				console.log("top", topHalf);
+				console.log("bottom", bottomHalf);
 
-			bottomHalf.textContent = currentValue;
-			topFlip.textContent = String(currentValue);
-			bottomFlip.textContent = String(nextValue);
+				bottomHalf.textContent = String(currentValue);
+				topFlip.textContent = String(currentValue);
+				bottomFlip.textContent = String(nextValue);
+				topFlip.addEventListener("animationstart", () => {
+					topHalf.textContent = String(nextValue);
+				});
 
-			topFlip.addEventListener("animationstart", () => {
-				topHalf.textContent = nextValue;
-			});
+				topFlip.addEventListener("animationend", () => {
+					topFlip.remove();
+				});
 
-			topFlip.addEventListener("animationend", () => {
-				topFlip.remove();
-			});
+				bottomFlip.addEventListener("animationend", () => {
+					bottomHalf.textContent = String(nextValue);
+					bottomFlip.remove();
+				});
 
-			bottomFlip.addEventListener("animationend", () => {
-				bottomHalf.textContent = nextValue;
-				bottomFlip.remove();
-			});
-
-			flipCard.append(topFlip, bottomFlip);
+				flipCard.append(topFlip, bottomFlip);
+			}
 		},
 		[]
 	);
@@ -76,14 +83,14 @@ function Counter({
 	return (
 		<div className={styles.main}>
 			<div className={styles.flipCard} ref={flipCardRef2}>
-				<div className="top"></div>
-				<div className="bottom"></div>
+				<div className={styles.top} ref={topRef}></div>
+				<div className={styles.bottom} ref={bottomRef}></div>
+			</div>
+			<div className={styles.flipCard} ref={flipCardRef1}>
+				<div className={styles.top} ref={topRef}></div>
+				<div className={styles.bottom} ref={bottomRef}></div>
 			</div>
 
-			<div className={styles.flipCard} ref={flipCardRef1}>
-				<div className="top"></div>
-				<div className="bottom"></div>
-			</div>
 			<button onClick={handleClick}>increase</button>
 		</div>
 	);
