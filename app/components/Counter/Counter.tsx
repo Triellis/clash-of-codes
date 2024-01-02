@@ -1,4 +1,5 @@
 import { update } from "@/app/util/userSlice";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import styles from "./Counter.module.css";
@@ -92,12 +93,18 @@ function Counter({ startNumber }: { startNumber: number }) {
 	return (
 		<div className={styles.main}>
 			{/* tens digit */}
-			<div className={styles.flipCard} ref={flipCardRef2}>
+			<div
+				className={classNames(styles.flipCard, styles.shiny)}
+				ref={flipCardRef2}
+			>
 				<div className={styles.top} ref={topRef2}></div>
 				<div className={styles.bottom} ref={bottomRef2}></div>
 			</div>
 			{/* unit digit */}
-			<div className={styles.flipCard} ref={flipCardRef1}>
+			<div
+				className={classNames(styles.flipCard, styles.shiny)}
+				ref={flipCardRef1}
+			>
 				<div className={styles.top} ref={topRef1}></div>
 				<div className={styles.bottom} ref={bottomRef1}></div>
 			</div>

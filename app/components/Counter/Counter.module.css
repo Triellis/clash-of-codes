@@ -6,6 +6,9 @@
 	border-radius: 0.1em;
 }
 
+.flipCard > * {
+}
+
 /* *,
 *::after,
 *::before {
@@ -15,8 +18,9 @@
 } */
 
 .main {
-	background-color: #f2f1ed;
-	color: #de4848;
+	/* background-color: #f2f1ed; */
+	/* color: #de4848; */
+	color: #e1c66e;
 }
 
 .top,
@@ -31,7 +35,7 @@
 
 .top,
 .flipCard .topFlip {
-	background-color: #f7f7f7;
+	background: var(--gray-800, #1a202c);
 	border-top-right-radius: 0.1em;
 	border-top-left-radius: 0.1em;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -39,7 +43,7 @@
 
 .bottom,
 .flipCard .bottomFlip {
-	background-color: white;
+	background-color: rgb(0, 0, 0, 0.4);
 	display: flex;
 	align-items: flex-end;
 	border-bottom-right-radius: 0.1em;
