@@ -11,7 +11,7 @@ export default function Test() {
 	const [number2, setNumber2] = useState(1);
 	return (
 		<main className={styles.main}>
-			<Counter setNumber={setNumber} startNumber={number} />
+			<Counter startNumber={number} />
 			<Input
 				type="number"
 				onChange={(e) => setNumber2(Number(e.target.value))}

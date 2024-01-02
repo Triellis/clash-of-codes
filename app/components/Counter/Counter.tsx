@@ -6,7 +6,7 @@ import styles from "./Counter.module.css";
 
 Counter.propTypes = {
 	startNumber: PropTypes.number.isRequired,
-	setNumber: PropTypes.func.isRequired,
+	// setNumber: PropTypes.func.isRequired,
 };
 
 function Counter({ startNumber }: { startNumber: number }) {
@@ -32,7 +32,7 @@ function Counter({ startNumber }: { startNumber: number }) {
 				topFlip.classList.add(styles.topFlip);
 				bottomFlip.classList.add(styles.bottomFlip);
 
-				bottomHalf1.textContent = String(currentValue);
+			bottomHalf1.textContent = String(currentValue);
 
 				topFlip.textContent = String(currentValue);
 				bottomFlip.textContent = String(nextValue);

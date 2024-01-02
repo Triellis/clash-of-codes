@@ -4,6 +4,7 @@ import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
 import { Center, Heading, transition } from "@chakra-ui/react";
 import classNames from "classnames";
 import { useEffect, useMemo, useState } from "react";
+import Counter from "../Counter/Counter";
 import MotionDiv from "../MotionDiv/MotionDiv";
 import SpecialTxt from "../SpecialTxt";
 import TabsComponent from "../TabsComponent/TabsComponent";
@@ -40,9 +41,11 @@ function Scorecard({
 			</div>
 
 			<div className={styles.score}>
-				<SpecialTxt>{score1}</SpecialTxt>
+				{/* <SpecialTxt>{score1}</SpecialTxt> */}
+				<Counter startNumber={score1} />
 				<SpecialTxt> - </SpecialTxt>
-				<SpecialTxt>{score2}</SpecialTxt>
+				{/* <SpecialTxt>{score2}</SpecialTxt> */}
+				<Counter startNumber={score2} />
 			</div>
 		</div>
 	);

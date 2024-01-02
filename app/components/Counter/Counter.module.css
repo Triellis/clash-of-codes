@@ -21,6 +21,12 @@
 	/* background-color: #f2f1ed; */
 	/* color: #de4848; */
 	color: #e1c66e;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1px;
+	width: min-content !important;
 }
 
 .top,

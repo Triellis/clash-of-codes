@@ -181,6 +181,10 @@
 		gap: 10px;
 	}
 
+	.death {
+		width: 4ch;
+	}
+
 	.tableHeader > :nth-child(1) {
 		display: none;
 	}
