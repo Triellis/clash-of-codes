@@ -32,7 +32,7 @@ function useWindowSizeMobile() {
 		// Remove event listener on cleanup
 		return () => window.removeEventListener("resize", handleResize);
 	}, []); // Empty array ensures that effect is only run on mount
-	return windowSize.width ? windowSize.width < 768 : true;
+	return windowSize.width ? windowSize.width < 768 : false;
 }
 const WebSocketComponent = () => {
 	const [leaderboardArr, setLeaderboardArr] = useState<LiveLeaderboard>([]);
