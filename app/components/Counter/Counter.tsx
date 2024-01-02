@@ -23,25 +23,17 @@ function Counter({
 	const bottomRef2 = useRef<HTMLDivElement>(null);
 
 	const updateFlipCard = useCallback(
-		(flipCardRef: any, currentValue: number, nextValue: number) => {
-			const flipCard = flipCardRef.current;
-			const topHalf1 = topRef1.current;
-			const bottomHalf1 = bottomRef1.current;
-			const topHalf2 = topRef2.current;
-			const bottomHalf2 = bottomRef2.current;
+		(refs: any, currentValue: number, nextValue: number) => {
+			const flipCard = refs.flipCardRef.current;
+			const topHalf1 = refs.topRef.current;
+			const bottomHalf1 = refs.bottomRef.current;
+
 			const topFlip = document.createElement("div");
 			const bottomFlip = document.createElement("div");
 
 			console.log("vals", currentValue, nextValue);
 
-			if (
-				topHalf2 &&
-				bottomHalf2 &&
-				topHalf1 &&
-				bottomHalf1 &&
-				topFlip &&
-				bottomFlip
-			) {
+			if (topHalf1 && bottomHalf1 && topFlip && bottomFlip) {
 				topFlip.classList.add(styles.topFlip);
 				bottomFlip.classList.add(styles.bottomFlip);
 
@@ -53,7 +45,6 @@ function Counter({
 				topFlip.addEventListener("animationstart", () => {
 					console.log("next top", nextValue);
 					topHalf1.textContent = String(nextValue);
-					topHalf2.textContent = String(currentValue);
 				});
 
 				topFlip.addEventListener("animationend", () => {
@@ -63,7 +54,7 @@ function Counter({
 				bottomFlip.addEventListener("animationend", () => {
 					console.log("next bottom", nextValue);
 					bottomHalf1.textContent = String(nextValue);
-					bottomHalf2.textContent = String(currentValue);
+
 					bottomFlip.remove();
 				});
 
@@ -77,14 +68,26 @@ function Counter({
 
 	useEffect(() => {
 		if (flipCardRef2.current) {
-			updateFlipCard(flipCardRef1, number, (number + 1) % 10);
+			updateFlipCard(
+				{
+					flipCardRef: flipCardRef1,
+					topRef: topRef1,
+					bottomRef: bottomRef1,
+				},
+				number,
+				(number + 1) % 10
+			);
 
 			if (Math.floor(startNumber / 9) === 0 || startNumber <= 0) {
 				flipCardRef2.current.style.display = "none";
 			} else {
 				flipCardRef2.current.style.display = "inline-flex";
 				updateFlipCard(
-					flipCardRef2,
+					{
+						flipCardRef: flipCardRef2,
+						topRef: topRef2,
+						bottomRef: bottomRef2,
+					},
 					Math.floor(startNumber / 10),
 					Math.floor((startNumber + 1) / 10)
 				);
