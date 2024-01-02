@@ -8,13 +8,7 @@ Counter.propTypes = {
 	setNumber: PropTypes.func.isRequired,
 };
 
-function Counter({
-	startNumber,
-	setNumber,
-}: {
-	startNumber: number;
-	setNumber: any;
-}) {
+function Counter({ startNumber }: { startNumber: number }) {
 	const flipCardRef1 = useRef<HTMLDivElement>(null);
 	const flipCardRef2 = useRef<HTMLDivElement>(null);
 	const topRef1 = useRef<HTMLDivElement>(null);
@@ -75,7 +69,7 @@ function Counter({
 					bottomRef: bottomRef1,
 				},
 				number,
-				(number + 1) % 10
+				number % 10
 			);
 
 			if (Math.floor(startNumber / 9) === 0 || startNumber <= 0) {
@@ -95,10 +89,6 @@ function Counter({
 		}
 	}, [startNumber, updateFlipCard, number]);
 
-	const handleClick = () => {
-		setNumber((prevNumber: number) => (prevNumber + 1) % 100);
-	};
-
 	return (
 		<div className={styles.main}>
 			{/* tens digit */}
@@ -111,8 +101,6 @@ function Counter({
 				<div className={styles.top} ref={topRef1}></div>
 				<div className={styles.bottom} ref={bottomRef1}></div>
 			</div>
-
-			<button onClick={handleClick}>increase</button>
 		</div>
 	);
 }
