@@ -32,7 +32,7 @@ function Counter({ startNumber }: { startNumber: number }) {
 
 				bottomHalf1.textContent = String(currentValue);
 
-				topFlip.textContent = String("X");
+				topFlip.textContent = String(currentValue);
 				bottomFlip.textContent = String(nextValue);
 
 				topFlip.addEventListener("animationstart", () => {
@@ -68,7 +68,7 @@ function Counter({ startNumber }: { startNumber: number }) {
 					bottomRef: bottomRef1,
 				},
 				number,
-				number % 10
+				number == 9 ? 0 : (number % 10) + 1
 			);
 
 			if (Math.floor(startNumber / 9) === 0 || startNumber <= 0) {
