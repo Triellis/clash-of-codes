@@ -1,4 +1,3 @@
-import { update } from "@/app/util/userSlice";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef } from "react";
@@ -6,7 +5,6 @@ import styles from "./Counter.module.css";
 
 Counter.propTypes = {
 	startNumber: PropTypes.number.isRequired,
-	// setNumber: PropTypes.func.isRequired,
 };
 
 function Counter({ startNumber }: { startNumber: number }) {
@@ -32,9 +30,9 @@ function Counter({ startNumber }: { startNumber: number }) {
 				topFlip.classList.add(styles.topFlip);
 				bottomFlip.classList.add(styles.bottomFlip);
 
-			bottomHalf1.textContent = String(currentValue);
+				bottomHalf1.textContent = String(nextValue);
 
-				topFlip.textContent = String(currentValue);
+				topFlip.textContent = String(nextValue);
 				bottomFlip.textContent = String(nextValue);
 
 				topFlip.addEventListener("animationstart", () => {
