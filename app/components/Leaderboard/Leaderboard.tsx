@@ -55,24 +55,7 @@ function Scorecard({
 	);
 }
 
-function LeaderboardEntry({
-	props,
-	entry,
-	rankDiff,
-}: // animation,
-{
-	props: any;
-	entry: any;
-	rankDiff?: number;
-	// animation?: any;
-}) {
-	// going up transition:
-	// const transition = {
-	// 	type: "spring",
-	// 	stiffness: 260,
-	// 	damping: 20,
-	// };
-
+function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
 	return (
 		// <MotionDiv {...props} transition={transition} animate={animation}>
 		<div {...props}>
@@ -86,10 +69,8 @@ function LeaderboardEntry({
 
 export default function Leaderboard({
 	fetchedData,
-	oldData,
 }: {
 	fetchedData: LiveBoardTeam;
-	oldData?: LiveBoardTeam;
 }) {
 	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
 	const clans = Object.keys(fetchedData);
@@ -129,26 +110,10 @@ export default function Leaderboard({
 
 	if (leftClan) {
 		entries1 = leftClan.map((entry, index) => {
-			let diff = 0;
-			if (oldData) {
-				let oldRank = entry.rank;
-				for (let i = 0; i < oldData[leftClanName].length; i++) {
-					if (oldData[leftClanName][i].name === entry.name) {
-						oldRank = oldData[leftClanName][i].rank;
-						break;
-					}
-				}
-				diff = oldRank - entry.rank;
-			}
-
 			return (
 				<LeaderboardEntry
-					rankDiff={diff}
 					props={{
-						className: classNames(
-							styles.tableEntry,
-							styles.highlighted ? diff != 0 : ""
-						),
+						className: classNames(styles.tableEntry),
 					}}
 					entry={entry}
 					key={index}
@@ -159,28 +124,14 @@ export default function Leaderboard({
 
 	if (rightClan) {
 		entries2 = rightClan.map((entry, index) => {
-			let diff = 0;
-			if (oldData) {
-				let oldRank = entry.rank;
-				for (let i = 0; i < oldData[rightClanName].length; i++) {
-					if (oldData[rightClanName][i].name === entry.name) {
-						oldRank = oldData[rightClanName][i].rank;
-						break;
-					}
-				}
-				diff = oldRank - entry.rank;
-			}
-
 			return (
 				<LeaderboardEntry
 					props={{
 						className: classNames(
 							styles.tableEntry,
-							styles.tableEntryRight,
-							styles.highlighted ? diff != 0 : ""
+							styles.tableEntryRight
 						),
 					}}
-					rankDiff={diff}
 					entry={entry}
 					key={index}
 				/>
