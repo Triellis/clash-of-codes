@@ -1,41 +1,46 @@
 body {
-  letter-spacing: 1px;
+	letter-spacing: 1px;
 }
 @font-face {
-  font-family: "supercell"; /* Choose a name for your font */
-  src: url("./supercell-magic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+	font-family: "supercell"; /* Choose a name for your font */
+	src: url("./supercell-magic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
 #root {
-  padding-bottom: 1em;
-  padding-inline: 1em;
+	padding-bottom: 1em;
+	padding-inline: 1em;
 }
 
 option {
-  background-color: var(--chakra-colors-gray-800) !important;
-  border: none !important;
-  border-radius: none !important;
+	background-color: var(--chakra-colors-gray-800) !important;
+	border: none !important;
+	border-radius: none !important;
 }
 
 /* sticky nav: */
 .nav {
-  position: sticky;
-  width: 100%;
-  top: 0px;
-  z-index: 10;
-  backdrop-filter: blur(10px);
+	position: sticky;
+	width: 100%;
+	top: 0px;
+	z-index: 10;
+	backdrop-filter: blur(10px);
+}
+
+.logo {
+	color: var(--chakra-colors-yellow-300);
+	text-shadow: red 2px 2px 0px;
 }
 
 /* for the scroll bar */
 ::-webkit-scrollbar {
-  width: 15px;
-  border-radius: 8px; /* Add rounded corners */
+	width: 15px;
+	border-radius: 8px; /* Add rounded corners */
 }
 ::-webkit-scrollbar-track {
-  background: var(--chakra-colors-gray-800);
+	background: var(--chakra-colors-gray-800);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--chakra-colors-gray-600);
-  border-radius: 5px; /* Add rounded corners */
+	background: var(--chakra-colors-gray-600);
+	border-radius: 5px; /* Add rounded corners */
 }

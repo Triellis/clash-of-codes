@@ -12,7 +12,7 @@ export default function Logo() {
 			justifyContent={"center"}
 			alignItems={"center"}
 			display={"flex"}
-			className={styles.logo}
+			className="logo"
 		>
 			Clash OF Codes
 		</Heading>

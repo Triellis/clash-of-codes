@@ -1,0 +1,284 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+/* top score: */
+.mainScore {
+	border-radius: 16px;
+	padding-inline: 32px;
+	padding-block: 32px;
+
+	border: 1px solid #000;
+	background: var(--gray-800, #1a202c);
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.logo {
+	font-size: 24px;
+}
+
+.mainScoreTitle {
+	font-size: 24px;
+	display: grid;
+	grid-template-columns: 2fr auto 2fr;
+	align-items: center;
+	justify-content: center;
+	gap: 22px;
+	text-align: center;
+}
+.highlighted {
+	background-color: red !important;
+}
+.name {
+	flex: 2;
+}
+.score {
+	font-size: 36px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	text-align: center;
+	gap: 15px;
+	flex: 1;
+}
+
+.score > * {
+	display: flex;
+	width: 3ch;
+}
+.score > :nth-child(1) {
+	justify-content: flex-end;
+}
+.score > :nth-child(2) {
+	width: auto;
+}
+.score > :nth-child(3) {
+	justify-content: flex-start;
+}
+
+/* remaining scoreboard */
+
+.board {
+	display: flex;
+	flex-direction: row;
+	font-size: 14px;
+	position: relative;
+	margin-top: -90px;
+	z-index: -2;
+	width: 100%;
+	justify-content: center;
+
+	border-radius: 16px;
+}
+
+.sb1,
+.sb2 {
+	display: flex;
+	padding: 96px 26px 16px 26px;
+	flex-direction: column;
+
+	align-items: flex-start;
+
+	align-self: stretch;
+
+	height: inherit;
+
+	border-radius: 16px 0px 0px 16px;
+	border: 1px solid #000;
+	width: 400px;
+}
+
+.sb2 {
+	border-radius: 0px 16px 16px 0px;
+}
+
+.RG {
+	background: var(--red-900, #63171b);
+}
+.PP {
+	background: var(--purple-800, #44337a);
+}
+.BW {
+	background: var(--blue-900, #304262);
+}
+.YB {
+	background: var(--yellow-900, #6d441c);
+}
+
+.death {
+	background: linear-gradient(176deg, #fff -30.47%, #000 176.58%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 16px;
+	width: 7ch;
+	font-weight: 500;
+}
+
+.tableHeader,
+.tableEntry {
+	display: flex;
+	padding: 10px 8px;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 32px;
+	align-self: stretch;
+	text-align: right;
+
+	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
+}
+
+.tableHeaderRight {
+	flex-direction: row-reverse;
+}
+
+.tableHeaderRight > .death {
+	text-align: left;
+}
+
+.tableEntryRight {
+	justify-content: flex-start;
+	text-align: left;
+	flex-direction: row-reverse;
+	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
+}
+
+.tableHeaderRight > .points {
+	text-align: left;
+}
+
+/* for responsive design: */
+@media (max-width: 390px) {
+	.mainScore {
+		padding-inline: 10px;
+		padding-block: 20px;
+		width: 90%;
+	}
+
+	.mainScoreTitle {
+		gap: 10px;
+	}
+	.mainScoreTitle,
+	.logo {
+		font-size: 16px;
+	}
+	.score {
+		font-size: 20px;
+	}
+
+	.death,
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 10px;
+	}
+
+	.death {
+		width: 4ch;
+	}
+
+	.tableHeader > :nth-child(1) {
+		display: none;
+	}
+
+	.sb1,
+	.sb2 {
+		padding: 96px 5px 5px 5px;
+	}
+}
+
+@media (min-width: 390px) and (max-width: 520px) {
+	.mainScore {
+		padding: 20px;
+	}
+
+	.logo {
+		font-size: 18px;
+	}
+
+	.mainScoreTitle {
+		font-size: 18px;
+		gap: 16px;
+	}
+
+	.score {
+		font-size: 24px;
+	}
+
+	.death {
+		font-size: 10px;
+		width: 55px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 16px;
+	}
+
+	.sb1,
+	.sb2 {
+		padding: 96px 5px 5px 5px;
+	}
+}
+
+@media (min-width: 520px) and (max-width: 768px) {
+	.mainScore {
+		padding: 20px;
+	}
+	.logo {
+		font-size: 20px;
+	}
+	.mainScoreTitle {
+		gap: 16px;
+	}
+
+	.score {
+		font-size: 26px;
+	}
+	.death {
+		font-size: 10px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 10px;
+		gap: 10px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 845px) {
+	.mainScore {
+		padding: 20px;
+		gap: 16px;
+	}
+
+	.mainScoreTitle {
+		font-size: 25px;
+		gap: 16px;
+	}
+
+	.score {
+		font-size: 25px;
+	}
+
+	.death {
+		font-size: 14px;
+	}
+
+	.tableHeader,
+	.tableEntry {
+		font-size: 14px;
+		gap: 20px;
+	}
+}

@@ -1,37 +1,25 @@
 "use client";
 
-import React from "react";
-import Logo from "../components/Logo/Logo";
-import NavBar from "../components/NavBar/NavBar";
-import NavItem from "../components/NavItem/NavItem";
+import { Button, Flex, Input } from "@chakra-ui/react";
+import React, { useState } from "react";
+import Counter from "../components/Counter/Counter";
+
 import styles from "./page.module.css";
-import { Flex } from "@chakra-ui/react";
-import { customFetch, getServerUrl, getUserData } from "../util/functions";
 
 export default function Test() {
-	const [isOpen, setIsOpen] = React.useState(false);
+	const [number, setNumber] = useState(1);
+
 	return (
 		<main className={styles.main}>
-			<button
-				onClick={async () => {
-					const dummyContest = {
-						Team1: "BW",
-						Team2: "YB",
-						ContestCode: "12345",
-						Live: true,
-					};
+			<Counter startNumber={number} />
 
-					const res = await customFetch(`admin/config`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(dummyContest),
-					});
+			<Button
+				onClick={(e) => {
+					setNumber(number + 1);
 				}}
 			>
-				Click
-			</button>
+				+
+			</Button>
 		</main>
 	);
 }

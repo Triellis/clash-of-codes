@@ -1,0 +1,24 @@
+.heading {
+	font-size: 16px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 23px;
+}
+
+.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	gap: 16px;
+	margin-top: 16px;
+}
+
+/*! KEPT IT ON NONE FOR TESTING PURPOSES ONLY! */
+.tabs {
+	/* display: none	; */
+}

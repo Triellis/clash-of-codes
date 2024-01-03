@@ -2,32 +2,32 @@ import { ObjectId } from "mongodb";
 
 export type Clan = "BW" | "RG" | "YB" | "PP";
 export type Role =
-	| "Admin"
-	| "Elder"
-	| "Member"
-	| "Leader"
-	| "CoLeader"
-	| "User";
+  | "Admin"
+  | "Elder"
+  | "Member"
+  | "Leader"
+  | "CoLeader"
+  | "User";
 
 export interface ContestCol {
-	_id?: ObjectId;
-	Team1: Clan;
-	Team2: Clan;
-	ContestCode: string;
-	DateAdded: Date;
-	Live: boolean;
+  _id?: ObjectId;
+  Team1: Clan;
+  Team2: Clan;
+  ContestCode: string;
+  DateAdded: Date;
+  Live: boolean;
 }
 
 export type UserCol = {
-	_id?: ObjectId;
-	name: String;
-	email: String;
-	role: Role;
-	clan: null | Clan;
-	visits: number;
-	createdAt: Date;
-	lastVisit: Date;
-	cfUsername?: string;
+  _id?: ObjectId;
+  name: String;
+  email: String;
+  role: Role;
+  clan: null | Clan;
+  visits: number;
+  createdAt: Date;
+  lastVisit: Date;
+  cfUsername?: string;
 };
 
 export type UserOnClient = Omit<UserCol, "visits" | "createdAt" | "lastVisit">;
@@ -39,3 +39,27 @@ export type AddUserAction = {
   value: string | Clan | Role;
   type: "UPDATE" | "RESET";
 };
+
+export type CFAPIResponse = {
+  rank: number;
+  points: number;
+  penalty: number;
+  username: string;
+};
+
+type ModifiedCFResponse = {
+  name: string;
+  cfUsername: string;
+} & Omit<CFAPIResponse, "username">;
+
+export type LiveBoardTeam = {
+  [key in Clan]: ModifiedCFResponse[];
+};
+
+export type LiveLeaderboard = LiveBoardTeam[];
+
+export type TabsType = {
+  label: string;
+  value: string;
+  color?: string;
+}[];

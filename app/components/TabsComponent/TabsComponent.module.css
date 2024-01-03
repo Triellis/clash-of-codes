@@ -1,0 +1,6 @@
+.indicator {
+	border-radius: 10px;
+	background-color: #f6e05e;
+	z-index: -1;
+	height: calc(100% - 18px);
+}
