@@ -24,8 +24,6 @@ function Counter({ startNumber }: { startNumber: number }) {
 			const topFlip = document.createElement("div");
 			const bottomFlip = document.createElement("div");
 
-			console.log("vals", currentValue, nextValue);
-
 			if (topHalf1 && bottomHalf1 && topFlip && bottomFlip) {
 				topFlip.classList.add(styles.topFlip);
 				bottomFlip.classList.add(styles.bottomFlip);
@@ -36,7 +34,6 @@ function Counter({ startNumber }: { startNumber: number }) {
 				bottomFlip.textContent = String(nextValue);
 
 				topFlip.addEventListener("animationstart", () => {
-					console.log("next top", nextValue);
 					topHalf1.textContent = String(nextValue);
 				});
 
@@ -45,7 +42,6 @@ function Counter({ startNumber }: { startNumber: number }) {
 				});
 
 				bottomFlip.addEventListener("animationend", () => {
-					console.log("next bottom", nextValue);
 					bottomHalf1.textContent = String(nextValue);
 
 					bottomFlip.remove();
@@ -67,13 +63,13 @@ function Counter({ startNumber }: { startNumber: number }) {
 					topRef: topRef1,
 					bottomRef: bottomRef1,
 				},
-				number,
-				number == 9 ? 0 : (number % 10) + 1
+				number !== 0 ? number - 1 : 9,
+				number == 10 ? 0 : number % 10
 			);
 
 			if (Math.floor(startNumber / 9) === 0 || startNumber <= 0) {
 				flipCardRef2.current.style.display = "none";
-			} else {
+			} else if (number != 9) {
 				flipCardRef2.current.style.display = "inline-flex";
 				updateFlipCard(
 					{
@@ -81,8 +77,8 @@ function Counter({ startNumber }: { startNumber: number }) {
 						topRef: topRef2,
 						bottomRef: bottomRef2,
 					},
-					Math.floor(startNumber / 10),
-					Math.floor((startNumber + 1) / 10)
+					Math.floor((startNumber - 1) / 10),
+					Math.floor(startNumber / 10)
 				);
 			}
 		}
