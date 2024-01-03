@@ -45,7 +45,7 @@
 .score {
 	font-size: 36px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	text-align: center;
 	gap: 15px;
@@ -53,16 +53,17 @@
 }
 
 .score > * {
-	width: 75px;
+	display: flex;
+	width: 3ch;
 }
 .score > :nth-child(1) {
-	text-align: right;
+	justify-content: flex-end;
 }
 .score > :nth-child(2) {
 	width: auto;
 }
 .score > :nth-child(3) {
-	text-align: left;
+	justify-content: flex-start;
 }
 
 /* remaining scoreboard */
