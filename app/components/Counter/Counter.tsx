@@ -30,9 +30,9 @@ function Counter({ startNumber }: { startNumber: number }) {
 				topFlip.classList.add(styles.topFlip);
 				bottomFlip.classList.add(styles.bottomFlip);
 
-				bottomHalf1.textContent = String(nextValue);
+				bottomHalf1.textContent = String(currentValue);
 
-				topFlip.textContent = String(nextValue);
+				topFlip.textContent = String("X");
 				bottomFlip.textContent = String(nextValue);
 
 				topFlip.addEventListener("animationstart", () => {
