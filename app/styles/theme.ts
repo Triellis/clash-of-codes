@@ -167,7 +167,7 @@ const Tabs = {
 	variants: {
 		default: {
 			tab: {
-				width: "maxContent",
+				width: "11ch",
 				fontSize: "14px",
 				borderRadius: "10px",
 				paddingBlock: "12px",

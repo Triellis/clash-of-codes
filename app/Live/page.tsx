@@ -41,17 +41,17 @@ const WebSocketComponent = () => {
 	let [tabs, setTabs] = useState([
 		{
 			value: "Loading...",
-			label: "Loading... Vs Loading... ",
+			label: "Loading Contests ",
 			index: 0,
 		},
 		{
-			value: "Loading...1",
-			label: "Loading... Vs Loading... ",
+			value: "Loading1...",
+			label: "Loading Contests ",
 			index: 0,
 		},
 		{
-			value: "Loading...2",
-			label: "Loading... Vs Loading... ",
+			value: "Loading2...",
+			label: "Loading Contests ",
 			index: 0,
 		},
 	]);
