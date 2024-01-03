@@ -41,15 +41,13 @@ function Scorecard({
 			</div>
 
 			<div className={styles.score}>
-				<div>
-					<Counter startNumber={score1} />
-				</div>
+				<Counter startNumber={score1} />
+
 				<div>
 					<SpecialTxt> - </SpecialTxt>
 				</div>
-				<div>
-					<Counter startNumber={score2} />
-				</div>
+
+				<Counter startNumber={score2} />
 			</div>
 		</div>
 	);
