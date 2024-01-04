@@ -69,18 +69,18 @@ function Counter({ startNumber }: { startNumber: number }) {
 
 			if (Math.floor(startNumber / 9) === 0 || startNumber <= 0) {
 				flipCardRef2.current.style.display = "none";
-			} else if (number != 9) {
-				flipCardRef2.current.style.display = "inline-flex";
-				updateFlipCard(
-					{
-						flipCardRef: flipCardRef2,
-						topRef: topRef2,
-						bottomRef: bottomRef2,
-					},
-					Math.floor((startNumber - 1) / 10),
-					Math.floor(startNumber / 10)
-				);
 			}
+
+			flipCardRef2.current.style.display = "inline-flex";
+			updateFlipCard(
+				{
+					flipCardRef: flipCardRef2,
+					topRef: topRef2,
+					bottomRef: bottomRef2,
+				},
+				Math.floor((startNumber - 1) / 10),
+				Math.floor(startNumber / 10)
+			);
 		}
 	}, [startNumber, updateFlipCard, number]);
 
