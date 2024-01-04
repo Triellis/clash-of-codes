@@ -10,6 +10,7 @@ import {
 	useColorModeValue,
 	VisuallyHidden,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { ReactNode } from "react";
 import Github from "../../styles/Icons/Github";
 import styles from "./Footer.module.css";
@@ -71,8 +72,9 @@ export default function Footer() {
 	return (
 		<Box
 			// bg={useColorModeValue("gray.50", "gray.900")}
-			bg="gray"
+			bg="gray.800"
 			// color={useColorModeValue("gray.700", "gray.200")}
+			fontFamily={"sans-serif"}
 		>
 			<Container
 				as={Stack}
@@ -85,12 +87,12 @@ export default function Footer() {
 				{/* Triellis logo here */}
 				{/* <Logo /> */}
 				<Stack direction={"row"} spacing={6}>
-					<Box as="a" href={"#"}>
+					{/* <Box as="a" href={"#"}>
 						Jeel Rajodiya
 					</Box>
 					<Box as="a" href={"#"}>
 						Sarthak Siddhpura
-					</Box>
+					</Box> */}
 				</Stack>
 			</Container>
 
@@ -103,21 +105,36 @@ export default function Footer() {
 					as={Stack}
 					maxW={"6xl"}
 					py={4}
-					direction={{ base: "column", md: "row" }}
-					spacing={4}
-					justify={{ base: "center", md: "space-between" }}
-					align={{ base: "center", md: "center" }}
+					direction={{ base: "row" }}
+					justify={"space-between"}
+					align={"center"}
 				>
-					<Text>© 2022 Chakra Templates. All rights reserved</Text>
+					<Text>© 2024 </Text>
+
+					<Stack direction={"row"} textAlign={"center"}>
+						<Link
+							href={"https://www.linkedin.com/in/zeel-rajodiya/"}
+							target="_blank"
+							className={styles.share}
+						>
+							Jeel Rajodiya
+						</Link>
+
+						<Text>|</Text>
+
+						<Link
+							href={
+								"https://www.linkedin.com/in/sarthak-siddhpura-544389257/"
+							}
+							target="_blank"
+							className={styles.share}
+						>
+							Sarthak Siddhpura
+						</Link>
+					</Stack>
+
 					<Stack direction={"row"} spacing={6}>
-						<IconButton
-							isRound={true}
-							variant="solid"
-							colorScheme="teal"
-							aria-label="Done"
-							fontSize="16px"
-							icon={<Github />}
-						/>
+						<Github />
 					</Stack>
 				</Container>
 			</Box>
