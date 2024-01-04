@@ -1,5 +1,9 @@
 body {
 	letter-spacing: 1px;
+	user-select: none;
+}
+* {
+	-webkit-tap-highlight-color: transparent;
 }
 @font-face {
 	font-family: "supercell"; /* Choose a name for your font */

@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import TabsComponent from "../components/TabsComponent";
 import Live from "../styles/Icons/Live";
-import { fullForm } from "../util/functions";
+import { fullForm, getSocketsUrl } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
 function useWindowSizeMobile() {
@@ -81,7 +81,7 @@ const WebSocketComponent = () => {
 
 	useEffect(() => {
 		// Establish WebSocket connection
-		const ws = new WebSocket("ws://localhost:3001");
+		const ws = new WebSocket(getSocketsUrl(""));
 
 		// Set up event listeners
 		ws.addEventListener("open", () => {
