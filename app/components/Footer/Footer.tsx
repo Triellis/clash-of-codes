@@ -75,6 +75,7 @@ export default function Footer() {
 			bg="gray.800"
 			// color={useColorModeValue("gray.700", "gray.200")}
 			fontFamily={"sans-serif"}
+			className={styles.main}
 		>
 			<Container
 				as={Stack}

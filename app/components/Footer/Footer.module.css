@@ -6,3 +6,9 @@
 	color: #0070f3;
 	cursor: pointer;
 }
+
+.main {
+	/* for the footer to always stay in the bottom */
+	margin-top: 1em;
+	bottom: 0;
+}
