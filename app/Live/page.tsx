@@ -6,6 +6,7 @@ import Live from "../styles/Icons/Live";
 import { fullForm, getSocketsUrl } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
+import { Box } from "@chakra-ui/react";
 function useWindowSizeMobile() {
 	// Initialize state with undefined width/height so server and client renders match
 	// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -36,6 +37,7 @@ function useWindowSizeMobile() {
 }
 const WebSocketComponent = () => {
 	const [leaderboardArr, setLeaderboardArr] = useState<LiveLeaderboard>([]);
+	const [isLive, setIsLive] = useState<boolean>(true);
 
 	const [tabIndex, setTabIndex] = useState(0);
 	let [tabs, setTabs] = useState([
@@ -90,6 +92,9 @@ const WebSocketComponent = () => {
 		ws.addEventListener("message", (event) => {
 			try {
 				const receivedMessage = JSON.parse(event.data);
+				if (receivedMessage.length === 0) {
+					setIsLive(false);
+				}
 
 				setLeaderboardArr(receivedMessage);
 			} catch (err) {
@@ -109,12 +114,14 @@ const WebSocketComponent = () => {
 			ws.close();
 		};
 	}, []); // Empty dependency array means this effect runs once on mount\
-	if (leaderboardArr.length === 0) {
+	if (!isLive) {
 		return (
 			<div className={styles.main}>
-				<div className={styles.heading}>
-					The Contests has not started !
-				</div>
+				<Box fontSize={24}>Battle is yet to begin ...</Box>
+				<Box color={"gray.500"} fontSize={14}>
+					The Live leaderboard will display once the contest starts.
+					Stay Tuned!{" "}
+				</Box>
 			</div>
 		);
 	}
