@@ -135,7 +135,14 @@ export default function Footer() {
 					</Stack>
 
 					<Stack direction={"row"} spacing={6}>
-						<Github />
+						<Link
+							href={
+								"https://github.com/JeelRajodiya/clash-of-codes"
+							}
+							target="_blank"
+						>
+							<Github />
+						</Link>
 					</Stack>
 				</Container>
 			</Box>
