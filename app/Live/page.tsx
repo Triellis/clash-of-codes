@@ -109,7 +109,15 @@ const WebSocketComponent = () => {
 			ws.close();
 		};
 	}, []); // Empty dependency array means this effect runs once on mount\
-
+	if (leaderboardArr.length === 0) {
+		return (
+			<div className={styles.main}>
+				<div className={styles.heading}>
+					The Contests has not started !
+				</div>
+			</div>
+		);
+	}
 	return (
 		<div className={styles.main}>
 			<div className={styles.heading}>
