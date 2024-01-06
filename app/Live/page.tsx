@@ -92,8 +92,11 @@ const WebSocketComponent = () => {
 		ws.addEventListener("message", (event) => {
 			try {
 				const receivedMessage = JSON.parse(event.data);
+				console.log(receivedMessage);
 				if (receivedMessage.length === 0) {
 					setIsLive(false);
+				} else {
+					setIsLive(true);
 				}
 
 				setLeaderboardArr(receivedMessage);
