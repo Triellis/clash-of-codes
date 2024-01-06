@@ -1,7 +1,9 @@
 "use client";
 
+import Triellis from "@/app/styles/Icons/Triellis";
 import {
 	Box,
+	Center,
 	chakra,
 	Container,
 	IconButton,
@@ -78,23 +80,15 @@ export default function Footer() {
 			className={styles.main}
 		>
 			<Container
-				as={Stack}
 				maxW={"6xl"}
-				py={4}
-				spacing={4}
-				justify={"center"}
-				align={"center"}
+				py={1}
+				display={"flex"}
+				justifyContent={"center"}
 			>
-				{/* Triellis logo here */}
-				{/* <Logo /> */}
-				<Stack direction={"row"} spacing={6}>
-					{/* <Box as="a" href={"#"}>
-						Jeel Rajodiya
-					</Box>
-					<Box as="a" href={"#"}>
-						Sarthak Siddhpura
-					</Box> */}
-				</Stack>
+				<Center gap={"1em"}>
+					<Triellis />
+					<div className={styles.companyName}>TRIELLIS</div>
+				</Center>
 			</Container>
 
 			<Box
@@ -105,7 +99,7 @@ export default function Footer() {
 				<Container
 					as={Stack}
 					maxW={"6xl"}
-					py={4}
+					py={1}
 					direction={{ base: "row" }}
 					justify={"space-between"}
 					align={"center"}
@@ -131,6 +125,18 @@ export default function Footer() {
 							className={styles.share}
 						>
 							Sarthak Siddhpura
+						</Link>
+
+						<Text>|</Text>
+
+						<Link
+							href={
+								"https://www.linkedin.com/in/malaypatelau/?originalSubdomain=in"
+							}
+							target="_blank"
+							className={styles.share}
+						>
+							Malay Patel
 						</Link>
 					</Stack>
 
