@@ -98,6 +98,11 @@
 	width: 400px;
 }
 
+.sb1 > .tableEntry,
+.sb2 > .tableEntry {
+	margin-top: auto;
+}
+
 .sb2 {
 	border-radius: 0px 16px 16px 0px;
 }
