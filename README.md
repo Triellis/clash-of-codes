@@ -1,13 +1,22 @@
-# About Clash of Codes
+# Live Demo and Screenshots 
+ Link - https://clash-of-codes-five.vercel.app/
 
+![image](https://github.com/Triellis/clash-of-codes/assets/63534268/a01af4dd-905b-4dfa-bf0c-ad88ad3e8613)
+![image](https://github.com/Triellis/clash-of-codes/assets/63534268/d4537369-01bb-4432-95db-238aaf5dc543)
+![image](https://github.com/Triellis/clash-of-codes/assets/63534268/83b46be1-35b6-463c-ac3a-0fc89c0ab570)
+
+
+
+# About Clash of Codes
 [Clash of codes](https://www.instagram.com/p/C1OmnG1N8iX/?img_index=6) is a game organized by the Programming club of Ahmadabad University. The game is hosted on [codeforces](https://codeforces.com) however, codeforces lacks an aesthetically pleasing UI. Using the codeforces API this project fetches the standings of an ongoing contest and displays them in a proper manner.
 
 # About this Repository
+This Repository contains the code for the frontend of the project.
 
-This repo contains the code for the frontend of the project.
+# Figma 
+Figam designs of the project can be found [here](https://www.figma.com/file/8Jqo9Ip6sdtqdTHBVHBZkR/Leaderboard---simple?type=design&node-id=2103%3A104&mode=design&t=lANkvrsxPyT3HGNA-1)
 
 # Backend
-
 Backend is made using express and is hosted on render. The code for the backend can be found [here](https://github.com/Triellis/clash-of-codes-api)
 
 ## Getting Started
