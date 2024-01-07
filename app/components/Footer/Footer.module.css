@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=New+Rocker&family=Ubuntu:wght@300&display=swap");
 .share {
 	text-decoration: underline;
 }
@@ -13,9 +13,32 @@
 	/* for the footer to always stay in the bottom */
 	margin-top: 1em;
 	bottom: 0;
+	padding: 16px 128px;
 }
 
 .companyName {
-	font-size: 25px;
 	font-family: "Zen Tokyo Zoo", system-ui;
+	color: #50cbff;
+}
+.creator {
+	font-family: "Ubuntu";
+	color: white;
+}
+
+.links {
+	text-decoration: underline;
+}
+.GHIcon {
+	opacity: 0.5;
+}
+
+.GHIcon:hover {
+	opacity: 1;
+}
+
+@media (max-width: 767px) {
+	.main {
+		padding: 16px 12px;
+		font-size: 10px;
+	}
 }
