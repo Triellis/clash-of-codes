@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=New+Rocker&family=Ubuntu:wght@300&display=swap");
-.share {
-	text-decoration: underline;
-}
-
-.share:hover {
-	color: #0070f3;
-	cursor: pointer;
-}
 
 .main {
 	/* for the footer to always stay in the bottom */
@@ -21,12 +13,17 @@
 	color: #50cbff;
 }
 .creator {
-	font-family: "Ubuntu";
-	color: white;
+	color: rgb(255, 255, 255);
+	font-weight: 600;
 }
 
 .links {
 	text-decoration: underline;
+}
+
+.links:hover {
+	color: #0070f3;
+	cursor: pointer;
 }
 .GHIcon {
 	opacity: 0.5;
@@ -35,10 +32,28 @@
 .GHIcon:hover {
 	opacity: 1;
 }
-
+.specialThanks {
+	color: rgba(255, 255, 255, 0.473);
+	font-size: 12px;
+}
+.specialThanks,
+.creator {
+	font-family: "Ubuntu";
+	letter-spacing: -0.01em;
+}
 @media (max-width: 767px) {
 	.main {
 		padding: 16px 12px;
 		font-size: 10px;
+	}
+	.creator {
+		font-size: 11px;
+	}
+	.specialThanks {
+		font-size: 10px;
+	}
+	.creator,
+	.specialThanks {
+		letter-spacing: 0.01em;
 	}
 }

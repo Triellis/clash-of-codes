@@ -47,24 +47,32 @@ export default function Footer() {
 						<span style={{ fontFamily: "sans-serif" }}>©2024 </span>
 					</Flex>
 				</Flex>
-				<span className={styles.creator}>
-					Created by{" "}
-					<a
-						className={styles.links}
-						href="https://www.linkedin.com/in/zeel-rajodiya"
-						target="_blank"
-					>
-						Zeel Rajodiya
-					</a>{" "}
-					|{"  "}
-					<a
-						className={styles.links}
-						href="https://www.linkedin.com/in/sarthak-siddhpura-544389257"
-						target="_blank"
-					>
-						Sarthak Siddhpura
-					</a>
-				</span>
+				<Flex direction={"column"} gap={1}>
+					<span className={styles.creator}>
+						Created by{" "}
+						<a
+							className={styles.links}
+							href="https://www.linkedin.com/in/zeel-rajodiya"
+							target="_blank"
+						>
+							Zeel Rajodiya
+						</a>{" "}
+						|{"  "}
+						<a
+							className={styles.links}
+							href="https://www.linkedin.com/in/sarthak-siddhpura-544389257"
+							target="_blank"
+						>
+							Sarthak Siddhpura
+						</a>
+					</span>
+					<span className={styles.specialThanks}>
+						Special thanks to{" "}
+						<a href="" target="_blank" className={styles.links}>
+							Malay Patel
+						</a>
+					</span>
+				</Flex>
 			</Flex>
 		</Box>
 	);
