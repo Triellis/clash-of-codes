@@ -1,6 +1,6 @@
 # About Clash of Codes
 
-Clash of codes is a game organized by the programming club of Ahmadabad University. The game is hosted on [codeforces](https://codeforces.com) however, codeforces lacks an aesthetically pleasing UI. Using the codeforces API this project fetches the standings of an ongoing contest and displays them in a proper manner.
+[Clash of codes](https://www.instagram.com/p/C1OmnG1N8iX/?img_index=6) is a game organized by the Programming club of Ahmadabad University. The game is hosted on [codeforces](https://codeforces.com) however, codeforces lacks an aesthetically pleasing UI. Using the codeforces API this project fetches the standings of an ongoing contest and displays them in a proper manner.
 
 # About this Repository
 
@@ -12,16 +12,16 @@ Backend is made using express and is hosted on render. The code for the backend 
 
 ## Getting Started
 
-First, run the development server:
+After cloning the repo, install the dependencies using
+
+```bash
+npm install
+```
+
+run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
