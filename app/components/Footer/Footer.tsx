@@ -39,7 +39,7 @@ export default function Footer() {
 						direction={"column"}
 					>
 						<a
-							href="https://github.com/JeelRajodiya/clash-of-codes"
+							href="https://github.com/Triellis/clash-of-codes"
 							target="_blank"
 						>
 							<Github className={styles.GHIcon} />
@@ -68,7 +68,11 @@ export default function Footer() {
 					</span>
 					<span className={styles.specialThanks}>
 						Special thanks to{" "}
-						<a href="" target="_blank" className={styles.links}>
+						<a
+							href="https://www.linkedin.com/in/malaypatelau"
+							target="_blank"
+							className={styles.links}
+						>
 							Malay Patel
 						</a>
 					</span>
