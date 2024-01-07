@@ -13,6 +13,9 @@
 # About this Repository
 This Repository contains the code for the frontend of the project.
 
+# Figma 
+Figam designs of the project can be found [here](https://www.figma.com/file/8Jqo9Ip6sdtqdTHBVHBZkR/Leaderboard---simple?type=design&node-id=2103%3A104&mode=design&t=lANkvrsxPyT3HGNA-1)
+
 # Backend
 Backend is made using express and is hosted on render. The code for the backend can be found [here](https://github.com/Triellis/clash-of-codes-api)
 
