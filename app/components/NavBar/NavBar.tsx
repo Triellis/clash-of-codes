@@ -100,8 +100,9 @@ export default function NavBar({}: // isOpen = false,
 					/>
 				))}
 			</div>
-
-			<LoginBtn />
+			<div className={styles.login}>
+				<LoginBtn />
+			</div>
 		</nav>
 	);
 }
