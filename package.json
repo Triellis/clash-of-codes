@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "next": "14.0.3",
+    "nextjs-google-analytics": "^2.3.3",
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^9.0.4",
