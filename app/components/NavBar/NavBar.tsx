@@ -37,6 +37,10 @@ const navMenus = {
 			title: "Users",
 			linkTo: "/Admin/Users",
 		},
+		{
+			title: "CF",
+			linkTo: "/Admin/CF",
+		},
 	],
 };
 
