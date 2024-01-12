@@ -1,0 +1,42 @@
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 32px;
+	font-size: 32px;
+	text-align: center;
+}
+
+.label {
+	font-size: 18px;
+}
+
+.form {
+	display: flex;
+	margin-block: 64px;
+
+	justify-content: center;
+	align-items: center;
+
+	flex-direction: column;
+	gap: 32px;
+}
+
+.formLabel {
+	width: 135px;
+}
+
+.formInput {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+}
+
+.submit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 32px;
+}

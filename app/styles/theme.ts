@@ -12,6 +12,9 @@ const Button = {
 			_hover: {
 				bg: "yellow.500",
 				color: "gray.900",
+				_disabled: {
+					color: "yellow.400",
+				},
 			},
 		},
 		solid: {
@@ -27,6 +30,7 @@ const Button = {
 				color: "gray.900",
 			},
 		},
+
 		ghost: {
 			_hover: {
 				bg: "gray.800",

@@ -19,10 +19,10 @@ const navMenus = {
 			title: "Live",
 			linkTo: "/Live",
 		},
-		// {
-		// 	title: "Past Scores",
-		// 	linkTo: "/PastScores",
-		// },
+		{
+			title: "Past Scores",
+			linkTo: "/PastScores",
+		},
 	],
 	Admin: [
 		{
@@ -36,6 +36,14 @@ const navMenus = {
 		{
 			title: "Users",
 			linkTo: "/Admin/Users",
+		},
+		{
+			title: "CF",
+			linkTo: "/Admin/CF",
+		},
+		{
+			title: "Past Scores",
+			linkTo: "/PastScores",
 		},
 	],
 };
