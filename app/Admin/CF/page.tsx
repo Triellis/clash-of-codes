@@ -64,11 +64,14 @@ function PasswordInput({
 				onChange={(e) => {
 					setValue(e.target.value);
 				}}
+				variant={"default"}
 				pr="4.5rem"
+				width={{ md: "322.4px", base: "100%" }}
 				isDisabled={!editmode}
 			/>
 			<InputRightElement>
 				<IconButton
+					color={editmode ? "white" : "gray.500"}
 					size="sm"
 					aria-label="Show/Hide Password"
 					onClick={handleClick}
@@ -179,6 +182,7 @@ function CF() {
 						<Input
 							width={{ md: "322.4px", base: "100%" }}
 							value={configData.groupCode}
+							variant={"default"}
 							onChange={(e) => {
 								configData.groupCode = e.target.value;
 							}}
