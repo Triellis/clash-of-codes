@@ -21,57 +21,63 @@ type configData = {
 };
 
 type configDataAction = {
-	field?: "cfApiKey" | "cfSecret" | "groupCode";
-	value?: string;
-	type: "UPDATE" | "RESET";
+	field?: "cfApiKey" | "cfSecret" | "groupCode" | "all";
+	value?: string | configData;
+	type: "UPDATE";
 };
 
-function configDataReducer(
+const configDataReducer = (
 	state: configData,
 	action: configDataAction
-): configData {
+): configData => {
 	switch (action.type) {
 		case "UPDATE":
-			return { ...state, [action.field!]: action.value };
-		case "RESET":
-			return { cfApiKey: "", cfSecret: "", groupCode: "" };
+			if (action.field === "all") {
+				return action.value as configData;
+			} else if (action.field) {
+				return {
+					...state,
+					[action.field]: action.value,
+				};
+			}
+			return state;
 		default:
 			return state;
 	}
-}
+};
 
 function PasswordInput({
-	title,
-	disabled,
-	placeholder,
+	initialValue,
+	editmode,
 }: {
-	title: string;
-	disabled: boolean;
-	placeholder?: string;
+	initialValue: string;
+	editmode: boolean;
 }) {
 	const [show, setShow] = React.useState(false);
 	const handleClick = () => setShow(!show);
+	const [value, setValue] = useState(initialValue);
 
 	return (
-		<div>
-			<InputGroup size="md">
-				<Input
-					pr="4.5rem"
-					isDisabled={disabled}
-					type={show ? "text" : "password"}
-					placeholder={placeholder}
+		<InputGroup size="md">
+			<Input
+				value={value}
+				onChange={(e) => {
+					setValue(e.target.value);
+				}}
+				pr="4.5rem"
+				isDisabled={!editmode}
+			/>
+			<InputRightElement>
+				<IconButton
+					size="sm"
+					aria-label="Show/Hide Password"
+					onClick={handleClick}
+					variant={"ghost"}
+					icon={show ? <ViewOffIcon /> : <ViewIcon />}
+					isDisabled={!editmode}
 				/>
-				<InputRightElement width="4.5rem">
-					<IconButton
-						isDisabled={disabled}
-						variant={"unstyled"}
-						aria-label="XXXXXXXX"
-						icon={show ? <ViewOffIcon /> : <ViewIcon />}
-						onClick={handleClick}
-					/>
-				</InputRightElement>
-			</InputGroup>
-		</div>
+			</InputRightElement>
+		</InputGroup>
 	);
 }
 
@@ -79,9 +85,7 @@ async function onSave() {}
 
 function CF() {
 	const [editMode, setEditMode] = useState(false);
-
 	let finalButton;
-
 	if (editMode) {
 		finalButton = (
 			<Button
@@ -117,22 +121,17 @@ function CF() {
 	const [configData, dispatch] = useReducer(configDataReducer, initialState);
 
 	useEffect(() => {
-		const getData = async () => {
-			const res = await customFetch("/admin/cfConfig", {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			const data = await res.json();
-
-			console.log("data", data);
-			dispatch({ type: "UPDATE", value: data });
-			console.log("config:", configData);
-		};
-
-		getData();
+		// const getConfigData = async () => {
+		// 	const res = await customFetch("/admin/cfConfig", {
+		// 		method: "GET",
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 		},
+		// 	});
+		// 	const data = await res.json();
+		// 	dispatch({ type: "UPDATE", field: "all", value: data });
+		// };
+		// getConfigData();
 	}, []);
 
 	return (
@@ -142,27 +141,34 @@ function CF() {
 			<div className={styles.form}>
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF API KEY</div>
-					<PasswordInput
-						title={"CF API KEY"}
-						disabled={!editMode}
-						placeholder={configData.cfApiKey}
-					/>
+					<div>
+						<PasswordInput
+							editmode={editMode}
+							initialValue={configData.cfApiKey}
+						/>
+					</div>
 				</div>
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF SECRET</div>
-					<PasswordInput
-						title={"CF SECRET"}
-						disabled={!editMode}
-						placeholder={configData.cfSecret}
-					/>
+					<div>
+						<PasswordInput
+							editmode={editMode}
+							initialValue={configData.cfSecret}
+						/>
+					</div>
 				</div>
 				<div className={styles.formInput}>
-					<div className={styles.formLabel}>GROUP CODE</div>
-					<PasswordInput
-						title={"GROUP CODE"}
-						disabled={!editMode}
-						placeholder={configData.groupCode}
-					/>
+					<div className={styles.formLabel}>GROUP CODE </div>
+					<div>
+						<Input
+							width={{ md: "322.4px", base: "100%" }}
+							value={configData.groupCode}
+							onChange={(e) => {
+								configData.groupCode = e.target.value;
+							}}
+							isDisabled={!editMode}
+						/>
+					</div>
 				</div>
 			</div>
 

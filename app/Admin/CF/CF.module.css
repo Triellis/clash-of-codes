@@ -4,6 +4,7 @@
 	align-items: center;
 	margin-top: 32px;
 	font-size: 32px;
+	text-align: center;
 }
 
 .label {
@@ -34,8 +35,8 @@
 }
 
 .submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 32px;
 }
