@@ -1,22 +1,22 @@
 "use client";
 
 import { customFetch } from "@/app/util/functions";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import {
-	Button,
-	IconButton,
-	Input,
-	InputGroup,
-	InputRightElement,
-} from "@chakra-ui/react";
+
+import { Button, Input } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import styles from "./CF.module.css";
-
-async function onSave(configData: {
-	cfApiKey: string;
-	cfSecret: string;
-	groupCode: string;
-}) {
+import NotifToast from "@/app/components/NotifToast/NotifToast";
+import { useToast } from "@chakra-ui/react";
+async function onSave(
+	configData: {
+		CF_API_KEY: string;
+		CF_SECRET: string;
+		CF_GROUP_CODE: string;
+	},
+	toast: any,
+	setIsLoading: any
+) {
+	setIsLoading(true);
 	const res = await customFetch("/admin/cfConfig", {
 		method: "POST",
 		headers: {
@@ -24,8 +24,22 @@ async function onSave(configData: {
 		},
 		body: JSON.stringify(configData),
 	});
-	const data = await res.json();
-	console.log(data);
+	setIsLoading(false);
+	if (res.ok) {
+		NotifToast({
+			title: "Updated!",
+			description: "",
+			status: "success",
+			toast: toast,
+		});
+	} else {
+		NotifToast({
+			title: "Error",
+			description: "Something went wrong",
+			status: "error",
+			toast: toast,
+		});
+	}
 }
 
 type CFState = {
@@ -36,10 +50,11 @@ type CFState = {
 function CF() {
 	const [isDisabled, setIsDisabled] = useState(true);
 	let finalButton;
-	const [CF_API_KEY, setCF_API_KEY] = useState("XXXXXXXXXX");
-	const [CF_SECRET, setCF_SECRET] = useState("XXXXXXXX");
-	const [GROUP_CODE, setGROUP_CODE] = useState("Loading...");
-
+	const [CF_API_KEY, setCF_API_KEY] = useState("XXXXXXXXX");
+	const [CF_SECRET, setCF_SECRET] = useState("XXXXXXXXX");
+	const [CF_GROUP_CODE, setCF_GROUP_CODE] = useState("Loading...");
+	const toast = useToast();
+	const [isLoading, setIsLoading] = useState(false);
 	if (!isDisabled) {
 		finalButton = (
 			<Button
@@ -48,6 +63,15 @@ function CF() {
 				size="lg"
 				onClick={() => {
 					setIsDisabled((e) => !e);
+					onSave(
+						{
+							CF_API_KEY,
+							CF_SECRET,
+							CF_GROUP_CODE,
+						},
+						toast,
+						setIsLoading
+					);
 				}}
 			>
 				Save
@@ -78,7 +102,7 @@ function CF() {
 
 		setCF_API_KEY(data.CF_API_KEY);
 		setCF_SECRET(data.CF_SECRET);
-		setGROUP_CODE(data.CF_GROUP_CODE);
+		setCF_GROUP_CODE(data.CF_GROUP_CODE);
 	}, []);
 	useEffect(() => {
 		getConfigData();
@@ -92,23 +116,35 @@ function CF() {
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF API KEY</div>
 					<div>
-						<Input value={CF_API_KEY} isDisabled={isDisabled} />
+						<Input
+							value={isDisabled ? "XXXXXXXXX" : CF_API_KEY}
+							isDisabled={isDisabled}
+							variant={"default"}
+							onChange={(e) => setCF_API_KEY(e.target.value)}
+						/>
 					</div>
 				</div>
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF SECRET</div>
 					<div>
-						<Input value={CF_SECRET} isDisabled={isDisabled} />
+						<Input
+							variant={"default"}
+							value={isDisabled ? "XXXXXXXXX" : CF_SECRET}
+							isDisabled={isDisabled}
+							onChange={(e) => {
+								setCF_SECRET(e.target.value);
+							}}
+						/>
 					</div>
 				</div>
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>GROUP CODE </div>
 					<div>
 						<Input
-							width={{ md: "322.4px", base: "100%" }}
-							value={GROUP_CODE}
+							value={CF_GROUP_CODE}
+							variant={"default"}
 							onChange={(e) => {
-								setGROUP_CODE(e.target.value);
+								setCF_GROUP_CODE(e.target.value);
 							}}
 							isDisabled={isDisabled}
 						/>
@@ -121,8 +157,10 @@ function CF() {
 					colorScheme="teal"
 					variant="outline"
 					size="lg"
+					isDisabled={isDisabled}
 					onClick={() => {
-						setIsDisabled(false);
+						setIsDisabled((e) => !e);
+						getConfigData();
 					}}
 				>
 					Cancel
