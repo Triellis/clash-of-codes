@@ -4,90 +4,19 @@ import { customFetch } from "@/app/util/functions";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
 	Button,
-	Center,
-	FormControl,
 	IconButton,
 	Input,
 	InputGroup,
 	InputRightElement,
 } from "@chakra-ui/react";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import styles from "./CF.module.css";
 
-type configData = {
+async function onSave(configData: {
 	cfApiKey: string;
 	cfSecret: string;
 	groupCode: string;
-};
-
-type configDataAction = {
-	field?: "cfApiKey" | "cfSecret" | "groupCode" | "all";
-	value?: string | configData;
-	type: "UPDATE";
-};
-
-const configDataReducer = (
-	state: configData,
-	action: configDataAction
-): configData => {
-	switch (action.type) {
-		case "UPDATE":
-			if (action.field === "all") {
-				return action.value as configData;
-			} else if (action.field) {
-				return {
-					...state,
-					[action.field]: action.value,
-				};
-			}
-			return state;
-		default:
-			return state;
-	}
-};
-
-function PasswordInput({
-	initialValue,
-	editmode,
-}: {
-	initialValue: string;
-	editmode: boolean;
 }) {
-	const [show, setShow] = React.useState(false);
-	const handleClick = () => setShow(!show);
-	const [value, setValue] = useState(initialValue);
-
-	return (
-		<InputGroup size="md">
-			<Input
-				value={value}
-				onChange={(e) => {
-					setValue(e.target.value);
-				}}
-				variant={"default"}
-				pr="4.5rem"
-				width={{ md: "322.4px", base: "100%" }}
-				isDisabled={!editmode}
-			/>
-			<InputRightElement>
-				<IconButton
-					color={editmode ? "white" : "gray.500"}
-					size="sm"
-					aria-label="Show/Hide Password"
-					onClick={handleClick}
-					variant={"ghost"}
-					icon={show ? <ViewOffIcon /> : <ViewIcon />}
-					isDisabled={!editmode}
-				/>
-			</InputRightElement>
-		</InputGroup>
-	);
-}
-
-async function onSave(
-	configData: configData,
-	dispatch: React.Dispatch<configDataAction>
-) {
 	const res = await customFetch("/admin/cfConfig", {
 		method: "POST",
 		headers: {
@@ -97,21 +26,29 @@ async function onSave(
 	});
 	const data = await res.json();
 	console.log(data);
-
-	dispatch({ type: "UPDATE", field: "all", value: data });
 }
 
+type CFState = {
+	CF_API_KEY: string;
+	CF_SECRET: string;
+	CF_GROUP_CODE: string;
+};
 function CF() {
-	const [editMode, setEditMode] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(true);
 	let finalButton;
+	const [CF_API_KEY, setCF_API_KEY] = useState("XXXXXXXXXX");
+	const [CF_SECRET, setCF_SECRET] = useState("XXXXXXXX");
+	const [GROUP_CODE, setGROUP_CODE] = useState("Loading...");
 
-	if (editMode) {
+	if (!isDisabled) {
 		finalButton = (
 			<Button
 				colorScheme="teal"
 				variant="solid"
 				size="lg"
-				onClick={() => onSave(configData, dispatch)}
+				onClick={() => {
+					setIsDisabled((e) => !e);
+				}}
 			>
 				Save
 			</Button>
@@ -123,35 +60,29 @@ function CF() {
 				variant="solid"
 				size="lg"
 				onClick={() => {
-					setEditMode(true);
+					setIsDisabled((e) => !e);
 				}}
 			>
 				Update
 			</Button>
 		);
 	}
+	const getConfigData = useCallback(async () => {
+		const res = await customFetch("/admin/cfConfig", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		const data = (await res.json()) as CFState;
 
-	const initialState = {
-		cfApiKey: "",
-		cfSecret: "",
-		groupCode: "",
-	};
-
-	const [configData, dispatch] = useReducer(configDataReducer, initialState);
-
-	useEffect(() => {
-		// const getConfigData = async () => {
-		// 	const res = await customFetch("/admin/cfConfig", {
-		// 		method: "GET",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 	});
-		// 	const data = await res.json();
-		// 	dispatch({ type: "UPDATE", field: "all", value: data });
-		// };
-		// getConfigData();
+		setCF_API_KEY(data.CF_API_KEY);
+		setCF_SECRET(data.CF_SECRET);
+		setGROUP_CODE(data.CF_GROUP_CODE);
 	}, []);
+	useEffect(() => {
+		getConfigData();
+	}, [getConfigData]);
 
 	return (
 		<div>
@@ -161,19 +92,13 @@ function CF() {
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF API KEY</div>
 					<div>
-						<PasswordInput
-							editmode={editMode}
-							initialValue={configData.cfApiKey}
-						/>
+						<Input value={CF_API_KEY} isDisabled={isDisabled} />
 					</div>
 				</div>
 				<div className={styles.formInput}>
 					<div className={styles.formLabel}>CF SECRET</div>
 					<div>
-						<PasswordInput
-							editmode={editMode}
-							initialValue={configData.cfSecret}
-						/>
+						<Input value={CF_SECRET} isDisabled={isDisabled} />
 					</div>
 				</div>
 				<div className={styles.formInput}>
@@ -181,12 +106,11 @@ function CF() {
 					<div>
 						<Input
 							width={{ md: "322.4px", base: "100%" }}
-							value={configData.groupCode}
-							variant={"default"}
+							value={GROUP_CODE}
 							onChange={(e) => {
-								configData.groupCode = e.target.value;
+								setGROUP_CODE(e.target.value);
 							}}
-							isDisabled={!editMode}
+							isDisabled={isDisabled}
 						/>
 					</div>
 				</div>
@@ -198,7 +122,7 @@ function CF() {
 					variant="outline"
 					size="lg"
 					onClick={() => {
-						setEditMode(false);
+						setIsDisabled(false);
 					}}
 				>
 					Cancel
