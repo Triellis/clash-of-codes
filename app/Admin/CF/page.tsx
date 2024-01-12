@@ -81,18 +81,34 @@ function PasswordInput({
 	);
 }
 
-async function onSave() {}
+async function onSave(
+	configData: configData,
+	dispatch: React.Dispatch<configDataAction>
+) {
+	const res = await customFetch("/admin/cfConfig", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(configData),
+	});
+	const data = await res.json();
+	console.log(data);
+
+	dispatch({ type: "UPDATE", field: "all", value: data });
+}
 
 function CF() {
 	const [editMode, setEditMode] = useState(false);
 	let finalButton;
+
 	if (editMode) {
 		finalButton = (
 			<Button
 				colorScheme="teal"
 				variant="solid"
 				size="lg"
-				onClick={() => onSave()}
+				onClick={() => onSave(configData, dispatch)}
 			>
 				Save
 			</Button>
