@@ -143,10 +143,13 @@ const WebSocketComponent = () => {
 			)}
 			{isSmall ? (
 				leaderboardArr.map((item, idx) => (
-					<Leaderboard fetchedData={item} key={idx} />
+					<Leaderboard mode="Live" fetchedData={item} key={idx} />
 				))
 			) : (
-				<Leaderboard fetchedData={leaderboardArr[tabIndex]} />
+				<Leaderboard
+					mode="Live"
+					fetchedData={leaderboardArr[tabIndex]}
+				/>
 			)}
 		</div>
 	);

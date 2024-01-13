@@ -1,5 +1,5 @@
 import { fullForm } from "@/app/util/functions";
-import { Clan, LiveBoardTeam, Side } from "@/app/util/types";
+import { Clan, LiveBoardTeam, ReceivedPastScore, Side } from "@/app/util/types";
 import { Center } from "@chakra-ui/react";
 import classNames from "classnames";
 
@@ -14,11 +14,13 @@ function Scorecard({
 	team2,
 	score1,
 	score2,
+	mode = "Live",
 }: {
 	team1: Clan;
 	team2: Clan;
 	score1: number;
 	score2: number;
+	mode?: "Live" | "Past";
 }) {
 	const team1Full = fullForm(team1).split(" ");
 	const team2Full = fullForm(team2).split(" ");
@@ -40,19 +42,35 @@ function Scorecard({
 			</div>
 
 			<div className={styles.score}>
-				<Counter startNumber={score1} />
+				{mode == "Live" ? (
+					<Counter startNumber={score1} />
+				) : (
+					<SpecialTxt>{score1}</SpecialTxt>
+				)}
 
 				<div>
 					<SpecialTxt> - </SpecialTxt>
 				</div>
 
-				<Counter startNumber={score2} />
+				{mode == "Live" ? (
+					<Counter startNumber={score2} />
+				) : (
+					<SpecialTxt>{score2}</SpecialTxt>
+				)}
 			</div>
 		</div>
 	);
 }
 
-function LeaderboardEntry({ side, entry }: { side: Side; entry: any }) {
+function LeaderboardEntry({
+	side,
+	entry,
+	mode = "Live",
+}: {
+	side: Side;
+	entry: any;
+	mode?: "Live" | "Past";
+}) {
 	return (
 		<div
 			className={classNames(
@@ -61,8 +79,20 @@ function LeaderboardEntry({ side, entry }: { side: Side; entry: any }) {
 			)}
 		>
 			<div className={styles.name}>{entry.name}</div>
-			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
-			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
+			{mode == "Live" ? (
+				<>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
+					<SpecialTxt className={styles.death}>
+						{entry.penalty}
+					</SpecialTxt>
+				</>
+			) : (
+				<>
+					<SpecialTxt>{entry.rating}</SpecialTxt>
+				</>
+			)}
 		</div>
 	);
 }
@@ -70,10 +100,12 @@ function LeaderboardEntryFooter({
 	totalScore,
 	totalPenalty,
 	side,
+	mode,
 }: {
 	totalScore: number;
-	totalPenalty: number;
+	totalPenalty?: number;
 	side: Side;
+	mode?: "Live" | "Past";
 }) {
 	return (
 		<div
@@ -83,8 +115,22 @@ function LeaderboardEntryFooter({
 			)}
 		>
 			<SpecialTxt flex={"2"}>Total</SpecialTxt>
-			<SpecialTxt className={styles.points}>{totalScore}</SpecialTxt>
-			<SpecialTxt className={styles.death}>{totalPenalty}</SpecialTxt>
+			{mode == "Live" ? (
+				<>
+					<SpecialTxt className={styles.points}>
+						{totalScore}
+					</SpecialTxt>
+					<SpecialTxt className={styles.death}>
+						{totalPenalty}
+					</SpecialTxt>
+				</>
+			) : (
+				<>
+					<SpecialTxt className={styles.points}>
+						{totalScore}
+					</SpecialTxt>
+				</>
+			)}
 		</div>
 	);
 }
@@ -104,12 +150,8 @@ function LeaderboardEntryHeader({ side }: { side: Side }) {
 		</div>
 	);
 }
-export default function Leaderboard({
-	fetchedData,
-}: {
-	fetchedData: LiveBoardTeam;
-}) {
-	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
+
+function LiveLeaderboard({ fetchedData }: { fetchedData: LiveBoardTeam }) {
 	const clans = Object.keys(fetchedData);
 
 	const leftClanName = clans[0] as Clan;
@@ -185,4 +227,110 @@ export default function Leaderboard({
 			</div>
 		</div>
 	);
+}
+
+function PastLeaderboard({ fetchedData }: { fetchedData: ReceivedPastScore }) {
+	const dateAdded = fetchedData.dateAdded;
+
+	let clans = Object.keys(fetchedData);
+	clans = clans.filter((clan) => clan !== "dateAdded");
+
+	const leftClanName = clans[0] as Clan;
+	const rightClanName = clans[1] as Clan;
+
+	const leftClan = fetchedData[leftClanName];
+	const rightClan = fetchedData[rightClanName];
+
+	let rating1 = 0;
+	let rating2 = 0;
+
+	leftClan?.forEach((entry) => {
+		rating1 += entry.rating;
+	});
+	rightClan?.forEach((entry) => {
+		rating2 += entry.rating;
+	});
+	rating1 = Math.round(rating1);
+	rating2 = Math.round(rating2);
+
+	let entries1;
+	let entries2;
+
+	if (leftClan) {
+		entries1 = leftClan.map((entry, index) => (
+			<LeaderboardEntry
+				side="LeftSide"
+				entry={entry}
+				key={index}
+				mode="Past"
+			/>
+		));
+	}
+
+	if (rightClan) {
+		entries2 = rightClan.map((entry, index) => (
+			<LeaderboardEntry
+				side="RightSide"
+				entry={entry}
+				key={index}
+				mode="Past"
+			/>
+		));
+	}
+
+	return (
+		<div className={styles.main}>
+			<Center>
+				<Scorecard
+					team1={leftClanName}
+					team2={rightClanName}
+					score1={rating1}
+					score2={rating2}
+					mode="Past"
+				/>
+			</Center>
+
+			<div className={styles.board}>
+				{/* sb1 */}
+				<div className={classNames(styles.sb1, styles[leftClanName])}>
+					<LeaderboardEntryHeader side="LeftSide" />
+
+					{entries1}
+
+					<LeaderboardEntryFooter
+						totalScore={rating1}
+						side="LeftSide"
+					/>
+				</div>
+
+				{/* sb2 */}
+				<div className={classNames(styles.sb2, styles[rightClanName])}>
+					<LeaderboardEntryHeader side="RightSide" />
+					{entries2}
+					<LeaderboardEntryFooter
+						totalScore={rating2}
+						side="RightSide"
+					/>
+				</div>
+			</div>
+		</div>
+	);
+}
+type BoardProps =
+	| {
+			fetchedData: LiveBoardTeam;
+			mode: "Live";
+	  }
+	| {
+			fetchedData: ReceivedPastScore;
+			mode: "Past";
+	  };
+export default function Leaderboard({ fetchedData, mode }: BoardProps) {
+	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
+
+	if (mode == "Live") {
+		return <LiveLeaderboard fetchedData={fetchedData} />;
+	} else {
+		return <PastLeaderboard fetchedData={fetchedData} />;
+	}
 }
