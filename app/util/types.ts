@@ -63,13 +63,11 @@ export type TabsType = {
 	value: string;
 	color?: string;
 }[];
+export type CFAPIResponseWithRating = Omit<CFAPIResponse, "panelty"> & {
+	rating: number;
+};
 export type ProcessedRatingData = {
-	[key in Clan]?: {
-		name: string;
-		cfUsername: string;
-		rating: number;
-		points: number;
-	}[];
+	[key in Clan]?: CFAPIResponseWithRating[];
 };
 
 export type ReceivedPastScore = {
