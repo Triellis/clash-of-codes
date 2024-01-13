@@ -17,3 +17,10 @@
 		padding-top: 32px;
 	}
 }
+
+.date {
+	color: #fff;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 100%; /* 24px */
+}

@@ -1,7 +1,7 @@
 import { ReceivedPastScore } from "@/app/util/types";
-import styles from "./PastScoreBoard.module.css";
-import Leaderboard from "../Leaderboard/Leaderboard";
 import { Divider } from "@chakra-ui/react";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import styles from "./PastScoreBoard.module.css";
 
 export default function PastScoreBoard({
 	boardData,
@@ -16,7 +16,7 @@ export default function PastScoreBoard({
 
 	return (
 		<div className={styles.board}>
-			{date}
+			<div className={styles.date} >{date}</div>
 			<Divider />
 			<Leaderboard mode="Past" fetchedData={boardData} />
 		</div>
