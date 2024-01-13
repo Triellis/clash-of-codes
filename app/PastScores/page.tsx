@@ -6,6 +6,7 @@ import Leaderboard from "../components/Leaderboard/Leaderboard";
 import styles from "./PastScores.module.css";
 import { usePastScores } from "../util/functions";
 import PastScoreBoard from "../components/PastScoreBoard/PastScoreBoard";
+import Pagination from "../components/Pagination/Pagination";
 
 export default function PastScores() {
 	const [page, setPage] = useState(1);
@@ -23,6 +24,12 @@ export default function PastScores() {
 			{pastScores.data.map((d, index) => {
 				return <PastScoreBoard boardData={d} key={index} />;
 			})}
+			<Pagination
+				page={page}
+				setPage={setPage}
+				items={pastScores.data}
+				maxResults={maxResults}
+			/>
 		</div>
 	);
 }
