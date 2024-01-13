@@ -1,13 +1,12 @@
-import Live from "@/app/styles/Icons/Live";
 import { fullForm } from "@/app/util/functions";
-import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
-import { Center, Heading, transition } from "@chakra-ui/react";
+import { Clan, LiveBoardTeam, Side } from "@/app/util/types";
+import { Center } from "@chakra-ui/react";
 import classNames from "classnames";
-import { useEffect, useMemo, useState } from "react";
+
 import Counter from "../Counter/Counter";
-import MotionDiv from "../MotionDiv/MotionDiv";
+
 import SpecialTxt from "../SpecialTxt";
-import TabsComponent from "../TabsComponent/TabsComponent";
+
 import styles from "./Leaderboard.module.css";
 
 function Scorecard({
@@ -53,18 +52,58 @@ function Scorecard({
 	);
 }
 
-function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
+function LeaderboardEntry({ side, entry }: { side: Side; entry: any }) {
 	return (
-		// <MotionDiv {...props} transition={transition} animate={animation}>
-		<div {...props}>
+		<div
+			className={classNames(
+				styles.tableEntry,
+				side == "RightSide" ? styles.tableEntryRight : ""
+			)}
+		>
 			<div className={styles.name}>{entry.name}</div>
 			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
 			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
 		</div>
-		// </MotionDiv>
+	);
+}
+function LeaderboardEntryFooter({
+	totalScore,
+	totalPenalty,
+	side,
+}: {
+	totalScore: number;
+	totalPenalty: number;
+	side: Side;
+}) {
+	return (
+		<div
+			className={classNames(
+				styles.tableEntry,
+				side == "RightSide" ? styles.tableEntryRight : ""
+			)}
+		>
+			<SpecialTxt flex={"2"}>Total</SpecialTxt>
+			<SpecialTxt className={styles.points}>{totalScore}</SpecialTxt>
+			<SpecialTxt className={styles.death}>{totalPenalty}</SpecialTxt>
+		</div>
 	);
 }
 
+function LeaderboardEntryHeader({ side }: { side: Side }) {
+	return (
+		<div
+			className={classNames(
+				styles.tableHeader,
+
+				side == "RightSide" ? styles.tableHeaderRight : ""
+			)}
+		>
+			<div>name</div>
+			<div className={styles.points}>#</div>
+			<div className={styles.death}>Penalty</div>
+		</div>
+	);
+}
 export default function Leaderboard({
 	fetchedData,
 }: {
@@ -96,45 +135,16 @@ export default function Leaderboard({
 	let entries1;
 	let entries2;
 
-	// const goUpAnimation = {
-	// 	scale: [1, 1.5, 1],
-	// 	y: [0, -100],
-	// };
-
-	// const goDownAnimation = {
-	// 	scale: [1, 0.5, 1],
-	// 	y: [0, 100],
-	// };
-
 	if (leftClan) {
-		entries1 = leftClan.map((entry, index) => {
-			return (
-				<LeaderboardEntry
-					props={{
-						className: classNames(styles.tableEntry),
-					}}
-					entry={entry}
-					key={index}
-				/>
-			);
-		});
+		entries1 = leftClan.map((entry, index) => (
+			<LeaderboardEntry side="LeftSide" entry={entry} key={index} />
+		));
 	}
 
 	if (rightClan) {
-		entries2 = rightClan.map((entry, index) => {
-			return (
-				<LeaderboardEntry
-					props={{
-						className: classNames(
-							styles.tableEntry,
-							styles.tableEntryRight
-						),
-					}}
-					entry={entry}
-					key={index}
-				/>
-			);
-		});
+		entries2 = rightClan.map((entry, index) => (
+			<LeaderboardEntry side="RightSide" entry={entry} key={index} />
+		));
 	}
 
 	return (
@@ -151,54 +161,26 @@ export default function Leaderboard({
 			<div className={styles.board}>
 				{/* sb1 */}
 				<div className={classNames(styles.sb1, styles[leftClanName])}>
-					<div className={styles.tableHeader}>
-						<div>name</div>
-						<div className={styles.points}>#</div>
-						<div className={styles.death}>Penalty</div>
-					</div>
+					<LeaderboardEntryHeader side="LeftSide" />
 
 					{entries1}
 
-					<div className={styles.tableEntry}>
-						<SpecialTxt>Total</SpecialTxt>
-						<SpecialTxt className={styles.points}>
-							{score1}
-						</SpecialTxt>
-						<SpecialTxt className={styles.death}>
-							{penalty1}
-						</SpecialTxt>
-					</div>
+					<LeaderboardEntryFooter
+						totalPenalty={penalty1}
+						totalScore={score1}
+						side="LeftSide"
+					/>
 				</div>
 
 				{/* sb2 */}
 				<div className={classNames(styles.sb2, styles[rightClanName])}>
-					<div
-						className={classNames(
-							styles.tableHeader,
-							styles.tableHeaderRight
-						)}
-					>
-						<div>name</div>
-						<div className={styles.points}>#</div>
-						<div className={styles.death}>Penalty</div>
-					</div>
-
+					<LeaderboardEntryHeader side="RightSide" />
 					{entries2}
-
-					<div
-						className={classNames(
-							styles.tableEntry,
-							styles.tableEntryRight
-						)}
-					>
-						<SpecialTxt flex={"2"}>Total</SpecialTxt>
-						<SpecialTxt className={styles.points}>
-							{score2}
-						</SpecialTxt>
-						<SpecialTxt className={styles.death}>
-							{penalty2}
-						</SpecialTxt>
-					</div>
+					<LeaderboardEntryFooter
+						totalPenalty={penalty2}
+						totalScore={score2}
+						side="RightSide"
+					/>
 				</div>
 			</div>
 		</div>

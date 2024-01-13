@@ -63,3 +63,15 @@ export type TabsType = {
 	value: string;
 	color?: string;
 }[];
+export type ProcessedRatingData = {
+	[key in Clan]?: {
+		name: string;
+		cfUsername: string;
+		rating: number;
+	}[];
+};
+
+export type ReceivedPastScore = {
+	dateAdded: Date;
+} & ProcessedRatingData;
+export type Side = "LeftSide" | "RightSide";

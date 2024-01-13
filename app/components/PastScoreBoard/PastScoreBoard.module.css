@@ -1,0 +1,10 @@
+.board {
+	display: inline-flex;
+	padding: 32px;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	border-radius: 32px;
+	border: 1px solid var(--gray-400, #a0aec0);
+}

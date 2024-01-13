@@ -2,7 +2,12 @@ import cookie from "cookie";
 import jwt from "jsonwebtoken";
 import useSWR from "swr";
 import NotifToast from "../components/NotifToast";
-import { AddContestState, ContestCol, UserOnClient } from "./types";
+import {
+	AddContestState,
+	ContestCol,
+	UserOnClient,
+	ReceivedPastScore,
+} from "./types";
 
 export function getServerUrl(url: string) {
 	let SERVER_URL;
@@ -220,4 +225,22 @@ export async function addUser(
 			toast: toast,
 		});
 	}
+}
+
+export function usePastScores(
+	page: number,
+
+	maxResults: number
+) {
+	const { data, error, isLoading, mutate } = useSWR(
+		getServerUrl(`/PastScores?page=${page}&maxResults=${maxResults}`),
+		fetcher
+	);
+
+	return {
+		data: data as ReceivedPastScore[],
+		isLoading,
+		isError: error,
+		mutate,
+	};
 }
