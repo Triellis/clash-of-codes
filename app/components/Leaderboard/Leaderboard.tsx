@@ -14,13 +14,11 @@ function Scorecard({
 	team2,
 	score1,
 	score2,
-	mode = "Live",
 }: {
 	team1: Clan;
 	team2: Clan;
 	score1: number;
 	score2: number;
-	mode?: "Live" | "Past";
 }) {
 	const team1Full = fullForm(team1).split(" ");
 	const team2Full = fullForm(team2).split(" ");
@@ -42,21 +40,13 @@ function Scorecard({
 			</div>
 
 			<div className={styles.score}>
-				{mode == "Live" ? (
-					<Counter startNumber={score1} />
-				) : (
-					<SpecialTxt>{score1}</SpecialTxt>
-				)}
+				<Counter startNumber={score1} />
 
 				<div>
 					<SpecialTxt> - </SpecialTxt>
 				</div>
 
-				{mode == "Live" ? (
-					<Counter startNumber={score2} />
-				) : (
-					<SpecialTxt>{score2}</SpecialTxt>
-				)}
+				<Counter startNumber={score2} />
 			</div>
 		</div>
 	);
@@ -90,20 +80,26 @@ function LeaderboardEntry({
 				</>
 			) : (
 				<>
-					<SpecialTxt>{entry.rating}</SpecialTxt>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
+					<SpecialTxt className={styles.rating}>
+						{entry.rating}
+					</SpecialTxt>
 				</>
 			)}
 		</div>
 	);
 }
 function LeaderboardEntryFooter({
+	totalPoints,
 	totalScore,
-	totalPenalty,
 	side,
-	mode,
+	mode = "Live",
 }: {
 	totalScore: number;
-	totalPenalty?: number;
+	totalPoints: number;
+
 	side: Side;
 	mode?: "Live" | "Past";
 }) {
@@ -118,15 +114,16 @@ function LeaderboardEntryFooter({
 			{mode == "Live" ? (
 				<>
 					<SpecialTxt className={styles.points}>
-						{totalScore}
+						{totalPoints}
 					</SpecialTxt>
-					<SpecialTxt className={styles.death}>
-						{totalPenalty}
-					</SpecialTxt>
+					<div className={styles.death}>{totalScore}</div>
 				</>
 			) : (
 				<>
 					<SpecialTxt className={styles.points}>
+						{totalPoints}
+					</SpecialTxt>
+					<SpecialTxt className={styles.rating}>
 						{totalScore}
 					</SpecialTxt>
 				</>
@@ -135,7 +132,13 @@ function LeaderboardEntryFooter({
 	);
 }
 
-function LeaderboardEntryHeader({ side }: { side: Side }) {
+function LeaderboardEntryHeader({
+	side,
+	mode = "Live",
+}: {
+	side: Side;
+	mode?: "Live" | "Past";
+}) {
 	return (
 		<div
 			className={classNames(
@@ -145,8 +148,17 @@ function LeaderboardEntryHeader({ side }: { side: Side }) {
 			)}
 		>
 			<div>name</div>
-			<div className={styles.points}>#</div>
-			<div className={styles.death}>Penalty</div>
+			{mode == "Live" ? (
+				<>
+					<div className={styles.points}>#</div>
+					<div className={styles.death}>Penalty</div>
+				</>
+			) : (
+				<>
+					<div className={styles.points}>#</div>
+					<SpecialTxt>Score</SpecialTxt>
+				</>
+			)}
 		</div>
 	);
 }
@@ -160,17 +172,17 @@ function LiveLeaderboard({ fetchedData }: { fetchedData: LiveBoardTeam }) {
 	const leftClan = fetchedData[leftClanName];
 	const rightClan = fetchedData[rightClanName];
 
-	let score1 = 0;
-	let score2 = 0;
+	let points1 = 0;
+	let points2 = 0;
 	let penalty1 = 0;
 	let penalty2 = 0;
 
 	leftClan.forEach((entry) => {
-		score1 += entry.points;
+		points1 += entry.points;
 		penalty1 += entry.penalty;
 	});
 	rightClan.forEach((entry) => {
-		score2 += entry.points;
+		points2 += entry.points;
 		penalty2 += entry.penalty;
 	});
 
@@ -195,8 +207,8 @@ function LiveLeaderboard({ fetchedData }: { fetchedData: LiveBoardTeam }) {
 				<Scorecard
 					team1={leftClanName}
 					team2={rightClanName}
-					score1={score1}
-					score2={score2}
+					score1={points1}
+					score2={points2}
 				/>
 			</Center>
 
@@ -208,8 +220,8 @@ function LiveLeaderboard({ fetchedData }: { fetchedData: LiveBoardTeam }) {
 					{entries1}
 
 					<LeaderboardEntryFooter
-						totalPenalty={penalty1}
-						totalScore={score1}
+						totalPoints={points1}
+						totalScore={penalty1}
 						side="LeftSide"
 					/>
 				</div>
@@ -219,8 +231,8 @@ function LiveLeaderboard({ fetchedData }: { fetchedData: LiveBoardTeam }) {
 					<LeaderboardEntryHeader side="RightSide" />
 					{entries2}
 					<LeaderboardEntryFooter
-						totalPenalty={penalty2}
-						totalScore={score2}
+						totalPoints={points2}
+						totalScore={penalty2}
 						side="RightSide"
 					/>
 				</div>
@@ -243,12 +255,16 @@ function PastLeaderboard({ fetchedData }: { fetchedData: ReceivedPastScore }) {
 
 	let rating1 = 0;
 	let rating2 = 0;
+	let points1 = 0;
+	let points2 = 0;
 
 	leftClan?.forEach((entry) => {
 		rating1 += entry.rating;
+		points1 += entry.points;
 	});
 	rightClan?.forEach((entry) => {
 		rating2 += entry.rating;
+		points2 += entry.points;
 	});
 	rating1 = Math.round(rating1);
 	rating2 = Math.round(rating2);
@@ -284,32 +300,35 @@ function PastLeaderboard({ fetchedData }: { fetchedData: ReceivedPastScore }) {
 				<Scorecard
 					team1={leftClanName}
 					team2={rightClanName}
-					score1={rating1}
-					score2={rating2}
-					mode="Past"
+					score1={points1}
+					score2={points2}
 				/>
 			</Center>
 
 			<div className={styles.board}>
 				{/* sb1 */}
 				<div className={classNames(styles.sb1, styles[leftClanName])}>
-					<LeaderboardEntryHeader side="LeftSide" />
+					<LeaderboardEntryHeader mode="Past" side="LeftSide" />
 
 					{entries1}
 
 					<LeaderboardEntryFooter
 						totalScore={rating1}
 						side="LeftSide"
+						mode="Past"
+						totalPoints={points1}
 					/>
 				</div>
 
 				{/* sb2 */}
 				<div className={classNames(styles.sb2, styles[rightClanName])}>
-					<LeaderboardEntryHeader side="RightSide" />
+					<LeaderboardEntryHeader mode="Past" side="RightSide" />
 					{entries2}
 					<LeaderboardEntryFooter
+						totalPoints={points2}
 						totalScore={rating2}
 						side="RightSide"
+						mode="Past"
 					/>
 				</div>
 			</div>

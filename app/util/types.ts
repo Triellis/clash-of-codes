@@ -68,6 +68,7 @@ export type ProcessedRatingData = {
 		name: string;
 		cfUsername: string;
 		rating: number;
+		points: number;
 	}[];
 };
 
