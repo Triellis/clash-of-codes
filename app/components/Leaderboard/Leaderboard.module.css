@@ -170,10 +170,17 @@
 		padding-block: 20px;
 		width: 90%;
 	}
-
 	.mainScoreTitle {
 		gap: 10px;
 	}
+	.mainScoreTitle > :nth-child(1),
+	.mainScoreTitle > :nth-child(3) {
+		width: 10ch;
+	}
+	.mainScoreTitle > :nth-child(2) {
+		width: 1ch;
+	}
+
 	.mainScoreTitle,
 	.logo {
 		font-size: 16px;
@@ -187,6 +194,10 @@
 	.tableEntry {
 		font-size: 10px;
 		gap: 10px;
+	}
+
+	.tableEntry > :nth-child(1) {
+		width: 7ch;
 	}
 
 	.death {
