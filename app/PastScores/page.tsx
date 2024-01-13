@@ -10,13 +10,27 @@ import Pagination from "../components/Pagination/Pagination";
 
 export default function PastScores() {
 	const [page, setPage] = useState(1);
-	const maxResults = 10;
+	const maxResults = 5;
 	const pastScores = usePastScores(page, maxResults);
 	if (pastScores.isLoading) {
 		return <div className={styles.main}>Loading...</div>;
 	}
 	if (pastScores.isError) {
 		return <div className={styles.main}>Error</div>;
+	}
+
+	if (pastScores.data.length == 0) {
+		return (
+			<div className={styles.main}>
+				No Past Scores
+				<Pagination
+					page={page}
+					setPage={setPage}
+					items={pastScores.data}
+					maxResults={maxResults}
+				/>
+			</div>
+		);
 	}
 
 	return (
