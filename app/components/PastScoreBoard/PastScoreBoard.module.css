@@ -8,6 +8,7 @@
 	max-width: min-content;
 
 	border-radius: 32px;
+	overflow: hidden;
 	border: 1px solid var(--gray-400, #a0aec0);
 }
 @media (max-width: 768px) {

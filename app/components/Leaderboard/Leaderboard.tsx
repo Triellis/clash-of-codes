@@ -128,9 +128,9 @@ function LeaderboardEntryFooter({
 				</>
 			) : (
 				<>
-					<SpecialTxt className={styles.points}>
-						{totalPoints}
-					</SpecialTxt>
+					<div className={styles.points}>
+						<SpecialTxt>{totalPoints}</SpecialTxt>
+					</div>
 					<div className={styles.rating}>
 						<SpecialTxt>{totalScore}</SpecialTxt>
 					</div>
