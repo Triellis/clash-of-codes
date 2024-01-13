@@ -125,7 +125,7 @@
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	font-size: 16px;
+
 	width: 7ch;
 	font-weight: 500;
 }
@@ -158,10 +158,11 @@
 	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
 }
 
-.tableHeaderRight > .points {
+.tableHeaderRight > .points,
+.tableHeaderRight > .rating,
+.tableEntryRight > .rating {
 	text-align: left;
 }
-
 /* for responsive design: */
 @media (max-width: 390px) {
 	.mainScore {
@@ -286,4 +287,10 @@
 		font-size: 14px;
 		gap: 20px;
 	}
+}
+.rating {
+	width: 6ch;
+}
+.points {
+	width: 2ch;
 }

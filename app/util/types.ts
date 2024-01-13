@@ -63,3 +63,14 @@ export type TabsType = {
 	value: string;
 	color?: string;
 }[];
+export type CFAPIResponseWithRating = Omit<CFAPIResponse, "panelty"> & {
+	rating: number;
+};
+export type ProcessedRatingData = {
+	[key in Clan]?: CFAPIResponseWithRating[];
+};
+
+export type ReceivedPastScore = {
+	dateAdded: Date;
+} & ProcessedRatingData;
+export type Side = "LeftSide" | "RightSide";

@@ -1,26 +1,49 @@
 "use client";
 
 import { Divider } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import styles from "./PastScores.module.css";
+import { usePastScores } from "../util/functions";
+import PastScoreBoard from "../components/PastScoreBoard/PastScoreBoard";
+import Pagination from "../components/Pagination/Pagination";
 
-function Board() {
-	return (
-		<div className={styles.board}>
-			<div className={styles.date}>Date: 14/6/2023</div>
-			<Divider />
-			{/* <Leaderboard fetchedData={} /> */}
-		</div>
-	);
-}
+export default function PastScores() {
+	const [page, setPage] = useState(1);
+	const maxResults = 5;
+	const pastScores = usePastScores(page, maxResults);
+	if (pastScores.isLoading) {
+		return <div className={styles.main}>Loading...</div>;
+	}
+	if (pastScores.isError) {
+		return <div className={styles.main}>Error</div>;
+	}
 
-function page() {
+	if (pastScores.data.length == 0) {
+		return (
+			<div className={styles.main}>
+				No Past Scores
+				<Pagination
+					page={page}
+					setPage={setPage}
+					items={pastScores.data}
+					maxResults={maxResults}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.main}>
-			<Board />
+			{pastScores.data.map((d, index) => {
+				return <PastScoreBoard boardData={d} key={index} />;
+			})}
+			<Pagination
+				page={page}
+				setPage={setPage}
+				items={pastScores.data}
+				maxResults={maxResults}
+			/>
 		</div>
 	);
 }
-
-export default page;

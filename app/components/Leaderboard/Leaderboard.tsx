@@ -1,13 +1,20 @@
-import Live from "@/app/styles/Icons/Live";
 import { fullForm } from "@/app/util/functions";
-import { Clan, LiveBoardTeam, TabsType } from "@/app/util/types";
-import { Center, Heading, transition } from "@chakra-ui/react";
+import {
+	CFAPIResponse,
+	CFAPIResponseWithRating,
+	Clan,
+	LiveBoardTeam,
+	ProcessedRatingData,
+	ReceivedPastScore,
+	Side,
+} from "@/app/util/types";
+import { Center } from "@chakra-ui/react";
 import classNames from "classnames";
-import { useEffect, useMemo, useState } from "react";
+
 import Counter from "../Counter/Counter";
-import MotionDiv from "../MotionDiv/MotionDiv";
+
 import SpecialTxt from "../SpecialTxt";
-import TabsComponent from "../TabsComponent/TabsComponent";
+
 import styles from "./Leaderboard.module.css";
 
 function Scorecard({
@@ -53,25 +60,129 @@ function Scorecard({
 	);
 }
 
-function LeaderboardEntry({ props, entry }: { props: any; entry: any }) {
+function LeaderboardEntry({
+	side,
+	entry,
+	mode = "Live",
+}: {
+	side: Side;
+	entry: any;
+	mode?: "Live" | "Past";
+}) {
 	return (
-		// <MotionDiv {...props} transition={transition} animate={animation}>
-		<div {...props}>
+		<div
+			className={classNames(
+				styles.tableEntry,
+				side == "RightSide" ? styles.tableEntryRight : ""
+			)}
+		>
 			<div className={styles.name}>{entry.name}</div>
-			<SpecialTxt className={styles.points}>{entry.points}</SpecialTxt>
-			<SpecialTxt className={styles.death}>{entry.penalty}</SpecialTxt>
+			{mode == "Live" ? (
+				<>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
+					<SpecialTxt className={styles.death}>
+						{entry.penalty}
+					</SpecialTxt>
+				</>
+			) : (
+				<>
+					<SpecialTxt className={styles.points}>
+						{entry.points}
+					</SpecialTxt>
+					<div className={styles.rating}>
+						<SpecialTxt>{entry.rating}</SpecialTxt>
+					</div>
+				</>
+			)}
 		</div>
-		// </MotionDiv>
+	);
+}
+function LeaderboardEntryFooter({
+	totalPoints,
+	totalScore,
+	side,
+	mode = "Live",
+}: {
+	totalScore: number;
+	totalPoints: number;
+
+	side: Side;
+	mode?: "Live" | "Past";
+}) {
+	return (
+		<div
+			className={classNames(
+				styles.tableEntry,
+				side == "RightSide" ? styles.tableEntryRight : ""
+			)}
+		>
+			<SpecialTxt flex={"2"}>Total</SpecialTxt>
+			{mode == "Live" ? (
+				<>
+					<SpecialTxt className={styles.points}>
+						{totalPoints}
+					</SpecialTxt>
+					<div className={styles.death}>{totalScore}</div>
+				</>
+			) : (
+				<>
+					<div className={styles.points}>
+						<SpecialTxt>{totalPoints}</SpecialTxt>
+					</div>
+					<div className={styles.rating}>
+						<SpecialTxt>{totalScore}</SpecialTxt>
+					</div>
+				</>
+			)}
+		</div>
 	);
 }
 
-export default function Leaderboard({
-	fetchedData,
+function LeaderboardEntryHeader({
+	side,
+	mode = "Live",
 }: {
-	fetchedData: LiveBoardTeam;
+	side: Side;
+	mode?: "Live" | "Past";
 }) {
+	return (
+		<div
+			className={classNames(
+				styles.tableHeader,
+
+				side == "RightSide" ? styles.tableHeaderRight : ""
+			)}
+		>
+			<div>name</div>
+			{mode == "Live" ? (
+				<>
+					<div className={styles.points}>#</div>
+					<div className={styles.death}>Penalty</div>
+				</>
+			) : (
+				<>
+					<div className={styles.points}>#</div>
+					<div className={styles.rating}>
+						<SpecialTxt>Score</SpecialTxt>
+					</div>
+				</>
+			)}
+		</div>
+	);
+}
+
+type BoardProps = {
+	fetchedData: any;
+	mode: "Live" | "Past";
+};
+
+export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
-	const clans = Object.keys(fetchedData);
+
+	let clans = Object.keys(fetchedData);
+	clans = clans.filter((clan) => clan !== "dateAdded");
 
 	const leftClanName = clans[0] as Clan;
 	const rightClanName = clans[1] as Clan;
@@ -79,62 +190,55 @@ export default function Leaderboard({
 	const leftClan = fetchedData[leftClanName];
 	const rightClan = fetchedData[rightClanName];
 
-	let score1 = 0;
-	let score2 = 0;
-	let penalty1 = 0;
-	let penalty2 = 0;
-
-	leftClan.forEach((entry) => {
-		score1 += entry.points;
-		penalty1 += entry.penalty;
-	});
-	rightClan.forEach((entry) => {
-		score2 += entry.points;
-		penalty2 += entry.penalty;
-	});
+	let rating1 = 0;
+	let rating2 = 0;
+	let points1 = 0;
+	let points2 = 0;
+	if (mode == "Past") {
+		leftClan?.forEach((entry: CFAPIResponseWithRating) => {
+			rating1 += entry.rating;
+			points1 += entry.points;
+		});
+		rightClan?.forEach((entry: CFAPIResponseWithRating) => {
+			rating2 += entry.rating;
+			points2 += entry.points;
+		});
+	} else {
+		leftClan?.forEach((entry: CFAPIResponse) => {
+			rating1 += entry.penalty;
+			points1 += entry.points;
+		});
+		rightClan?.forEach((entry: CFAPIResponse) => {
+			rating2 += entry.penalty;
+			points2 += entry.points;
+		});
+	}
+	rating1 = Math.round(rating1 * 100) / 100;
+	rating2 = Math.round(rating2 * 100) / 100;
 
 	let entries1;
 	let entries2;
 
-	// const goUpAnimation = {
-	// 	scale: [1, 1.5, 1],
-	// 	y: [0, -100],
-	// };
-
-	// const goDownAnimation = {
-	// 	scale: [1, 0.5, 1],
-	// 	y: [0, 100],
-	// };
-
 	if (leftClan) {
-		entries1 = leftClan.map((entry, index) => {
-			return (
-				<LeaderboardEntry
-					props={{
-						className: classNames(styles.tableEntry),
-					}}
-					entry={entry}
-					key={index}
-				/>
-			);
-		});
+		entries1 = leftClan.map((entry: any, index: any) => (
+			<LeaderboardEntry
+				side="LeftSide"
+				entry={entry}
+				key={index}
+				mode={mode}
+			/>
+		));
 	}
 
 	if (rightClan) {
-		entries2 = rightClan.map((entry, index) => {
-			return (
-				<LeaderboardEntry
-					props={{
-						className: classNames(
-							styles.tableEntry,
-							styles.tableEntryRight
-						),
-					}}
-					entry={entry}
-					key={index}
-				/>
-			);
-		});
+		entries2 = rightClan.map((entry: any, index: any) => (
+			<LeaderboardEntry
+				side="RightSide"
+				entry={entry}
+				key={index}
+				mode={mode}
+			/>
+		));
 	}
 
 	return (
@@ -143,62 +247,36 @@ export default function Leaderboard({
 				<Scorecard
 					team1={leftClanName}
 					team2={rightClanName}
-					score1={score1}
-					score2={score2}
+					score1={points1}
+					score2={points2}
 				/>
 			</Center>
 
 			<div className={styles.board}>
 				{/* sb1 */}
 				<div className={classNames(styles.sb1, styles[leftClanName])}>
-					<div className={styles.tableHeader}>
-						<div>name</div>
-						<div className={styles.points}>#</div>
-						<div className={styles.death}>Penalty</div>
-					</div>
+					<LeaderboardEntryHeader mode={mode} side="LeftSide" />
 
 					{entries1}
 
-					<div className={styles.tableEntry}>
-						<SpecialTxt>Total</SpecialTxt>
-						<SpecialTxt className={styles.points}>
-							{score1}
-						</SpecialTxt>
-						<SpecialTxt className={styles.death}>
-							{penalty1}
-						</SpecialTxt>
-					</div>
+					<LeaderboardEntryFooter
+						totalScore={rating1}
+						side="LeftSide"
+						mode={mode}
+						totalPoints={points1}
+					/>
 				</div>
 
 				{/* sb2 */}
 				<div className={classNames(styles.sb2, styles[rightClanName])}>
-					<div
-						className={classNames(
-							styles.tableHeader,
-							styles.tableHeaderRight
-						)}
-					>
-						<div>name</div>
-						<div className={styles.points}>#</div>
-						<div className={styles.death}>Penalty</div>
-					</div>
-
+					<LeaderboardEntryHeader mode={mode} side="RightSide" />
 					{entries2}
-
-					<div
-						className={classNames(
-							styles.tableEntry,
-							styles.tableEntryRight
-						)}
-					>
-						<SpecialTxt flex={"2"}>Total</SpecialTxt>
-						<SpecialTxt className={styles.points}>
-							{score2}
-						</SpecialTxt>
-						<SpecialTxt className={styles.death}>
-							{penalty2}
-						</SpecialTxt>
-					</div>
+					<LeaderboardEntryFooter
+						totalPoints={points2}
+						totalScore={rating2}
+						side="RightSide"
+						mode={mode}
+					/>
 				</div>
 			</div>
 		</div>
