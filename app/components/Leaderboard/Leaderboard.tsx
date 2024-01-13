@@ -91,9 +91,9 @@ function LeaderboardEntry({
 					<SpecialTxt className={styles.points}>
 						{entry.points}
 					</SpecialTxt>
-					<SpecialTxt className={styles.rating}>
-						{entry.rating}
-					</SpecialTxt>
+					<div className={styles.rating}>
+						<SpecialTxt>{entry.rating}</SpecialTxt>
+					</div>
 				</>
 			)}
 		</div>
@@ -131,9 +131,9 @@ function LeaderboardEntryFooter({
 					<SpecialTxt className={styles.points}>
 						{totalPoints}
 					</SpecialTxt>
-					<SpecialTxt className={styles.rating}>
-						{totalScore}
-					</SpecialTxt>
+					<div className={styles.rating}>
+						<SpecialTxt>{totalScore}</SpecialTxt>
+					</div>
 				</>
 			)}
 		</div>
@@ -164,7 +164,9 @@ function LeaderboardEntryHeader({
 			) : (
 				<>
 					<div className={styles.points}>#</div>
-					<SpecialTxt>Score</SpecialTxt>
+					<div className={styles.rating}>
+						<SpecialTxt>Score</SpecialTxt>
+					</div>
 				</>
 			)}
 		</div>
@@ -211,8 +213,8 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 			points2 += entry.points;
 		});
 	}
-	rating1 = Math.round(rating1);
-	rating2 = Math.round(rating2);
+	rating1 = Math.round(rating1 * 100) / 100;
+	rating2 = Math.round(rating2 * 100) / 100;
 
 	let entries1;
 	let entries2;
