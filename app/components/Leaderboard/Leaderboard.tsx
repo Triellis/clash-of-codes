@@ -22,11 +22,13 @@ function Scorecard({
 	team2,
 	score1,
 	score2,
+	mode,
 }: {
 	team1: Clan;
 	team2: Clan;
 	score1: number;
 	score2: number;
+	mode: "Live" | "Past";
 }) {
 	const team1Full = fullForm(team1).split(" ");
 	const team2Full = fullForm(team2).split(" ");
@@ -35,15 +37,31 @@ function Scorecard({
 		<div className={styles.mainScore}>
 			<div className={styles.mainScoreTitle}>
 				<div className={styles.teamNameWrapper}>
-					{team1Full.map((word, index) => {
-						return <SpecialTxt key={index}>{word}</SpecialTxt>;
-					})}
+					<div
+						className={
+							mode === "Past" && score1 >= score2
+								? styles.winner
+								: ""
+						}
+					>
+						{team1Full.map((word, index) => {
+							return <SpecialTxt key={index}>{word}</SpecialTxt>;
+						})}
+					</div>
 				</div>
 				<span className={classNames("logo", styles.logo)}>VS</span>
 				<div className={styles.teamNameWrapper}>
-					{team2Full.map((word, index) => {
-						return <SpecialTxt key={index}>{word}</SpecialTxt>;
-					})}
+					<div
+						className={
+							mode === "Past" && score2 >= score1
+								? styles.winner
+								: ""
+						}
+					>
+						{team2Full.map((word, index) => {
+							return <SpecialTxt key={index}>{word}</SpecialTxt>;
+						})}
+					</div>
 				</div>
 			</div>
 
@@ -64,14 +82,18 @@ function LeaderboardEntry({
 	side,
 	entry,
 	mode = "Live",
+	index,
 }: {
 	side: Side;
 	entry: any;
 	mode?: "Live" | "Past";
+	index: number;
 }) {
 	return (
 		<div
 			className={classNames(
+				index == 0 ? styles.best
+				 : "",
 				styles.tableEntry,
 				side == "RightSide" ? styles.tableEntryRight : ""
 			)}
@@ -194,6 +216,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 	let rating2 = 0;
 	let points1 = 0;
 	let points2 = 0;
+
 	if (mode == "Past") {
 		leftClan?.forEach((entry: CFAPIResponseWithRating) => {
 			rating1 += entry.rating;
@@ -213,6 +236,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 			points2 += entry.points;
 		});
 	}
+
 	rating1 = Math.round(rating1 * 100) / 100;
 	rating2 = Math.round(rating2 * 100) / 100;
 
@@ -226,6 +250,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 				entry={entry}
 				key={index}
 				mode={mode}
+				index={index}
 			/>
 		));
 	}
@@ -237,6 +262,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 				entry={entry}
 				key={index}
 				mode={mode}
+				index={index}
 			/>
 		));
 	}
@@ -249,6 +275,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 					team2={rightClanName}
 					score1={points1}
 					score2={points2}
+					mode={mode}
 				/>
 			</Center>
 

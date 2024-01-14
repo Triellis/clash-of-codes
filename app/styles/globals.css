@@ -48,3 +48,9 @@ option {
 	background: var(--chakra-colors-gray-600);
 	border-radius: 5px; /* Add rounded corners */
 }
+
+@media (max-width: 375px) {
+	#root {
+		padding-inline: 0.5em;
+	}
+}
