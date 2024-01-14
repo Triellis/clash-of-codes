@@ -16,7 +16,7 @@ export default function PastScoreBoard({
 
 	return (
 		<div className={styles.board}>
-			<div className={styles.date} >{date}</div>
+			<div className={styles.date}>{date}</div>
 			<Divider />
 			<Leaderboard mode="Past" fetchedData={boardData} />
 		</div>
