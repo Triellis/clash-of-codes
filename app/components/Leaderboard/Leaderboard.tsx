@@ -82,14 +82,18 @@ function LeaderboardEntry({
 	side,
 	entry,
 	mode = "Live",
+	index,
 }: {
 	side: Side;
 	entry: any;
 	mode?: "Live" | "Past";
+	index: number;
 }) {
 	return (
 		<div
 			className={classNames(
+				index == 0 ? styles.best
+				 : "",
 				styles.tableEntry,
 				side == "RightSide" ? styles.tableEntryRight : ""
 			)}
@@ -246,6 +250,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 				entry={entry}
 				key={index}
 				mode={mode}
+				index={index}
 			/>
 		));
 	}
@@ -257,6 +262,7 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 				entry={entry}
 				key={index}
 				mode={mode}
+				index={index}
 			/>
 		));
 	}

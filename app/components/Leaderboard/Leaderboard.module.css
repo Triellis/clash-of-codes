@@ -28,10 +28,8 @@
 }
 
 /* light shine */
-.winner{
-	
+.winner {
 }
-
 
 .mainScoreTitle {
 	font-size: 24px;
@@ -148,6 +146,27 @@
 	text-align: right;
 
 	border-bottom: 1px solid rgb(0, 0, 0, 0.25);
+}
+
+/* best performer */
+@keyframes glowing {
+	0% {
+	}
+	50% {
+		text-shadow: 0 0 20px var(--chakra-colors-yellow-200);
+	}
+	100% {
+	}
+}
+
+/* Apply the animation to the desired element */
+.best > :nth-child(1),
+.best > :nth-child(2) {
+	animation: glowing 5s linear infinite;
+	background-image: linear-gradient(to right, #e1c66e, #d09243);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
 }
 
 .tableHeaderRight {
