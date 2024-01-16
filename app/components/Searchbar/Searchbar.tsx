@@ -6,14 +6,20 @@ type searchbarProps = {
 	searchQuery: string;
 	setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 	setPage: React.Dispatch<React.SetStateAction<number>>;
+	placeholder?: string;
 };
 
-function Searchbar({ searchQuery, setSearchQuery, setPage }: searchbarProps) {
+function Searchbar({
+	searchQuery,
+	setSearchQuery,
+	setPage,
+	placeholder,
+}: searchbarProps) {
 	return (
 		<div className={styles.main}>
 			<Input
 				variant={"default"}
-				placeholder="Search"
+				placeholder={placeholder || "Search"}
 				onChange={(e) => {
 					setSearchQuery(e.target.value);
 					setPage(1);
