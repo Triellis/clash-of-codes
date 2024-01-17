@@ -76,6 +76,7 @@ export default function Users() {
 				searchQuery={searchQuery}
 				setSearchQuery={setSearchQuery}
 				setPage={setPage}
+				placeholder="Search name or team (RG)"
 			/>
 
 			{/* headers */}
