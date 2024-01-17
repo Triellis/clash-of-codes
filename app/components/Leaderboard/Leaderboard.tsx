@@ -92,8 +92,7 @@ function LeaderboardEntry({
 	return (
 		<div
 			className={classNames(
-				index == 0 ? styles.best
-				 : "",
+				index == 0 ? styles.best : "",
 				styles.tableEntry,
 				side == "RightSide" ? styles.tableEntryRight : ""
 			)}
@@ -204,7 +203,9 @@ export default function Leaderboard({ fetchedData, mode }: BoardProps) {
 	if (!fetchedData) return <Center pt={"100px"}>Loading...</Center>;
 
 	let clans = Object.keys(fetchedData);
+
 	clans = clans.filter((clan) => clan !== "dateAdded");
+	clans = clans.sort((a, b) => a.localeCompare(b));
 
 	const leftClanName = clans[0] as Clan;
 	const rightClanName = clans[1] as Clan;
