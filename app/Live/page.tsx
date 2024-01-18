@@ -1,4 +1,5 @@
 "use client";
+import { Box, Button, Link } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import TabsComponent from "../components/TabsComponent";
@@ -6,7 +7,6 @@ import Live from "../styles/Icons/Live";
 import { fullForm, getSocketsUrl } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
-import { Box } from "@chakra-ui/react";
 function useWindowSizeMobile() {
 	// Initialize state with undefined width/height so server and client renders match
 	// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -125,6 +125,12 @@ const WebSocketComponent = () => {
 					The Live leaderboard will display once the contest starts.
 					Stay Tuned!{" "}
 				</Box>
+
+				<div>
+					<Link href="/PastScores">
+						<Button>See Past Scores</Button>
+					</Link>
+				</div>
 			</div>
 		);
 	}
