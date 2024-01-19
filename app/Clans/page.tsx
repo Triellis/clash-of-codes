@@ -5,9 +5,8 @@ import { useClans } from "../util/functions";
 
 export default function Clans() {
 	const { clans, isError, isLoading, mutate } = useClans();
-	if (isLoading) return <div>Loading...</div>;
-	if (isError) return <div>Error</div>;
-	console.log(clans);
+	if (isLoading) return <div className={styles.wrapper}>Loading...</div>;
+	if (isError) return <div className={styles.wrapper}>Error</div>;
 
 	return (
 		<div className={styles.wrapper}>
