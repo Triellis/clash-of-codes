@@ -20,6 +20,10 @@ const navMenus = {
 			linkTo: "/Live",
 		},
 		{
+			title: "Clans",
+			linkTo: "/Clans",
+		},
+		{
 			title: "Past Scores",
 			linkTo: "/PastScores",
 		},
@@ -44,6 +48,10 @@ const navMenus = {
 		{
 			title: "Past Scores",
 			linkTo: "/PastScores",
+		},
+		{
+			title: "Clans",
+			linkTo: "/Clans",
 		},
 	],
 };

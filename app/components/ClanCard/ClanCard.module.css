@@ -1,0 +1,51 @@
+.clanCard {
+	border: 8px solid;
+	border-radius: 64px;
+	padding: 64px 48px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	width: 100%;
+	box-shadow: inset 12px 12px 4px 0px rgba(0, 0, 0, 0.515);
+}
+.rank {
+	font-size: 48px;
+}
+.clanName {
+	font-size: 40px;
+}
+.clanScore {
+	font-size: 24px;
+}
+.BW {
+	background-color: #003a71;
+	border-color: #0057a9;
+}
+.RG {
+	background-color: #5b0303;
+	border-color: #a10303;
+}
+.PP {
+	background-color: #590162;
+	border-color: #8e019d;
+}
+.YB {
+	background-color: #624802;
+	border-color: #b08000;
+}
+@media (max-width: 768px) {
+	.clanCard {
+		padding: 32px 48px;
+		border-width: 4px;
+		border-radius: 48px;
+	}
+	.rank {
+		font-size: 32px;
+	}
+	.clanName {
+		font-size: 24px;
+	}
+	.clanScore {
+		font-size: 18px;
+	}
+}
