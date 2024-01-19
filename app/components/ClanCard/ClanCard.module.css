@@ -18,20 +18,20 @@
 	font-size: 24px;
 }
 .BW {
-	background-color: #05549e;
-	border-color: #3b94e8;
+	background-color: #003a71;
+	border-color: #0057a9;
 }
 .RG {
-	background-color: #8c0000;
-	border-color: #d90000;
+	background-color: #5b0303;
+	border-color: #a10303;
 }
 .PP {
-	background-color: #6e007a;
-	border-color: #a700ba;
+	background-color: #590162;
+	border-color: #8e019d;
 }
 .YB {
-	background-color: #856000;
-	border-color: #f6ad55;
+	background-color: #624802;
+	border-color: #b08000;
 }
 @media (max-width: 768px) {
 	.clanCard {
