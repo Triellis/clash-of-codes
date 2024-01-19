@@ -74,3 +74,7 @@ export type ReceivedPastScore = {
 	dateAdded: Date;
 } & ProcessedRatingData;
 export type Side = "LeftSide" | "RightSide";
+export type ClanData = {
+	clanName: Clan;
+	totalScore: number;
+};
