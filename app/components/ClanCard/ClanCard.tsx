@@ -18,7 +18,7 @@ export default function ClanCard({
 			<div className={styles.rank}>
 				<SpecialTxt>#{rank}</SpecialTxt>
 			</div>
-			<Flex direction={"column"} gap="12px">
+			<Flex direction={"column"}>
 				<div className={styles.clanName}>
 					{fullForm(clanName).split(" ")[1]}
 				</div>

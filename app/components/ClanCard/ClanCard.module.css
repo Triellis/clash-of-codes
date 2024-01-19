@@ -4,9 +4,9 @@
 	padding: 64px 48px;
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 4px;
 	width: 100%;
-	box-shadow: inset 8px 8px 4px 0px rgba(0, 0, 0, 0.515);
+	box-shadow: inset 12px 12px 4px 0px rgba(0, 0, 0, 0.515);
 }
 .rank {
 	font-size: 48px;
@@ -37,7 +37,7 @@
 	.clanCard {
 		padding: 32px 48px;
 		border-width: 4px;
-		border-radius: 32px;
+		border-radius: 48px;
 	}
 	.rank {
 		font-size: 32px;
