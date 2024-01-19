@@ -1,7 +1,7 @@
 .clanCard {
 	border: 8px solid;
 	border-radius: 64px;
-	padding: 64px 48px;
+	padding: 60px 44px;
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
@@ -9,13 +9,13 @@
 	box-shadow: inset 12px 12px 4px 0px rgba(0, 0, 0, 0.515);
 }
 .rank {
-	font-size: 48px;
-}
-.clanName {
 	font-size: 40px;
 }
+.clanName {
+	font-size: 32px;
+}
 .clanScore {
-	font-size: 24px;
+	font-size: 20px;
 }
 .BW {
 	background-color: #003a71;
