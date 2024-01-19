@@ -11,16 +11,19 @@
 	overflow: hidden;
 	border: 1px solid var(--gray-400, #a0aec0);
 }
+.date {
+	color: #fff;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 100%; /* 24px */
+}
 @media (max-width: 768px) {
 	.board {
 		padding: 0;
 		padding-top: 32px;
+		border-color: var(--chakra-colors-gray-700);
 	}
-}
-
-.date {
-	color: #fff;
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 100%; /* 24px */
+	.date {
+		font-size: 18px;
+	}
 }
