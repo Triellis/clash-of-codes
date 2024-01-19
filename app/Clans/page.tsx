@@ -18,6 +18,7 @@ export default function Clans() {
 							clanName={clanObj.clanName}
 							key={clanObj.clanName}
 							clanScore={clanObj.totalScore}
+							solvedProblems={clanObj.totalProblemSolved}
 							rank={rank + 1}
 						/>
 					);

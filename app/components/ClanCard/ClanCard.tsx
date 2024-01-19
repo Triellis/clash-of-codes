@@ -8,10 +8,12 @@ export default function ClanCard({
 	clanName,
 	clanScore,
 	rank,
+	solvedProblems,
 }: {
 	clanName: Clan;
 	clanScore: number;
 	rank: number;
+	solvedProblems: number;
 }) {
 	return (
 		<div className={classNames(styles.clanCard, styles[clanName])}>
@@ -24,7 +26,7 @@ export default function ClanCard({
 				</div>
 
 				<div className={styles.clanScore}>
-					<SpecialTxt>Total Score: {clanScore}</SpecialTxt>
+					<SpecialTxt>Problems Solved: {solvedProblems}</SpecialTxt>
 				</div>
 			</Flex>
 		</div>
