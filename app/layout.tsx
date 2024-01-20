@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 			width: 91,
 			height: 90,
 		},
+		url: "https://clash-of-codes-five.vercel.app",
 	},
 };
 
