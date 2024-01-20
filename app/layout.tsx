@@ -10,6 +10,7 @@ import "./styles/globals.css";
 export const metadata: Metadata = {
 	title: "Clash Of Codes",
 	description: "The Official Live Leaderboard for Clash of Codes ",
+	icons: "./icons/coc.png",
 };
 
 export default function RootLayout({
