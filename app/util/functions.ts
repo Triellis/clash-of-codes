@@ -7,6 +7,7 @@ import {
 	ContestCol,
 	UserOnClient,
 	ReceivedPastScore,
+	ClanData,
 } from "./types";
 
 export function getServerUrl(url: string) {
@@ -239,6 +240,19 @@ export function usePastScores(
 
 	return {
 		data: data as ReceivedPastScore[],
+		isLoading,
+		isError: error,
+		mutate,
+	};
+}
+export function useClans() {
+	const { data, error, isLoading, mutate } = useSWR(
+		getServerUrl(`/clans`),
+		fetcher
+	);
+
+	return {
+		clans: data as ClanData[],
 		isLoading,
 		isError: error,
 		mutate,
