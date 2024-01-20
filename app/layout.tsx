@@ -5,17 +5,12 @@ import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import { Providers } from "./providers";
 import "./styles/globals.css";
+import Head from "next/head";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Clash of Codes",
 	description: "The Official Live Leaderboard for Clash of Codes ",
-	openGraph: {
-		title: "Clash of Codes",
-		description: "The Official Live Leaderboard for Clash of Codes",
-		creators: ["Zeel Rajodiya", "Sarthak Siddhpura"],
-		images: "./icons/coc.png",
-	},
 };
 
 export default function RootLayout({
@@ -27,6 +22,13 @@ export default function RootLayout({
 
 	return (
 		<html lang="en">
+			<Head>
+				<meta property="og:image" content="./icons/coc.png" />
+				<meta property="og:image:alt" content="logo" />
+				<meta property="og:image:type" content="image/png" />
+				<meta property="og:image:width" content="91" />
+				<meta property="og:image:height" content="90" />
+			</Head>
 			<body>
 				<Providers>
 					<div className="nav">
