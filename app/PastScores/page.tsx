@@ -36,9 +36,10 @@ export default function PastScores() {
 
 	return (
 		<div className={styles.main}>
-			{pastScores.data.map((d, index) => {
-				return <PastScoreBoard boardData={d} key={index} />;
-			})}
+			{pastScores.data &&
+				pastScores.data.map((d, index) => {
+					return <PastScoreBoard boardData={d} key={index} />;
+				})}
 			<Pagination
 				page={page}
 				setPage={setPage}

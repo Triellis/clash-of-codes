@@ -86,10 +86,14 @@ const WebSocketComponent = () => {
 	useEffect(() => {
 		// Establish WebSocket connection
 		const ws = new WebSocket(getSocketsUrl(""));
+		let interval: NodeJS.Timeout;
 
 		// Set up event listeners
 		ws.addEventListener("open", () => {
 			console.log("WebSocket connection opened");
+			interval = setInterval(() => {
+				ws.send("ping");
+			}, 10000);
 		});
 		ws.addEventListener("message", (event) => {
 			try {
@@ -109,6 +113,7 @@ const WebSocketComponent = () => {
 
 		ws.addEventListener("close", () => {
 			console.log("WebSocket connection closed");
+			clearInterval(interval);
 		});
 
 		// Save the WebSocket instance in state

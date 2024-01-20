@@ -10,12 +10,13 @@ import Head from "next/head";
 
 export const metadata: Metadata = {
 	title: "Clash of Codes",
+	metadataBase: new URL("https://clash-of-codes-five.vercel.app"),
 	description: "The Official Live Leaderboard for Clash of Codes ",
 	openGraph: {
 		title: "Clash of Codes",
 		description: "The Official Live Leaderboard for Clash of Codes ",
 		images: {
-			url: "https://clash-of-codes-five.vercel.app/icons/coc.png", // Must be an absolute URL
+			url: "/icons/coc.png", // Must be an absolute URL
 			width: 91,
 			height: 90,
 		},
@@ -32,13 +33,6 @@ export default function RootLayout({
 
 	return (
 		<html lang="en">
-			<Head>
-				<meta property="og:image" content="./icons/coc.png" />
-				<meta property="og:image:alt" content="logo" />
-				<meta property="og:image:type" content="image/png" />
-				<meta property="og:image:width" content="91" />
-				<meta property="og:image:height" content="90" />
-			</Head>
 			<body>
 				<Providers>
 					<div className="nav">
