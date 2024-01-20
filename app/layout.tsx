@@ -11,6 +11,15 @@ import Head from "next/head";
 export const metadata: Metadata = {
 	title: "Clash of Codes",
 	description: "The Official Live Leaderboard for Clash of Codes ",
+	openGraph: {
+		title: "Clash of Codes",
+		description: "The Official Live Leaderboard for Clash of Codes ",
+		images: {
+			url: "./icons/coc.png", // Must be an absolute URL
+			width: 91,
+			height: 90,
+		},
+	},
 };
 
 export default function RootLayout({
