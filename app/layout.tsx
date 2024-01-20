@@ -8,8 +8,14 @@ import "./styles/globals.css";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Clash Of Codes",
-	description: "The Live Coding Competition",
+	title: "Clash of Codes",
+	description: "The Official Live Leaderboard for Clash of Codes ",
+	openGraph: {
+		title: "Clash of Codes",
+		description: "The Official Live Leaderboard for Clash of Codes",
+		creators: ["Zeel Rajodiya", "Sarthak Siddhpura"],
+		images: "./icons/coc.png",
+	},
 };
 
 export default function RootLayout({
