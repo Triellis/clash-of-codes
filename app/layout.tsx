@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 		title: "Clash of Codes",
 		description: "The Official Live Leaderboard for Clash of Codes ",
 		images: {
-			url: "./icons/coc.png", // Must be an absolute URL
+			url: "https://clash-of-codes-five.vercel.app/icons/coc.png", // Must be an absolute URL
 			width: 91,
 			height: 90,
 		},
