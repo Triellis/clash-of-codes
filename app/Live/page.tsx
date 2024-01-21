@@ -138,7 +138,7 @@ const WebSocketComponent = () => {
 					<Link
 						href="/PastScores"
 						onClick={() => {
-							event("navigation", {
+							event("navigate", {
 								menu: "Past Scores ( from live ) ",
 							});
 						}}
