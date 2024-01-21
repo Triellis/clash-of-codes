@@ -188,7 +188,8 @@
 	text-align: left;
 }
 /* for responsive design: */
-@media (max-width: 390px) {
+
+@media (max-width: 768px) {
 	.mainScore {
 		padding-inline: 10px;
 		padding-block: 20px;
@@ -217,7 +218,7 @@
 	.tableHeader,
 	.tableEntry {
 		font-size: 10px;
-		gap: 10px;
+		gap: 2px;
 	}
 
 	.tableEntry > :nth-child(1) {
@@ -238,91 +239,6 @@
 	}
 }
 
-@media (min-width: 390px) and (max-width: 520px) {
-	.mainScore {
-		padding: 20px;
-	}
-
-	.logo {
-		font-size: 18px;
-	}
-
-	.mainScoreTitle {
-		font-size: 18px;
-		gap: 16px;
-	}
-
-	.score {
-		font-size: 24px;
-	}
-
-	.death {
-		font-size: 10px;
-		width: 55px;
-	}
-
-	.tableHeader,
-	.tableEntry {
-		font-size: 10px;
-		gap: 12px;
-	}
-
-	.sb1,
-	.sb2 {
-		padding: 96px 5px 5px 5px;
-	}
-}
-
-@media (min-width: 520px) and (max-width: 768px) {
-	.mainScore {
-		padding: 20px;
-	}
-	.logo {
-		font-size: 20px;
-	}
-	.mainScoreTitle {
-		gap: 16px;
-	}
-
-	.score {
-		font-size: 26px;
-	}
-	.death {
-		font-size: 10px;
-	}
-
-	.tableHeader,
-	.tableEntry {
-		font-size: 10px;
-		gap: 10px;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 845px) {
-	.mainScore {
-		padding: 20px;
-		gap: 16px;
-	}
-
-	.mainScoreTitle {
-		font-size: 25px;
-		gap: 16px;
-	}
-
-	.score {
-		font-size: 25px;
-	}
-
-	.death {
-		font-size: 14px;
-	}
-
-	.tableHeader,
-	.tableEntry {
-		font-size: 14px;
-		gap: 20px;
-	}
-}
 .rating {
 	width: 6ch;
 }
