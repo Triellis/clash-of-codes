@@ -9,6 +9,7 @@ import { fullForm, getSocketsUrl } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 function useWindowSizeMobile() {
 	// Initialize state with undefined width/height so server and client renders match
 	// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -134,7 +135,14 @@ const WebSocketComponent = () => {
 				</Box>
 
 				<div>
-					<Link href="/PastScores">
+					<Link
+						href="/PastScores"
+						onClick={() => {
+							event("navigation", {
+								menu: "Past Scores ( from live ) ",
+							});
+						}}
+					>
 						<Button>See Past Scores</Button>
 					</Link>
 				</div>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import Github from "../../styles/Icons/Github";
 import styles from "./Footer.module.css";
+import { event } from "nextjs-google-analytics";
 
 export default function Footer() {
 	return (
@@ -18,7 +19,15 @@ export default function Footer() {
 		>
 			<Flex justifyContent={"space-between"} alignItems={"center"}>
 				<Flex direction={"row"} gap={2}>
-					<a href="https://github.com/Triellis" target="_blank">
+					<a
+						href="https://github.com/Triellis"
+						target="_blank"
+						onClick={() => {
+							event("github", {
+								name: "Triellis",
+							});
+						}}
+					>
 						<Flex
 							gap={2}
 							direction={"column"}
@@ -41,6 +50,11 @@ export default function Footer() {
 						<a
 							href="https://github.com/Triellis/clash-of-codes"
 							target="_blank"
+							onClick={() => {
+								event("github", {
+									name: "Clash of Codes",
+								});
+							}}
 						>
 							<Github className={styles.GHIcon} />
 						</a>
@@ -54,6 +68,11 @@ export default function Footer() {
 							className={styles.links}
 							href="https://www.linkedin.com/in/zeel-rajodiya"
 							target="_blank"
+							onClick={() => {
+								event("linkedin", {
+									name: "Zeel Rajodiya",
+								});
+							}}
 						>
 							Zeel Rajodiya
 						</a>{" "}
@@ -62,6 +81,11 @@ export default function Footer() {
 							className={styles.links}
 							href="https://www.linkedin.com/in/sarthak-siddhpura-544389257"
 							target="_blank"
+							onClick={() => {
+								event("linkedin", {
+									name: "Sarthak Siddhpura",
+								});
+							}}
 						>
 							Sarthak Siddhpura
 						</a>
@@ -72,6 +96,11 @@ export default function Footer() {
 							href="https://www.linkedin.com/in/malaypatelau"
 							target="_blank"
 							className={styles.links}
+							onClick={() => {
+								event("linkedin", {
+									name: "Malay Patel",
+								});
+							}}
 						>
 							Malay Patel
 						</a>
