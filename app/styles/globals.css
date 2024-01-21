@@ -48,8 +48,8 @@ option {
 	border-radius: 5px; /* Add rounded corners */
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
 	#root {
-		padding-inline: 0.5em;
+		padding-inline: 5px;
 	}
 }
