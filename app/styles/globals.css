@@ -24,11 +24,10 @@ option {
 
 /* sticky nav: */
 .nav {
-	position: sticky;
 	width: 100%;
+	position: sticky;
 	top: 0px;
 	z-index: 10;
-	backdrop-filter: blur(10px);
 }
 
 .logo {
