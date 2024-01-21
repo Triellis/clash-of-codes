@@ -16,14 +16,7 @@ export default function Config() {
 	const toast = useToast();
 
 	const tableCols = useMemo(
-		() => [
-			"Team1",
-			"Team2",
-			"Contest Code",
-			"Date Added",
-			"Live",
-			"Remove",
-		],
+		() => ["Contest Code", "Date Added", "Live", "Remove"],
 		[]
 	);
 
@@ -73,14 +66,15 @@ export default function Config() {
 
 			{/* form for making the item */}
 			<div className={styles.configBoard}>
-				<div className={styles.header}>
-					{tableCols.map((col) => (
-						<SpecialTxt key={col}>{col}</SpecialTxt>
-					))}
+				<div>
+					<div className={styles.header}>
+						{tableCols.map((col) => (
+							<SpecialTxt key={col}>{col}</SpecialTxt>
+						))}
+					</div>
+
+					<Divider variant="default" />
 				</div>
-
-				<Divider variant="default" />
-
 				<ConfigBoard
 					toast={toast}
 					isLoading={isAddLoading}
