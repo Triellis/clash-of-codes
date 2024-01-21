@@ -11,8 +11,7 @@ export type Role =
 
 export interface ContestCol {
 	_id?: ObjectId;
-	Team1: Clan;
-	Team2: Clan;
+
 	ContestCode: string;
 	DateAdded: Date;
 	Live: boolean;

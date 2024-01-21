@@ -11,7 +11,7 @@ import styles from "./PastScores.module.css";
 
 export default function PastScores() {
 	const [page, setPage] = useState(1);
-	const maxResults = 5;
+	const maxResults = 6;
 	const pastScores = usePastScores(page, maxResults);
 	if (pastScores.isLoading) {
 		return <div className={styles.main}>Loading...</div>;
@@ -42,6 +42,7 @@ export default function PastScores() {
 				})}
 			<Pagination
 				page={page}
+				shouldScrollToTop={true}
 				setPage={setPage}
 				items={pastScores.data}
 				maxResults={maxResults}

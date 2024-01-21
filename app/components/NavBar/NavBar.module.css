@@ -43,9 +43,10 @@
 	.NavBar {
 		flex-direction: column;
 		border-bottom: var(--chakra-colors-gray-700) 2px solid;
-		backdrop-filter: blur(8px);
+		backdrop-filter: blur(12px);
 		grid-template-columns: auto 1fr auto;
 		column-gap: 16px;
+		padding-inline: 16px;
 
 		align-items: flex-start;
 	}
@@ -58,7 +59,7 @@
 		grid-row: 2;
 		grid-column: 1/4;
 		padding: 0 16px;
-		transition: height 300ms ease-in-out;
+		transition: height 200ms ease-out;
 		height: 100%;
 	}
 	.menuIcon {
