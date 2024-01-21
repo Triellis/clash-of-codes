@@ -3,6 +3,7 @@ import styles from "./NavItem.module.css";
 
 import * as React from "react";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 
 export default function NavItem({
 	title,
@@ -18,7 +19,12 @@ export default function NavItem({
 	return (
 		<Link
 			href={linkTo}
-			onClick={() => setIsOpen(false)}
+			onClick={() => {
+				setIsOpen(false);
+				event("Navigate", {
+					menu: title,
+				});
+			}}
 			className={`${styles.navItem} ${isOpen ? styles.open : ""}`}
 		>
 			{title}
