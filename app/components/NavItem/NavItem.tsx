@@ -21,7 +21,7 @@ export default function NavItem({
 			href={linkTo}
 			onClick={() => {
 				setIsOpen(false);
-				event("Navigate", {
+				event("navigate", {
 					menu: title,
 				});
 			}}
