@@ -37,8 +37,10 @@ const Button = {
 				color: "gray.100",
 			},
 			_active: {
-				bg: "gray.700",
+				bg: "transparent",
 				color: "gray.100",
+				borderColor: "yellow.400",
+				borderWidth: "2px",
 			},
 		},
 	},

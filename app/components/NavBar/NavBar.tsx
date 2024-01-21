@@ -81,7 +81,12 @@ export default function NavBar({}: // isOpen = false,
 		// setNavItems(navMenus[user.role]);
 	}, [user]);
 	return (
-		<nav className={styles.NavBar}>
+		<nav
+			className={classNames(
+				styles.NavBar,
+				isOpen ? styles.open : styles.closed
+			)}
+		>
 			{isOpen ? (
 				<Button
 					variant={"ghost"}
@@ -109,6 +114,7 @@ export default function NavBar({}: // isOpen = false,
 			>
 				{navItems.map((item) => (
 					<NavItem
+						setIsOpen={setIsOpen}
 						key={item.title}
 						isOpen={item.linkTo == pathname}
 						title={item.title}

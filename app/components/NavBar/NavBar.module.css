@@ -6,7 +6,9 @@
 	justify-content: space-between;
 	gap: 32px;
 	padding-block: 8px;
-	margin-inline: 32px;
+	padding-inline: 32px;
+
+	backdrop-filter: blur(10px);
 	/* margin-block: 1em; */
 }
 .menuIcon {
@@ -26,12 +28,25 @@
 	overflow-y: hidden;
 	gap: 32px;
 }
+
+.NavBar > :nth-child(2) {
+	justify-self: center;
+	align-self: center;
+}
 @media (max-width: 768px) {
+	.NavBar.open {
+		row-gap: 16px;
+	}
+	.NavBar.closed {
+		row-gap: 0;
+	}
 	.NavBar {
 		flex-direction: column;
-		border-bottom: none;
+		border-bottom: var(--chakra-colors-gray-700) 2px solid;
+		backdrop-filter: blur(8px);
 		grid-template-columns: auto 1fr auto;
-		gap: 16px;
+		column-gap: 16px;
+
 		align-items: flex-start;
 	}
 	.NavBar > * {
@@ -51,9 +66,5 @@
 	}
 	.navItemsWrapper.close {
 		height: 0;
-	}
-	.NavBar > :nth-child(2) {
-		justify-self: center;
-		align-self: center;
 	}
 }
