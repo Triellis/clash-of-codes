@@ -1,7 +1,11 @@
 .main {
 	padding: 16px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+
+	font-size: 30px;
+	gap: 0.5ch;
+	color: rgb(225, 198, 110);
 }

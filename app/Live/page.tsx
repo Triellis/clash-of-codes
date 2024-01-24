@@ -1,6 +1,8 @@
 "use client";
 import { Box, Button } from "@chakra-ui/react";
 
+import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 import React, { useEffect, useMemo, useState } from "react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
 import TabsComponent from "../components/TabsComponent";
@@ -8,8 +10,6 @@ import Live from "../styles/Icons/Live";
 import { fullForm, getSocketsUrl } from "../util/functions";
 import { LiveLeaderboard, TabsType } from "../util/types";
 import styles from "./Live.module.css";
-import Link from "next/link";
-import { event } from "nextjs-google-analytics";
 function useWindowSizeMobile() {
 	// Initialize state with undefined width/height so server and client renders match
 	// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -144,6 +144,23 @@ const WebSocketComponent = () => {
 						}}
 					>
 						<Button>See Past Scores</Button>
+					</Link>
+				</div>
+
+				<Box color={"gray.500"} fontSize={14}>
+					Check the current standings of the clans.
+				</Box>
+
+				<div>
+					<Link
+						href="/Clans"
+						onClick={() => {
+							event("navigate", {
+								menu: "Clans ( from live ) ",
+							});
+						}}
+					>
+						<Button>Clans</Button>
 					</Link>
 				</div>
 			</div>
