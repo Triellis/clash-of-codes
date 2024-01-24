@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import CloseIcon from "../../styles/Icons/Close";
 import MenuIcon from "../../styles/Icons/Menu";
 import { useAppDispatch, useAppSelector } from "../../util/hooks";
+import { event } from "nextjs-google-analytics";
 const navMenus = {
 	Default: [
 		{
@@ -99,7 +100,12 @@ export default function NavBar({}: // isOpen = false,
 				<Button
 					className={styles.menuIcon}
 					variant={"ghost"}
-					onClick={() => setIsOpen(!isOpen)}
+					onClick={() => {
+						setIsOpen(!isOpen);
+						event("navigate", {
+							menu: "Open menu hamburger ",
+						});
+					}}
 				>
 					<MenuIcon onClick={() => setIsOpen(!isOpen)} />
 				</Button>
