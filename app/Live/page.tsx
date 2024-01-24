@@ -160,7 +160,7 @@ const WebSocketComponent = () => {
 							});
 						}}
 					>
-						<Button>Clans</Button>
+						<Button>See clan standings</Button>
 					</Link>
 				</div>
 			</div>
