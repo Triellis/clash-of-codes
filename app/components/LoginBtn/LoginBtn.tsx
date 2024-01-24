@@ -74,8 +74,15 @@ export default function LoginBtn() {
 	useGoogleOneTapLogin({
 		onSuccess: async (credentialResponse) => {
 			setIsLoading(true);
+			var now = new Date();
+			var time = now.getTime();
 
-			document.cookie = `google_token=${credentialResponse.credential}`;
+			var expireTime = time + 1000 * 60 * 60 * 24 * 30;
+			now.setTime(expireTime);
+
+			document.cookie = `google_token=${
+				credentialResponse.credential
+			}; expires=${now.toUTCString()}; path=/;`;
 			// console.log("Login Success");
 			const res = await customFetch("/login");
 			if (res.status !== 200) {
