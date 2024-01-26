@@ -52,6 +52,10 @@ export default function LoginBtn() {
 	const userDispatch = useAppDispatch();
 
 	const login = useCallback(async () => {
+		// clear g_state cookie
+		document.cookie =
+			"g_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
 		setOneTapDisabled(false);
 	}, []);
 	// console.log(document.cookie);
@@ -99,9 +103,11 @@ export default function LoginBtn() {
 
 			setIsLoading(false);
 		},
+
 		onError: () => {
 			console.log("Login Failed");
 		},
+
 		disabled: oneTapDisabled,
 	});
 	useEffect(() => {
