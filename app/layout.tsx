@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 		"programming leaderboard",
 		"programming live leaderboard",
 		"programming live",
+		"coc live",
 	],
 	openGraph: {
 		title: "Clash of Codes",
