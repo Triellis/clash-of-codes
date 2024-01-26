@@ -146,23 +146,6 @@ const WebSocketComponent = () => {
 						<Button>See Past Scores</Button>
 					</Link>
 				</div>
-
-				<Box color={"gray.500"} fontSize={14}>
-					Check the current standings of the clans.
-				</Box>
-
-				<div>
-					<Link
-						href="/Clans"
-						onClick={() => {
-							event("navigate", {
-								menu: "Clans ( from live ) ",
-							});
-						}}
-					>
-						<Button>See Clan Standings</Button>
-					</Link>
-				</div>
 			</div>
 		);
 	}
