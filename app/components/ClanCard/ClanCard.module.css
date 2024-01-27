@@ -7,8 +7,14 @@
 	gap: 4px;
 	width: 100%;
 	box-shadow: inset 12px 12px 4px 0px rgba(0, 0, 0, 0.515);
+	transition: 200ms ease-in-out;
+	transition-property: border-radius, transform, box-shadow;
 }
-
+.clanCard:hover {
+	border-radius: 36px;
+	box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.515);
+	transform: scale(0.96);
+}
 .rank {
 	font-size: 40px;
 }
@@ -17,16 +23,6 @@
 }
 .clanScore {
 	font-size: 20px;
-}
-.viewClanBtn {
-	border: 4px solid var(--chakra-colors-gray-700);
-	border-radius: 16px;
-	padding: 8px 12px;
-	font-size: small;
-	background-color: var(--chakra-colors-yellow-400);
-	color: var(--chakra-colors-gray-900);
-	text-transform: capitalize;
-	letter-spacing: 0;
 }
 .BW {
 	background-color: #003a71;
