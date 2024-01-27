@@ -39,6 +39,9 @@ export default function ClanCard({
 						event("navigate", {
 							menu: clanName,
 						});
+						setTimeout(() => {
+							window.scrollTo(0, 0);
+						}, 500);
 					}}
 				>
 					{children}
