@@ -3,9 +3,11 @@ import classNames from "classnames";
 import styles from "./ClanCard.module.css";
 import SpecialTxt from "../SpecialTxt/SpecialTxt";
 import { fullForm } from "@/app/util/functions";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { event } from "nextjs-google-analytics";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+
 export default function ClanCard({
 	clanName,
 	clanScore,
@@ -58,10 +60,14 @@ export default function ClanCard({
 				<div className={styles.clanName}>
 					{fullForm(clanName).split(" ")[1]}
 				</div>
-
 				<div className={styles.clanScore}>
 					<SpecialTxt>Problems Solved: {solvedProblems}</SpecialTxt>
 				</div>
+				{isLink && (
+					<Text mt="1" fontSize={"small"} color={"gray.400"}>
+						Click to see more <ChevronRightIcon h={6} w={6} />
+					</Text>
+				)}
 			</Flex>
 		</Wrapper>
 	);
