@@ -8,6 +8,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 		{...props}
+		transform="scale(0.9)"
 	>
 		<g filter="url(#a)">
 			<path
