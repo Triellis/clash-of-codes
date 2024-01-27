@@ -5,6 +5,7 @@ import SpecialTxt from "../SpecialTxt/SpecialTxt";
 import { fullForm } from "@/app/util/functions";
 import { Flex } from "@chakra-ui/react";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 export default function ClanCard({
 	clanName,
 	clanScore,
@@ -29,7 +30,15 @@ export default function ClanCard({
 	}) => {
 		if (isLink) {
 			return (
-				<Link href={href} className={className}>
+				<Link
+					href={href}
+					className={className}
+					onClick={() => {
+						event("navigate", {
+							menu: clanName,
+						});
+					}}
+				>
 					{children}
 				</Link>
 			);
