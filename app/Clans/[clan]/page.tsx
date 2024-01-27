@@ -6,6 +6,7 @@ import styles from "./clan.module.css";
 import { ClanData } from "@/app/util/types";
 import { useState } from "react";
 import ClanMemberItem from "@/app/components/ClanMemberItem/ClanMemberItem";
+import Pagination from "@/app/components/Pagination/Pagination";
 
 function ClanCardWrapper({ clanName }: { clanName: string }) {
 	const { clans, isError, isLoading, mutate } = useClans(clanName);
@@ -28,11 +29,13 @@ function ClanCardWrapper({ clanName }: { clanName: string }) {
 function ClanMembersWrapper({
 	clanName,
 	page,
+	setPage,
 	maxResults,
 	searchQuery,
 }: {
 	clanName: string;
 	page: number;
+	setPage: any;
 	maxResults: number;
 	searchQuery: string;
 }) {
@@ -55,6 +58,14 @@ function ClanMembersWrapper({
 					/>
 				);
 			})}
+
+			<Pagination
+				items={members}
+				maxResults={maxResults}
+				page={page}
+				shouldScrollToTop={true}
+				setPage={setPage}
+			/>
 		</div>
 	);
 }
@@ -78,6 +89,7 @@ export default function ClanPage({
 				<ClanMembersWrapper
 					clanName={clanName}
 					page={page}
+					setPage={setPage}
 					maxResults={maxResults}
 					searchQuery={seachQuery}
 				/>
