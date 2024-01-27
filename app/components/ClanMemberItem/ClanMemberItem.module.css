@@ -53,7 +53,7 @@
 }
 @media (max-width: 768px) {
 	.clanMemberItem {
-		padding: 8px;
+		padding: 16px;
 		font-size: small;
 		border-radius: 16px;
 	}
@@ -75,5 +75,8 @@
 	.score,
 	.problemSolved {
 		font-size: small;
+	}
+	.nameRoleWrapper {
+		gap: 0px;
 	}
 }

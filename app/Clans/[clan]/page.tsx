@@ -44,8 +44,9 @@ function ClanMembersWrapper({
 }) {
 	const { members, isMembersLoading, isMembersError, membersMutate } =
 		useClanMembers(clanName, searchQuery, page, maxResults);
-	if (isMembersLoading) return <div>Loading...</div>;
-	if (isMembersError) return <div>Error</div>;
+	if (isMembersLoading)
+		return <div className={styles.wrapper}>Loading...</div>;
+	if (isMembersError) return <div className={styles.wrapper}>Error</div>;
 	return (
 		<div className={styles.clanMembersWrapper}>
 			{members.map((member) => {
