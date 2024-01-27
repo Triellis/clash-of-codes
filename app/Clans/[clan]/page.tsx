@@ -9,6 +9,7 @@ import ClanMemberItem from "@/app/components/ClanMemberItem/ClanMemberItem";
 import Pagination from "@/app/components/Pagination/Pagination";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 
 function ClanCardWrapper({ clanName }: { clanName: string }) {
 	const { clans, isError, isLoading, mutate } = useClans(clanName);
@@ -88,7 +89,14 @@ export default function ClanPage({
 		<div className={styles.wrapper}>
 			<div className={styles.main}>
 				<div className={styles.backNavigation}>
-					<Link href="/Clans">
+					<Link
+						href="/Clans"
+						onClick={() => {
+							event("navigate", {
+								menu: "Back to Clans",
+							});
+						}}
+					>
 						<ChevronLeftIcon w={8} h={8} />
 						Back to Clans
 					</Link>
