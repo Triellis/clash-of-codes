@@ -1,0 +1,75 @@
+.clanMemberItem {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	background-color: var(--chakra-colors-gray-900);
+	border: 1px solid var(--chakra-colors-gray-700);
+	flex-direction: row;
+	padding: 16px 64px;
+	border-radius: 24px;
+	font-weight: 500;
+	justify-content: space-around;
+	gap: 1ch;
+	letter-spacing: 0.5px;
+}
+
+.role {
+	font-size: x-small;
+	color: var(--chakra-colors-gray-500);
+}
+.smallText {
+	font-size: x-small;
+}
+
+.name,
+.cfUsername {
+	width: 15ch;
+}
+.smallTextWrapper {
+	width: 7ch;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.problemSolved,
+.score {
+	font-size: medium;
+}
+.rank {
+	font-size: x-large;
+}
+
+.divider {
+	height: 3ch;
+	width: 1px;
+	background-color: var(--chakra-colors-gray-600);
+}
+
+@media (max-width: 768px) {
+	.clanMemberItem {
+		padding: 8px;
+		font-size: small;
+		border-radius: 16px;
+	}
+
+	.name {
+		width: 13ch;
+		font-size: small;
+	}
+
+	.cfUsername {
+		display: none;
+	}
+	.smallText {
+		font-size: xx-small;
+	}
+	.rank {
+		font-size: large;
+	}
+	.score,
+	.problemSolved {
+		font-size: small;
+	}
+}

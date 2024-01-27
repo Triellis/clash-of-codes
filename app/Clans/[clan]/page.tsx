@@ -41,10 +41,11 @@ function ClanMembersWrapper({
 	if (isMembersLoading) return <div>Loading...</div>;
 	if (isMembersError) return <div>Error</div>;
 	return (
-		<div>
+		<div className={styles.clanMembersWrapper}>
 			{members.map((member) => {
 				return (
 					<ClanMemberItem
+						cfUsername={member.cfUsername}
 						key={member.cfUsername}
 						name={member.name}
 						rank={member.rank}
@@ -71,14 +72,16 @@ export default function ClanPage({
 
 	useClanMembers(clanName, "", 1, 10);
 	return (
-		<div>
-			<ClanCardWrapper clanName={clanName} />
-			<ClanMembersWrapper
-				clanName={clanName}
-				page={page}
-				maxResults={maxResults}
-				searchQuery={seachQuery}
-			/>
+		<div className={styles.wrapper}>
+			<div className={styles.main}>
+				<ClanCardWrapper clanName={clanName} />
+				<ClanMembersWrapper
+					clanName={clanName}
+					page={page}
+					maxResults={maxResults}
+					searchQuery={seachQuery}
+				/>
+			</div>
 		</div>
 	);
 }

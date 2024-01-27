@@ -1,0 +1,35 @@
+.wrapper {
+	display: flex;
+	width: 100%;
+
+	justify-content: center;
+	align-items: center;
+}
+
+.main {
+	display: flex;
+	gap: 32px;
+	max-width: 25cm;
+	flex-direction: column;
+	width: 100%;
+}
+.clanMembersWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 24px;
+	gap: 8px;
+	border-radius: 32px;
+	background-color: var(--chakra-colors-gray-800);
+	border: 1px solid var(--chakra-colors-gray-700);
+}
+
+@media (max-width: 768px) {
+	.main {
+		gap: 16px;
+	}
+	.clanMembersWrapper {
+		padding: 8px;
+		border-radius: 24px;
+	}
+}
