@@ -8,6 +8,7 @@ import {
 	UserOnClient,
 	ReceivedPastScore,
 	ClanData,
+	ClanMember,
 } from "./types";
 
 export function getServerUrl(url: string) {
@@ -245,16 +246,48 @@ export function usePastScores(
 		mutate,
 	};
 }
-export function useClans() {
+export function useClans(clanName?: string) {
+	let urlString = `/clans`;
+	if (clanName !== undefined) {
+		urlString += `?clanName=${clanName}`;
+	}
+
 	const { data, error, isLoading, mutate } = useSWR(
-		getServerUrl(`/clans`),
+		getServerUrl(urlString),
 		fetcher
 	);
-
+	if (clanName) {
+		return {
+			clans: data as ClanData,
+			isLoading,
+			isError: error,
+			mutate,
+		};
+	}
 	return {
 		clans: data as ClanData[],
 		isLoading,
 		isError: error,
 		mutate,
+	};
+}
+export function useClanMembers(
+	clanName: string,
+	searchQuery: string,
+	page: number,
+	maxResults: number
+) {
+	const { data, error, isLoading, mutate } = useSWR(
+		getServerUrl(
+			`/clan/${clanName}?page=${page}&maxResults=${maxResults}&searchQuery=${searchQuery}`
+		),
+		fetcher
+	);
+
+	return {
+		members: data as ClanMember[],
+		isMembersLoading: isLoading,
+		isMembersError: error,
+		membersMutate: mutate,
 	};
 }
