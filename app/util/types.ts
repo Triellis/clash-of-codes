@@ -77,4 +77,14 @@ export type ClanData = {
 	clanName: Clan;
 	totalScore: number;
 	totalProblemSolved: number;
+	rank: number;
+};
+
+export type ClanMember = {
+	name: string;
+	cfUsername: string;
+	rank: number;
+	score: number;
+	role: Role;
+	problemSolved: number;
 };

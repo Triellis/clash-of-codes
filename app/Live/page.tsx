@@ -79,7 +79,7 @@ const WebSocketComponent = () => {
 			const team1Full = fullForm(team1).split(" ")[1];
 			const team2Full = fullForm(team2).split(" ")[1];
 			const joint = `${team1Full} vs ${team2Full}`;
-			return { label: joint, value: joint, index: idx };
+			return { label: joint, value: joint + String(idx), index: idx };
 		});
 		setTabs(newTabs);
 	}, [leaderboardArr]);

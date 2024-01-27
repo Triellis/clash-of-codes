@@ -4,19 +4,44 @@ import styles from "./ClanCard.module.css";
 import SpecialTxt from "../SpecialTxt/SpecialTxt";
 import { fullForm } from "@/app/util/functions";
 import { Flex } from "@chakra-ui/react";
+import Link from "next/link";
 export default function ClanCard({
 	clanName,
 	clanScore,
 	rank,
 	solvedProblems,
+	isLink = true,
 }: {
 	clanName: Clan;
 	clanScore: number;
 	rank: number;
 	solvedProblems: number;
+	isLink?: boolean;
 }) {
+	const Wrapper = ({
+		children,
+		href,
+		className,
+	}: {
+		children: React.ReactNode;
+		href: string;
+		className: string;
+	}) => {
+		if (isLink) {
+			return (
+				<Link href={href} className={className}>
+					{children}
+				</Link>
+			);
+		} else {
+			return <div className={className}>{children}</div>;
+		}
+	};
 	return (
-		<div className={classNames(styles.clanCard, styles[clanName])}>
+		<Wrapper
+			href={`/Clans/${clanName}`}
+			className={classNames(styles.clanCard, styles[clanName])}
+		>
 			<div className={styles.rank}>
 				<SpecialTxt>#{rank}</SpecialTxt>
 			</div>
@@ -29,6 +54,6 @@ export default function ClanCard({
 					<SpecialTxt>Problems Solved: {solvedProblems}</SpecialTxt>
 				</div>
 			</Flex>
-		</div>
+		</Wrapper>
 	);
 }

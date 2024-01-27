@@ -2,6 +2,7 @@
 import styles from "./Clans.module.css";
 import ClanCard from "../components/ClanCard/ClanCard";
 import { useClans } from "../util/functions";
+import { ClanData } from "../util/types";
 
 export default function Clans() {
 	const { clans, isError, isLoading, mutate } = useClans();
@@ -11,7 +12,7 @@ export default function Clans() {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.clansPage}>
-				{clans.map((clanObj, rank) => {
+				{(clans as ClanData[]).map((clanObj, rank) => {
 					return (
 						<ClanCard
 							clanName={clanObj.clanName}
