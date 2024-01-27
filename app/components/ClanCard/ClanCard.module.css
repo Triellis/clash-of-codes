@@ -7,11 +7,11 @@
 	gap: 4px;
 	width: 100%;
 	box-shadow: inset 12px 12px 4px 0px rgba(0, 0, 0, 0.515);
-	transition: 100ms ease-in-out;
+	transition: 200ms ease-in-out;
 	transition-property: border-radius, transform, box-shadow;
 }
 .clanCard:hover {
-	border-radius: 48px;
+	border-radius: 36px;
 	box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.515);
 	transform: scale(0.96);
 }

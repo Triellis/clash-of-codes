@@ -46,7 +46,11 @@
 	width: 1px;
 	background-color: var(--chakra-colors-gray-600);
 }
-
+.nameRoleWrapper {
+	display: flex;
+	gap: 4px;
+	flex-direction: column;
+}
 @media (max-width: 768px) {
 	.clanMemberItem {
 		padding: 8px;

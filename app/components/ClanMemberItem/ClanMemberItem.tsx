@@ -22,7 +22,7 @@ export default function ClanMemberItem({
 			<div className={styles.rank}>
 				<SpecialTxt>#{rank}</SpecialTxt>
 			</div>
-			<div>
+			<div className={styles.nameRoleWrapper}>
 				<div className={styles.name}>{name}</div>
 				<div className={styles.role}>{role}</div>
 			</div>

@@ -7,6 +7,8 @@ import { ClanData } from "@/app/util/types";
 import { useState } from "react";
 import ClanMemberItem from "@/app/components/ClanMemberItem/ClanMemberItem";
 import Pagination from "@/app/components/Pagination/Pagination";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 
 function ClanCardWrapper({ clanName }: { clanName: string }) {
 	const { clans, isError, isLoading, mutate } = useClans(clanName);
@@ -85,6 +87,12 @@ export default function ClanPage({
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.main}>
+				<div className={styles.backNavigation}>
+					<Link href="/Clans">
+						<ChevronLeftIcon w={8} h={8} />
+						Back to Clans
+					</Link>
+				</div>
 				<ClanCardWrapper clanName={clanName} />
 				<ClanMembersWrapper
 					clanName={clanName}
