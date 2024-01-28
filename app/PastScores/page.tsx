@@ -35,9 +35,7 @@ export default function PastScores() {
 			);
 		}
 	} else {
-		return (
-			<div className={styles.main}>Error connecting to the database</div>
-		);
+		return <div className={styles.main}>Something went wrong</div>;
 	}
 
 	return (
