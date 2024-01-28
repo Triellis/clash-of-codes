@@ -20,17 +20,23 @@ export default function PastScores() {
 		return <div className={styles.main}>Error</div>;
 	}
 
-	if (pastScores.data.length == 0) {
+	if (pastScores.data) {
+		if (pastScores.data.length == 0) {
+			return (
+				<div className={styles.main}>
+					No Past Scores
+					<Pagination
+						page={page}
+						setPage={setPage}
+						items={pastScores.data}
+						maxResults={maxResults}
+					/>
+				</div>
+			);
+		}
+	} else {
 		return (
-			<div className={styles.main}>
-				No Past Scores
-				<Pagination
-					page={page}
-					setPage={setPage}
-					items={pastScores.data}
-					maxResults={maxResults}
-				/>
-			</div>
+			<div className={styles.main}>Error connecting to the database</div>
 		);
 	}
 
