@@ -1,0 +1,11 @@
+.main {
+	margin-top: 100px;
+	text-align: center;
+
+	font-weight: bold;
+}
+.title {
+	font-size: xx-large;
+	font-weight: bold;
+	color: red;
+}

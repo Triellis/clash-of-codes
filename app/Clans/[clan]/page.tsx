@@ -10,12 +10,13 @@ import Pagination from "@/app/components/Pagination/Pagination";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import { event } from "nextjs-google-analytics";
+import { redirect } from "next/navigation";
 
 function ClanCardWrapper({ clanName }: { clanName: string }) {
 	const { clans, isError, isLoading, mutate } = useClans(clanName);
 
 	if (isLoading) return <div className={styles.wrapper}>Loading...</div>;
-	if (isError) return <div className={styles.wrapper}>Error</div>;
+	if (isError) return redirect("/Error");
 
 	return (
 		<div>
@@ -46,7 +47,7 @@ function ClanMembersWrapper({
 		useClanMembers(clanName, searchQuery, page, maxResults);
 	if (isMembersLoading)
 		return <div className={styles.wrapper}>Loading...</div>;
-	if (isMembersError) return <div className={styles.wrapper}>Error</div>;
+	if (isMembersError) redirect("/Error");
 	return (
 		<div className={styles.clanMembersWrapper}>
 			{members.map((member) => {

@@ -3,11 +3,12 @@ import styles from "./Clans.module.css";
 import ClanCard from "../components/ClanCard/ClanCard";
 import { useClans } from "../util/functions";
 import { ClanData } from "../util/types";
+import { redirect } from "next/navigation";
 
 export default function Clans() {
 	const { clans, isError, isLoading, mutate } = useClans();
 	if (isLoading) return <div className={styles.wrapper}>Loading...</div>;
-	if (isError) return <div className={styles.wrapper}>Error</div>;
+	if (isError) return redirect("/Error");
 
 	return (
 		<div className={styles.wrapper}>

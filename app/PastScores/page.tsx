@@ -8,6 +8,7 @@ import Pagination from "../components/Pagination/Pagination";
 import PastScoreBoard from "../components/PastScoreBoard/PastScoreBoard";
 import { usePastScores } from "../util/functions";
 import styles from "./PastScores.module.css";
+import { redirect } from "next/navigation";
 
 export default function PastScores() {
 	const [page, setPage] = useState(1);
@@ -17,7 +18,7 @@ export default function PastScores() {
 		return <div className={styles.main}>Loading...</div>;
 	}
 	if (pastScores.isError) {
-		return <div className={styles.main}>Error</div>;
+		return redirect("/Error");
 	}
 
 	if (pastScores.data.length == 0) {
