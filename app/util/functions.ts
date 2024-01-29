@@ -62,11 +62,9 @@ export const fetcher = (...args) => {
 		},
 	});
 	//@ts-ignore
-	return fetch(...args)
-		.then((res) => res.json())
-		.catch((e) => {
-			console.error(e);
-		});
+	return fetch(...args).then((res) => {
+		return res.json();
+	});
 };
 
 export function fullForm(short: string) {
