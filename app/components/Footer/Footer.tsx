@@ -58,7 +58,14 @@ export default function Footer() {
 						>
 							<Github className={styles.GHIcon} />
 						</a>
-						<span style={{ fontFamily: "sans-serif" }}>©2024 </span>
+						<span
+							style={{
+								fontFamily: "sans-serif",
+								fontSize: "x-small",
+							}}
+						>
+							©2024{" "}
+						</span>
 					</Flex>
 				</Flex>
 				<Flex direction={"column"} gap={1}>
