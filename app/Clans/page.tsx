@@ -29,7 +29,7 @@ export default function Clans() {
 					)}
 				</div>
 			) : (
-				<div>Something went wrong!</div>
+				<div>Error connecting to the database</div>
 			)}
 		</div>
 	);
