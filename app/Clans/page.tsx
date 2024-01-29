@@ -1,9 +1,8 @@
 "use client";
-import { Center } from "@chakra-ui/react";
+import styles from "./Clans.module.css";
 import ClanCard from "../components/ClanCard/ClanCard";
 import { useClans } from "../util/functions";
 import { ClanData } from "../util/types";
-import styles from "./Clans.module.css";
 
 export default function Clans() {
 	const { clans, isError, isLoading, mutate } = useClans();
@@ -12,25 +11,19 @@ export default function Clans() {
 
 	return (
 		<div className={styles.wrapper}>
-			{clans ? (
-				<div className={styles.clansPage}>
-					{(clans as ClanData[]).map(
-						(clanObj: ClanData, rank: number) => {
-							return (
-								<ClanCard
-									clanName={clanObj.clanName}
-									key={clanObj.clanName}
-									clanScore={clanObj.totalScore}
-									solvedProblems={clanObj.totalProblemSolved}
-									rank={rank + 1}
-								/>
-							);
-						}
-					)}
-				</div>
-			) : (
-				<div>Error connecting to the database</div>
-			)}
+			<div className={styles.clansPage}>
+				{(clans as ClanData[]).map((clanObj, rank) => {
+					return (
+						<ClanCard
+							clanName={clanObj.clanName}
+							key={clanObj.clanName}
+							clanScore={clanObj.totalScore}
+							solvedProblems={clanObj.totalProblemSolved}
+							rank={rank + 1}
+						/>
+					);
+				})}
+			</div>
 		</div>
 	);
 }
