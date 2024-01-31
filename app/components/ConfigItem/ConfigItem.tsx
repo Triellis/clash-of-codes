@@ -129,7 +129,7 @@ export default function ConfigItem({
 	mutate: Function;
 }) {
 	const toast = useToast();
-	console.log(itemData.Live);
+
 	// modal states:
 	const {
 		isOpen: isDeleteOpen,
