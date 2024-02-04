@@ -120,7 +120,9 @@
 .BW {
 	background: var(--blue-900, #304262);
 }
-.YB {
+.YB,
+.YB1,
+.YB2 {
 	background: var(--yellow-900, #6d441c);
 }
 

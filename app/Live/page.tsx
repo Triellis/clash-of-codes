@@ -78,7 +78,12 @@ const WebSocketComponent = () => {
 			const team2 = teams[1];
 			const team1Full = fullForm(team1).split(" ")[1];
 			const team2Full = fullForm(team2).split(" ")[1];
-			const joint = `${team1Full} vs ${team2Full}`;
+			let joint;
+			if (team1 == "YB1" && team2 == "YB2") {
+				joint = "Utsav vs Shrey";
+			} else {
+				joint = `${team1Full} vs ${team2Full}`;
+			}
 			return { label: joint, value: joint + String(idx), index: idx };
 		});
 		setTabs(newTabs);
