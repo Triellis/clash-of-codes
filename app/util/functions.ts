@@ -77,10 +77,6 @@ export function fullForm(short: string) {
 			return "Purple PEKKAS";
 		case "YB":
 			return "Yellow Barbarians";
-		case "YB1":
-			return "Utsav";
-		case "YB2":
-			return "Shrey";
 		default:
 			return "N/A";
 	}
