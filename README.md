@@ -22,7 +22,7 @@ Backend is made using express and is hosted on render. The code for the backend 
 ## Getting Started
 
 After cloning the repo, install the dependencies using
-
+ test
 ```bash
 npm install
 ```
