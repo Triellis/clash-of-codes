@@ -1,16 +1,21 @@
 # Live Demo and Screenshots 
  Link - https://clash-of-codes-five.vercel.app/
 
-![Screenshot 2024-02-17 165349](https://github.com/Triellis/clash-of-codes/assets/63534268/50b2cfe6-4cc1-42ba-acf4-2c7714ef6598)
-![GA](https://github.com/Triellis/clash-of-codes/assets/63534268/3ce50f95-da24-45bf-bd11-e15857c067ca)
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/50b2cfe6-4cc1-42ba-acf4-2c7714ef6598" width="45%"/>
 
-![Screenshot 2024-02-17 165407](https://github.com/Triellis/clash-of-codes/assets/63534268/67809167-bebb-4a89-ba84-a20888a08123)
-![Screenshot 2024-02-17 165418](https://github.com/Triellis/clash-of-codes/assets/63534268/2e95f1fa-bffd-456e-a4ce-2092b229da28)
-![Screenshot 2024-02-17 165434](https://github.com/Triellis/clash-of-codes/assets/63534268/ed3b9c9b-6329-4b25-a488-7b1f4c029c21)
-![Screenshot 2024-02-17 165455](https://github.com/Triellis/clash-of-codes/assets/63534268/a580e6d5-cefc-401e-9ffa-bdf5c314a432)
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/3ce50f95-da24-45bf-bd11-e15857c067ca" width="45%"/>
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/67809167-bebb-4a89-ba84-a20888a08123" width="45%"/>
 
-![Screenshot 2024-02-17 165507](https://github.com/Triellis/clash-of-codes/assets/63534268/ab206268-9bcc-4950-9554-ef320c233671)
-![Screenshot 2024-02-17 165518](https://github.com/Triellis/clash-of-codes/assets/63534268/9e31b378-6e72-4982-8908-eaf872a7cbd1)
+
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/2e95f1fa-bffd-456e-a4ce-2092b229da28" width="45%"/>
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/ed3b9c9b-6329-4b25-a488-7b1f4c029c21" width="45%"/>
+
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/a580e6d5-cefc-401e-9ffa-bdf5c314a432" width="45%"/>
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/ab206268-9bcc-4950-9554-ef320c233671" width="45%"/>
+<img src="https://github.com/Triellis/clash-of-codes/assets/63534268/9e31b378-6e72-4982-8908-eaf872a7cbd1" width="45%"/>
+
+
+
 
 # About Clash of Codes
 [Clash of codes](https://www.instagram.com/p/C1OmnG1N8iX/?img_index=6) is a game organized by the Programming club of Ahmadabad University. The game is hosted on [codeforces](https://codeforces.com) however, codeforces lacks an aesthetically pleasing UI. Using the codeforces API this project fetches the standings of an ongoing contest and displays them in a proper manner.
