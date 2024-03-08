@@ -20,6 +20,9 @@
 # About Clash of Codes
 [Clash of codes](https://www.instagram.com/p/C1OmnG1N8iX/?img_index=6) is a game organized by the Programming club of Ahmadabad University. The game is hosted on [codeforces](https://codeforces.com) however, codeforces lacks an aesthetically pleasing UI. Using the codeforces API this project fetches the standings of an ongoing contest and displays them in a proper manner.
 
+## Background
+Every year, programming club at Ahmedabad University organizes a competitive programming competition, The entire competition takes place on CodeForces. To make the competition more engaging, The projects displays the live scores of each participant (Using the CodeForces API) whilst the contest is going on. After each contest ends, their scores are moved to past scores and, their internal clan rankings changes based on their performance.
+
 # About this Repository
 This Repository contains the code for the frontend of the project.
 
