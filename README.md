@@ -31,7 +31,7 @@ Figam designs of the project can be found [here](https://www.figma.com/file/8Jqo
 
 # Backend
 
-![image](https://github.com/Triellis/clash-of-codes/assets/63534268/3a50b967-efaf-48fc-b4b6-313b8f0cabdf)
+![image](https://github.com/Triellis/clash-of-codes/assets/63534268/82cad490-1e78-4eb1-b81b-94fd3810df33)
 
 Backend is made using express and is hosted on render. The code for the backend can be found [here](https://github.com/Triellis/clash-of-codes-api)
 
